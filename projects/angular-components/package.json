@@ -1,9 +1,25 @@
 {
-  "name": "angular-components",
+  "name": "@sfamose/angular-components",
   "version": "0.0.1",
+  "description": "a library of angular components",
   "peerDependencies": {
     "@angular/common": "^9.1.1",
     "@angular/core": "^9.1.1",
     "tslib": "^1.10.0"
-  }
+  },
+  "author": "Sandrine Famose",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sfamose/angular-components.git"
+  },
+  "keywords": [
+    "angular",
+    "javascript",
+    "dynamic-form"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sfamose/angular-components/issues"
+  },
+  "homepage": "https://github.com/sfamose/angular-components#readme"
 }
