@@ -1,0 +1,12 @@
+<div class="title">
+  Custom component examples
+</div>
+
+
+<div class="content">
+  <ac-dynamic-form [config]="config" #dynamicForm ></ac-dynamic-form>
+</div>
+
+<div class="result">
+  {{dynamicForm?.form?.value | json}}
+</div>

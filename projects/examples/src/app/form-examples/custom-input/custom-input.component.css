@@ -1,0 +1,11 @@
+:host{
+  display: flex;
+  flex: 1;
+  overflow: auto;
+  flex-direction: column;
+}
+
+.result {
+  margin-top: 30px;
+  text-align: center;
+}

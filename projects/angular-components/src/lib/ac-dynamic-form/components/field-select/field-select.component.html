@@ -1,0 +1,76 @@
+<mat-form-field class="ac-dynamic-field ac-dynamic-field-select" [ngClass]="field.className"
+                [formGroup]="group"
+                [appearance]="field.appearance?field.appearance:appearance"
+                [hideRequiredMarker]="field.hideRequiredMarker?field.hideRequiredMarker:false"
+                [floatLabel]="field.floatLabel?field.floatLabel:floatLabel"
+>
+  <mat-label><span [innerHTML]="field.label"></span></mat-label>
+  <mat-select [placeholder]="field.placeholder"
+              [formControlName]="field.name"
+              [required]="field.required"
+              [multiple]="field.multiple"
+              [panelClass]="field.panelClassName"
+              [compareWith]="field.compareWith?field.compareWith:compareWith"
+  >
+    <mat-option *ngIf="field.resetOption">{{ field.resetOptionLabel }}</mat-option>
+
+    <ng-container *ngIf="field.options as options">
+      <mat-option *ngFor="let item of options"
+                  [value]="field.valueKey ? item[field.valueKey] : item">
+        {{ field.labelKey ? item[field.labelKey]: item }}
+      </mat-option>
+    </ng-container>
+    <ng-container *ngIf="(field.asyncOptions | async) as options">
+      <mat-option *ngFor="let item of options"
+                  [value]="field.valueKey ? item[field.valueKey] : item">
+        {{ field.labelKey ? item[field.labelKey]: item }}
+      </mat-option>
+    </ng-container>
+
+    <ng-container *ngIf="field.optionGroups as groups">
+      <mat-optgroup *ngFor="let group of groups" [label]="group[field.groupLabelKey]">
+        <mat-option *ngFor="let item of group[field.optionsKey]"
+                    [value]="field.valueKey ? item[field.valueKey] : item">
+          {{ field.labelKey ? item[field.labelKey]: item }}
+        </mat-option>
+      </mat-optgroup>
+    </ng-container>
+
+    <ng-container *ngIf="(field.asyncOptionGroups | async) as groups">
+      <mat-optgroup *ngFor="let group of groups" [label]="group[field.groupLabelKey]">
+        <mat-option *ngFor="let item of group[field.optionsKey]"
+                    [value]="field.valueKey ? item[field.valueKey] : item">
+          {{ field.labelKey ? item[field.labelKey]: item }}
+        </mat-option>
+      </mat-optgroup>
+    </ng-container>
+  </mat-select>
+  <span matPrefix *ngFor="let b of field.prefixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <span matSuffix *ngFor="let b of field.suffixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <mat-hint *ngIf="field.startHint as b" align="start">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </mat-hint>
+  <mat-hint *ngIf="field.endHint as b" align="end">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </mat-hint>
+
+  <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
+    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{ validation.message }}</mat-error>
+  </ng-container>
+</mat-form-field>

@@ -1,0 +1,14 @@
+:host ::ng-deep .ac-dynamic-field-raddiobutton{
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep .ac-dynamic-field-raddiobutton-content {
+  display: flex;
+  flex-direction: column;
+}
+:host ::ng-deep  mat-radio-button {
+  margin-left: 20px;
+  margin-top: 10px;
+}

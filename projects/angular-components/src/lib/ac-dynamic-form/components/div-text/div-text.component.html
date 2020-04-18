@@ -1,0 +1,6 @@
+<div class="ac-dynamic-field ac-dynamic-field-text" [ngClass]="field.className" >
+  <button *ngIf="field.action" type="button" mat-button (click)="buttonAction($event)" [attr.aria-label]="field.actionAriaLabel">
+    <span [innerHTML]="field.label"></span>
+  </button>
+  <span *ngIf="!field.action" [innerHTML]="field.label"></span>
+</div>

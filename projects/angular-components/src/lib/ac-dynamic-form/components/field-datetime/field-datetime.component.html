@@ -1,0 +1,43 @@
+<mat-form-field class="ac-dynamic-field ac-dynamic-field-datetime" [ngClass]="field.className"
+                [formGroup]="group"
+                [appearance]="field.appearance?field.appearance:appearance"
+                [hideRequiredMarker]="field.hideRequiredMarker?field.hideRequiredMarker:false"
+                [floatLabel]="field.floatLabel?field.floatLabel:floatLabel"
+>
+  <mat-label><span [innerHTML]="field.label"></span></mat-label>
+  <ac-input-datetime
+                      [placeholder]="field.placeholder"
+                      [formControlName]="field.name"
+                      [required]="field.required"
+                      [field]="field"
+                      [group]="group"
+  ></ac-input-datetime>
+  <span matPrefix *ngFor="let b of field.prefixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <span matSuffix *ngFor="let b of field.suffixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <mat-hint *ngIf="field.startHint as b" align="start">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </mat-hint>
+  <mat-hint *ngIf="field.endHint as b" align="end">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </mat-hint>
+
+  <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
+    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{ validation.message }}</mat-error>
+  </ng-container>
+</mat-form-field>

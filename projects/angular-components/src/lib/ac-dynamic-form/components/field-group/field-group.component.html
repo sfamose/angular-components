@@ -1,0 +1,6 @@
+<div class="ac-dynamic-field-group" [ngClass]="field.className">
+  <div class="ac-dynamic-field-group-label" >{{field.label}}</div>
+  <div class="ac-dynamic-field-group-content" >
+    <ng-container *ngFor="let f of field.fields" acDynamicField [field]="f" [group]="subGroup"> </ng-container>
+  </div>
+</div>

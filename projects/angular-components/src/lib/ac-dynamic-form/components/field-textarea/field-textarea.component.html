@@ -1,0 +1,89 @@
+<mat-form-field *ngIf="field.autosize" class="ac-dynamic-field ac-dynamic-field-textarea" [ngClass]="field.className"
+                [formGroup]="group"
+                [appearance]="field.appearance?field.appearance:appearance"
+                [hideRequiredMarker]="field.hideRequiredMarker?field.hideRequiredMarker:false"
+                [floatLabel]="field.floatLabel?field.floatLabel:floatLabel"
+>
+  <mat-label><span [innerHTML]="field.label"></span></mat-label>
+  <textarea matInput
+            [placeholder]="field.placeholder"
+            [formControlName]="field.name"
+            [readonly]="field.readonly"
+            [required]="field.required"
+            [matTextareaAutosize]="true"
+            [matAutosizeMinRows]="field.minRows"
+            [matAutosizeMaxRows]="field.maxRows"
+  ></textarea>
+  <span matPrefix *ngFor="let b of field.prefixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <span matSuffix *ngFor="let b of field.suffixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <mat-hint *ngIf="field.startHint" align="start">
+    <button *ngIf="field.startHint.action" type="button" mat-button (click)="buttonAction($event, field.startHint)" [attr.aria-label]="field.startHint.actionAriaLabel">
+      <span [innerHTML]="field.startHint.label"></span>
+    </button>
+    <span *ngIf="!field.startHint.action" [innerHTML]="field.startHint.label"></span>
+  </mat-hint>
+  <mat-hint *ngIf="field.endHint" align="end">
+    <button *ngIf="field.endHint.action" type="button" mat-button (click)="buttonAction($event, field.endHint)" [attr.aria-label]="field.endHint.actionAriaLabel">
+      <span [innerHTML]="field.endHint.label"></span>
+    </button>
+    <span *ngIf="!field.endHint.action" [innerHTML]="field.endHint.label"></span>
+  </mat-hint>
+
+  <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
+    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{ validation.message }}</mat-error>
+  </ng-container>
+</mat-form-field>
+
+
+<mat-form-field *ngIf="!field.autosize" class="ac-dynamic-field ac-dynamic-field-textarea" [ngClass]="field.className"
+                [formGroup]="group"
+                [appearance]="field.appearance?field.appearance:appearance"
+                [hideRequiredMarker]="field.hideRequiredMarker?field.hideRequiredMarker:false"
+                [floatLabel]="field.floatLabel?field.floatLabel:floatLabel"
+>
+  <mat-label><span [innerHTML]="field.label"></span></mat-label>
+  <textarea matInput
+            [placeholder]="field.placeholder"
+            [formControlName]="field.name"
+            [readonly]="field.readonly"
+            [required]="field.required"
+  ></textarea>
+  <span matPrefix *ngFor="let b of field.prefixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <span matSuffix *ngFor="let b of field.suffixes">
+    <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">
+      <span [innerHTML]="b.label"></span>
+    </button>
+    <span *ngIf="!b.action" [innerHTML]="b.label"></span>
+  </span>
+  <mat-hint *ngIf="field.startHint" align="start">
+    <button *ngIf="field.startHint.action" type="button" mat-button (click)="buttonAction($event, field.startHint)" [attr.aria-label]="field.startHint.actionAriaLabel">
+      <span [innerHTML]="field.startHint.label"></span>
+    </button>
+    <span *ngIf="!field.startHint.action" [innerHTML]="field.startHint.label"></span>
+  </mat-hint>
+  <mat-hint *ngIf="field.endHint" align="end">
+    <button *ngIf="field.endHint.action" type="button" mat-button (click)="buttonAction($event, field.endHint)" [attr.aria-label]="field.endHint.actionAriaLabel">
+      <span [innerHTML]="field.endHint.label"></span>
+    </button>
+    <span *ngIf="!field.endHint.action" [innerHTML]="field.endHint.label"></span>
+  </mat-hint>
+
+  <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
+    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{ validation.message }}</mat-error>
+  </ng-container>
+</mat-form-field>

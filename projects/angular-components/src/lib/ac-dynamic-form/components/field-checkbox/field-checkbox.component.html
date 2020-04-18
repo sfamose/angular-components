@@ -1,0 +1,7 @@
+<div class="ac-dynamic-field ac-dynamic-field-checkbox" [formGroup]="group" [ngClass]="field.className" >
+  <mat-checkbox [formControlName]="field.name"> <span [innerHTML]="field.label"></span> </mat-checkbox>
+
+  <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
+    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{ validation.message }}</mat-error>
+  </ng-container>
+</div>

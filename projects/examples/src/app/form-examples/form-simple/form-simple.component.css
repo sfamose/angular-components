@@ -1,0 +1,35 @@
+:host ::ng-deep .lib-dynamic-field .mat-form-field-prefix {
+  padding-right: 20px;
+}
+
+:host ::ng-deep .lib-dynamic-field-raddiobutton{
+  margin-bottom: 30px;
+}
+
+:host ::ng-deep .lib-dynamic-field-raddiobutton .mat-radio-button{
+  margin-left: 20px;
+}
+
+:host ::ng-deep .lib-dynamic-field-group {
+  border: 1px solid silver;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+}
+
+:host ::ng-deep .lib-dynamic-field-group .lib-dynamic-field-group-label {
+  position: absolute;
+  top: -10px;
+  left: 25px;
+  display: inline-block;
+  background-color: white;
+  padding: 0 10px;
+}
+
+:host ::ng-deep .lib-dynamic-field-text{
+  margin-bottom: 10px;
+  border: 1px solid silver;
+  padding: 10px;
+  background-color: aliceblue;
+  text-align: center;
+}

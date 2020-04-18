@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button [matMenuTriggerFor]="items">Menu</button>
+
+    <mat-menu #items="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="dynamicform">Dynamic Form</button>
+    </mat-menu>
+
+    <mat-menu #dynamicform="matMenu">
+      <button mat-menu-item routerLink="/form/form-simple">Simple example</button>
+      <button mat-menu-item routerLink="/form/mat-form-field">Mat-form-field</button>
+      <button mat-menu-item routerLink="/form/input">Input</button>
+      <button mat-menu-item routerLink="/form/select">Select</button>
+      <button mat-menu-item routerLink="/form/textarea">Textarea</button>
+      <button mat-menu-item routerLink="/form/radio-button">Radio Button</button>
+      <button mat-menu-item routerLink="/form/date">Date</button>
+      <button mat-menu-item routerLink="/form/time">Time</button>
+      <button mat-menu-item routerLink="/form/datetime">Datetime</button>
+      <button mat-menu-item routerLink="/form/validations">Validations</button>
+      <button mat-menu-item routerLink="/form/custom">Custom component</button>
+      <button mat-menu-item routerLink="/form/dynamic-example">Dynamic example</button>
+    </mat-menu>
+
+
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

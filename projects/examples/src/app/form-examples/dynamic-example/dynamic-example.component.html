@@ -1,0 +1,9 @@
+<div class="title">
+  A todo list
+</div>
+<div class="content">
+  <ac-dynamic-form [config]="config" #form="dynamicForm" ></ac-dynamic-form>
+  <div class="add-button" >
+    <button  mat-raised-button (click)="addItem()" color="primary" >Add item</button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+
+.add-button {
+  text-align: center;
+}
+
+.add-button button {
+  width: 90%;
+}
+
+:host ::ng-deep .todolist .lib-dynamic-field-group-content {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+:host ::ng-deep lib-field-checkbox {
+  width: 25px;
+}
+
+:host ::ng-deep lib-field-input {
+  flex: 1;
+}

@@ -1,0 +1,24 @@
+<div class="ac-dynamic-field ac-dynamic-field-raddiobutton" [ngClass]="field.className" [formGroup]="group">
+  <label class="ac-dynamic-field-raddiobutton-label">{{ field.label }}:</label>
+  <mat-radio-group class="ac-dynamic-field-raddiobutton-content" [formControlName]="field.name" [color]="field.color">
+    <ng-container *ngIf="field.options as options">
+      <mat-radio-button *ngFor="let item of options"
+                        [value]="field.valueKey ? item[field.valueKey] : item"
+                        [disabled]="field.disabledKey && !!item[field.disabledKey]"
+                        [color]="field.colorKey ? item[field.colorKey]: undefined">
+        {{ field.labelKey ? item[field.labelKey]: item }}
+      </mat-radio-button>
+    </ng-container>
+    <ng-container *ngIf="(field.asyncOptions | async) as options">
+      <mat-radio-button *ngFor="let item of options"
+                        [value]="field.valueKey ? item[field.valueKey] : item"
+                        [disabled]="field.disabledKey && !!item[field.disabledKey]"
+                        [color]="field.colorKey ? item[field.colorKey]: undefined">
+        {{ field.labelKey ? item[field.labelKey]: item }}
+      </mat-radio-button>
+    </ng-container>
+  </mat-radio-group>
+  <ng-container *ngFor="let validation of field.validations" ngProjectAs="mat-error">
+    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{ validation.message }}</mat-error>
+  </ng-container>
+</div>

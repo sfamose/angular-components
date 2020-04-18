@@ -1,0 +1,5 @@
+<label>Level</label>
+<span *ngFor="let star of stars; index as i" (click)="rate(i+1)">
+  <i class="fa-star" [ngClass]="{'fas':star, 'far':!star}"></i>
+</span>
+

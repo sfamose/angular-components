@@ -1,0 +1,23 @@
+<div class="ac-dynamic-field-datetime-content" [formGroup]="form" *ngIf="field">
+  <div class="ac-dynamic-field-datetime-date">
+    <input [matDatepicker]="picker"
+           formControlName="date" readonly
+           (click)="picker.open()"
+           [min]="field.minDate"
+           [max]="field.maxDate"
+           [matDatepickerFilter]="filterDate">
+    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+    <mat-datepicker #picker [touchUi]="field.touchUi" (closed)="onDatePickerClose()"></mat-datepicker>
+  </div>
+  <div class="ac-dynamic-field-datetime-time">
+    <input [ngxTimepicker]="timePicker" readonly formControlName="time"
+           [format]="field.format"
+           [min]="field.minTime"
+           [max]="field.maxTime">
+    <ngx-material-timepicker-toggle [for]="timePicker"></ngx-material-timepicker-toggle>
+    <ngx-material-timepicker #timePicker (closed)="onTimePickerClose()"
+                             [defaultTime]="field.defaultTime"
+                             [minutesGap]="field.minutesGap"
+                             [theme]="field.theme"></ngx-material-timepicker>
+  </div>
+</div>
