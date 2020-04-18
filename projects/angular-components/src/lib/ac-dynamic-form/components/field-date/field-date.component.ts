@@ -47,7 +47,7 @@ export class FieldDateComponent implements OnInit, OnDestroy, AcField {
 
   filterDate = (d: Moment | null): boolean => {
     return this.field.filter ? this.field.filter(d, this.field, this.group) : true;
-  };
+  }
 
   onInputClick(picker: MatDatepicker<any>) {
     if (this.field.onlyPopup) {

@@ -10,19 +10,19 @@ describe('DynamicFormService', () => {
   }));
 
   it('should be created', () => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     expect(service).toBeTruthy();
   });
 
   it('createGroup calls createControl', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'createControl').and.callThrough();
     service.createGroup([{type: 'input', name: 'test2'}]);
     expect(service.createControl).toHaveBeenCalled();
   }));
 
   it('updateForm calls removeItems', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'removeItems');
     service.createForm([]);
     service.updateForm([]);
@@ -30,7 +30,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('updateForm calls addItems', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'addItems');
     service.createForm([]);
     service.updateForm([]);
@@ -38,7 +38,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('updateForm calls updateItems', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'updateItems');
     service.createForm([]);
     service.updateForm([]);
@@ -46,7 +46,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('addItems calls createControl', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'createControl').and.callThrough();
     const form: FormGroup = new FormGroup({test: new FormControl('')});
     service.addItems(form, [{type: 'input', name: 'test2'}]);
@@ -54,7 +54,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('addItems add a field to the form', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     const form: FormGroup = new FormGroup({test: new FormControl('')});
     service.addItems(form, [{type: 'input', name: 'test2'}]);
     expect(form.controls.test).toBeTruthy();
@@ -62,7 +62,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('addItems calls createGroup', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'createGroup').and.callThrough();
     const form: FormGroup = new FormGroup({test: new FormControl('')});
     service.addItems(form, [{type: 'group', name: 'test2', fields: []}]);
@@ -70,7 +70,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('addItems add a group to the form', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     const form: FormGroup = new FormGroup({test: new FormControl('')});
     service.addItems(form, [{type: 'group', name: 'test2', fields: []}]);
     expect(form.controls.test).toBeTruthy();
@@ -78,7 +78,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('removeItems remove a field from the form', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     const form: FormGroup = new FormGroup({
       test: new FormControl(''),
       test2: new FormControl('')
@@ -91,7 +91,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('updateItems calls updateGroup', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'updateGroup');
     const form: FormGroup = new FormGroup({group: new FormGroup({})});
     service.updateItems(form, [{type: 'group', name: 'group'}]);
@@ -99,7 +99,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('updateItems disables field', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'updateGroup');
     const form: FormGroup = new FormGroup({test: new FormControl('')});
     expect(form.controls.test.enabled).toBeTrue();
@@ -108,7 +108,7 @@ describe('DynamicFormService', () => {
   }));
 
   it('updateItems enables field', async(() => {
-    const service: DynamicFormService = TestBed.get(DynamicFormService);
+    const service: DynamicFormService = TestBed.inject(DynamicFormService);
     spyOn(service, 'updateGroup');
     const form: FormGroup = new FormGroup({test: new FormControl({value: '', disabled: true})});
     expect(form.controls.test.enabled).toBeFalse();

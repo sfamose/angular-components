@@ -4,6 +4,7 @@
 export * from './dynamic-form/dynamic-form.component';
 export * from './config/ac-dynamic-form-config';
 export * from './models/affix';
+export * from './models/custom-component';
 export * from './models/dynamic-form';
 export * from './models/field';
 export * from './models/field-checkbox-config';

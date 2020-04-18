@@ -1,6 +1,6 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {AcField, AcFieldCustomConfig} from 'angular-components';
+import {FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {AcFieldCustomConfig, AcCustomComponentField} from 'angular-components';
 
 @Component({
   selector: 'app-input-rating',
@@ -14,7 +14,7 @@ import {AcField, AcFieldCustomConfig} from 'angular-components';
     }
   ]
 })
-export class InputRatingComponent implements AcField, OnInit, ControlValueAccessor {
+export class InputRatingComponent extends AcCustomComponentField implements OnInit {
 
   field: AcFieldCustomConfig;
   group?: FormGroup;
@@ -29,6 +29,7 @@ export class InputRatingComponent implements AcField, OnInit, ControlValueAccess
   }
 
   constructor() {
+    super();
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 import {AcValidator} from './validator';
+import {AcCustomComponentField} from './custom-component';
 import {Type} from '@angular/core';
-import {ControlValueAccessor} from '@angular/forms';
 
 export interface AcFieldCustomConfig {
   type: 'customInput';
@@ -9,6 +9,6 @@ export interface AcFieldCustomConfig {
   value?: any;
   disabled?: boolean;
   validations?: AcValidator[];
-  component: Type<ControlValueAccessor>;
+  component: Type<AcCustomComponentField>;
   data?: any;
 }

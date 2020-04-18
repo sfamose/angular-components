@@ -40,13 +40,13 @@ export class InputDatetimeComponent implements ControlValueAccessor, MatFormFiel
   private pDisabled = false;
 
   onChange = (_: any) => {
-  };
+  }
   onTouched = () => {
-  };
+  }
 
   filterDate = (d: Moment | null): boolean => {
     return this.field.filter ? this.field.filter(d, this.field, this.group) : true;
-  };
+  }
 
   get empty() {
     const {value: {date, time}} = this.form;
@@ -141,7 +141,9 @@ export class InputDatetimeComponent implements ControlValueAccessor, MatFormFiel
 
   onContainerClick(event: MouseEvent) {
     if ((event.target as Element).tagName.toLowerCase() !== 'input') {
-      this.pElementRef.nativeElement.querySelector('input')!.focus();
+      if (this.pElementRef.nativeElement.querySelector('input') !== undefined) {
+        this.pElementRef.nativeElement.querySelector('input').focus();
+      }
     }
   }
 

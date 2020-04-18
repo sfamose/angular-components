@@ -1,5 +1,4 @@
 import {
-  Component,
   ComponentFactoryResolver,
   ComponentRef,
   Directive, EventEmitter,
@@ -7,12 +6,12 @@ import {
   Input,
   OnChanges, OnDestroy,
   OnInit, Optional, Output,
-  Renderer2, SkipSelf,
+  Renderer2, SkipSelf, Type,
   ViewContainerRef
 } from '@angular/core';
-import {AsyncValidatorFn, ControlContainer, ControlValueAccessor, FormControl, FormGroup, NgControl, ValidatorFn} from '@angular/forms';
-import {AcField} from '../../models/field';
+import {AsyncValidatorFn, ControlContainer, FormControl, FormGroup, NgControl, ValidatorFn} from '@angular/forms';
 import {AcFieldCustomConfig} from '../../models/field-custom-config';
+import {AcCustomComponentField} from '../../models/custom-component';
 
 @Directive({
   selector: '[acFieldCustom]'
@@ -25,11 +24,12 @@ export class FieldCustomDirective extends NgControl implements OnChanges, OnInit
   group: FormGroup;
 
   name: string;
-  component: ComponentRef<ControlValueAccessor>;
+  component: ComponentRef<AcCustomComponentField>;
 
+  // tslint:disable-next-line:no-output-rename
   @Output('ngModelChange') update = new EventEmitter();
 
-  _control: FormControl;
+  pcontrol: FormControl;
 
   constructor(@Optional() @Host() @SkipSelf() private parent: ControlContainer,
               private resolver: ComponentFactoryResolver, private container: ViewContainerRef, private renderer2: Renderer2) {
@@ -38,8 +38,8 @@ export class FieldCustomDirective extends NgControl implements OnChanges, OnInit
 
   ngOnChanges() {
     if (this.component) {
-      this.component.instance['field'] = this.field;
-      this.component.instance['group'] = this.group;
+      this.component.instance.field = this.field;
+      this.component.instance.group = this.group;
     }
   }
 
@@ -49,17 +49,17 @@ export class FieldCustomDirective extends NgControl implements OnChanges, OnInit
         `Trying to use an empty component`
       );
     }
-    const component = this.resolver.resolveComponentFactory<ControlValueAccessor>(this.field.component);
+    const component = this.resolver.resolveComponentFactory<AcCustomComponentField>(this.field.component);
     this.name = this.field.name;
     this.component = this.container.createComponent(component);
     this.valueAccessor = this.component.instance;
-    this.component.instance['field'] = this.field;
-    this.component.instance['group'] = this.group;
-    this._control = this.formDirective.addControl(this);
+    this.component.instance.field = this.field;
+    this.component.instance.group = this.group;
+    this.pcontrol = this.formDirective.addControl(this);
   }
 
   get path(): string[] {
-    return [...this.parent.path !, this.name];
+    return [...this.parent.path, this.name];
   }
 
   get formDirective(): any {
@@ -67,7 +67,7 @@ export class FieldCustomDirective extends NgControl implements OnChanges, OnInit
   }
 
   get control(): FormControl {
-    return this._control;
+    return this.pcontrol;
   }
 
   get validator(): ValidatorFn | null {

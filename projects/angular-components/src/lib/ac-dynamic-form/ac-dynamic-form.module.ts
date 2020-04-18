@@ -28,7 +28,6 @@ import {
 import {AcDynamicFormConfig} from './config/ac-dynamic-form-config';
 import {AcDynamicFormComponent} from './dynamic-form/dynamic-form.component';
 
-
 @NgModule({
   declarations: [
     AcDynamicFormComponent,
