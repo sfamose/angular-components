@@ -4,6 +4,7 @@
 
     <mat-menu #items="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="dynamicform">Dynamic Form</button>
+      <button mat-menu-item [matMenuTriggerFor]="table">Table</button>
     </mat-menu>
 
     <mat-menu #dynamicform="matMenu">
@@ -19,6 +20,14 @@
       <button mat-menu-item routerLink="/form/validations">Validations</button>
       <button mat-menu-item routerLink="/form/custom">Custom component</button>
       <button mat-menu-item routerLink="/form/dynamic-example">Dynamic example</button>
+    </mat-menu>
+
+    <mat-menu #table="matMenu">
+      <button mat-menu-item routerLink="/table/table">Table</button>
+      <button mat-menu-item routerLink="/table/responsive">Responsive</button>
+      <button mat-menu-item routerLink="/table/selection">Selection</button>
+      <button mat-menu-item routerLink="/table/pagination">Pagination</button>
+      <button mat-menu-item routerLink="/table/edition">Edition</button>
     </mat-menu>
 
 

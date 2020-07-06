@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.ac-table {
+  overflow: auto;
+  width: 100%;
+}
+
+table {
+  min-width: 100%;
+}
+
+.mat-table__wrapper .mat-table {
+  min-width: auto !important;
+  width: auto !important;
+}
+
+.mat-header-row {
+  width: 100%;
+}
+
+.mat-row {
+  width: 100%;
+}

@@ -1,0 +1,46 @@
+<div class="ac-table" #container (window:resize)="onResize()" >
+  <table mat-table matSort [dataSource]="dataSource"
+         [matSortActive]="options?.sort?.active"
+         [matSortDirection]="options?.sort?.direction"
+         [matSortDisableClear]="options?.sort?.disableClear"
+         [matSortDisabled]="options?.sort?.disabled"
+         [matSortStart]="options?.sort?.start"
+         (matSortChange)="onSortChange($event)"
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let col of columns" [matColumnDef]="col.key" [sticky]="col.sticky==='start'" [stickyEnd]="col.sticky==='end'">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header
+          [ngClass]="col.headerClassName"
+          [arrowPosition]="col.sort?.arrowPosition"
+          [disabled]="col.sort?.disabled"
+          [disableClear]="col.sort?.disableClear"
+          [start]="col.sort?.start"
+      >
+        <span [innerHTML]="col.label"></span>
+      </th>
+      <td mat-cell *matCellDef="let element" [ngClass]="col.className" >
+        <ac-table-cell [column]="col" [element]="element"></ac-table-cell>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+

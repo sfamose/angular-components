@@ -1,0 +1,13 @@
+<ng-container *ngIf="column.component; else noComponent" acCustomCell [element]="element" [column]="column"></ng-container>
+<ng-template #noComponent>
+  <ng-container *ngIf="column.pipe;else noPipe">
+    <span class="ac-cell-label">{{(column.attributeKey && element[column.key]?element[column.key][column.attributeKey]:element[column.key]) | acDynamicPipe: column.pipe.token: column.pipe.args}}</span>
+  </ng-container>
+  <ng-template #noPipe>
+    <span class="ac-cell-label" [innerHTML]="column.attributeKey && element[column.key]?element[column.key][column.attributeKey]:element[column.key]"></span>
+  </ng-template>
+
+  <span class="ac-cell-buttons" *ngIf="column.buttons">
+    <button mat-button *ngFor="let b of column.buttons" [innerHTML]="b.label" (click)="b.action(element, column)"></button>
+  </span>
+</ng-template>

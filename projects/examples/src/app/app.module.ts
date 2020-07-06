@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import {MaterialModule} from 'angular-components';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import * as moment from 'moment';
+import {UpperCasePipe} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,13 @@ import * as moment from 'moment';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     MaterialModule
   ],
-  providers: [{ provide: 'moment', useFactory: (): any => moment }],
+  providers: [
+    { provide: 'moment', useFactory: (): any => moment },
+    UpperCasePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
