@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DynamicFieldDirective} from './components/dynamic-field.directive';
 import {FieldGroupComponent} from './components/field-group/field-group.component';
@@ -71,25 +71,25 @@ import {AcDynamicFormComponent} from './dynamic-form/dynamic-form.component';
   ]
 })
 export class AcDynamicFormModule {
-  static setConfig(config: AcDynamicFormConfig) {
+  static setConfig(config: AcDynamicFormConfig): ModuleWithProviders<AcDynamicFormModule> {
     return {
-      ngModule: AcDynamicFormModule,
-      providers: [
-        {provide: MAT_DATE_LOCALE, useValue: config.locale ? config.locale : DEFAULT_LOCALE},
-        {provide: MAT_DATE_FORMATS, useValue: config.dateFormat ? config.dateFormat : DEFAULT_DATE_FORMAT},
-        {
-          provide: MAT_FORM_FIELD_APPEARANCE,
-          useValue: config.matFormFieldAppearance ? config.matFormFieldAppearance : DEFAULT_MAT_FORM_FIELD_APPEARANCE
-        },
-        {
-          provide: MAT_FORM_FIELD_FLOATLABEL,
-          useValue: config.matFormFieldFloatlabel ? config.matFormFieldFloatlabel : DEFAULT_MAT_FORM_FIELD_FLOATLABEL
-        },
-        {
-          provide: INPUT_MAXLENGTH,
-          useValue: config.inputMaxlength ? config.inputMaxlength : DEFAULT_INPUT_MAXLENGTH
-        }
-      ]
+        ngModule: AcDynamicFormModule,
+        providers: [
+            { provide: MAT_DATE_LOCALE, useValue: config.locale ? config.locale : DEFAULT_LOCALE },
+            { provide: MAT_DATE_FORMATS, useValue: config.dateFormat ? config.dateFormat : DEFAULT_DATE_FORMAT },
+            {
+                provide: MAT_FORM_FIELD_APPEARANCE,
+                useValue: config.matFormFieldAppearance ? config.matFormFieldAppearance : DEFAULT_MAT_FORM_FIELD_APPEARANCE
+            },
+            {
+                provide: MAT_FORM_FIELD_FLOATLABEL,
+                useValue: config.matFormFieldFloatlabel ? config.matFormFieldFloatlabel : DEFAULT_MAT_FORM_FIELD_FLOATLABEL
+            },
+            {
+                provide: INPUT_MAXLENGTH,
+                useValue: config.inputMaxlength ? config.inputMaxlength : DEFAULT_INPUT_MAXLENGTH
+            }
+        ]
     };
-  }
+}
 }
