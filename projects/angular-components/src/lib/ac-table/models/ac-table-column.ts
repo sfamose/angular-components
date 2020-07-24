@@ -1,6 +1,7 @@
 import {PipeTransform, Type} from '@angular/core';
 import {AcCell} from './ac-cell';
 import {AcTableButton} from './ac-table-button';
+import {AcFieldConfig} from '../../ac-dynamic-form/models/field-config';
 
 export interface AcTableColumn {
   key: string;
@@ -24,4 +25,8 @@ export interface AcTableColumn {
   component?: Type<AcCell>;
   attributeKey?: string;
   buttons?: AcTableButton[];
+
+  addable?: boolean;
+  editable?: boolean;
+  field?: AcFieldConfig;
 }

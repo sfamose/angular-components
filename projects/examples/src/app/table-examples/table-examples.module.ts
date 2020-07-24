@@ -21,7 +21,11 @@ import {EditionComponent} from './edition/edition.component';
   imports: [
     CommonModule,
     TableExamplesRoutingModule,
-    AcTableModule
+    AcTableModule.setConfig({
+      dynamicForm: {
+        locale: 'fr'
+      }
+    })
   ]
 })
 export class TableExamplesModule {

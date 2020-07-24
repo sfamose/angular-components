@@ -1,4 +1,5 @@
 import {Sort, SortDirection} from '@angular/material/sort';
+import {Observable} from 'rxjs';
 
 export interface AcTableOptions {
   sort?: {
@@ -10,5 +11,27 @@ export interface AcTableOptions {
     sortChange: (sort: Sort) => void;
   };
   selection?: boolean;
-  editable?: 'cell' | 'row' | 'popup' | 'bottomSheet';
+  addRow?: {
+    addButtonLabel?: string;
+    submitButtonLabel?: string;
+    cancelButtonLabel?: string;
+    modalTitleLabel?: string;
+    action?: (row: any) => Observable<any>;
+  };
+  editRow?: {
+    editButtonLabel?: string;
+    submitButtonLabel?: string;
+    cancelButtonLabel?: string;
+    modalTitleLabel?: string;
+    action?: (row: any) => Observable<any>;
+  };
+  deleteRow?: {
+    deleteButtonLabel?: string;
+    confirmation?: boolean;
+    confirmationMessage?: string;
+    submitButtonLabel?: string;
+    cancelButtonLabel?: string;
+    modalTitleLabel?: string;
+    action?: (row: any) => Observable<any>;
+  };
 }

@@ -31,6 +31,7 @@ export class CustomCellDirective implements OnChanges, OnInit {
     const component = this.resolver.resolveComponentFactory<AcCell>(this.column.component);
     this.component = this.container.createComponent(component);
     this.component.instance.element = this.element;
+    this.component.instance.column = this.column;
   }
 
 }

@@ -1,0 +1,15 @@
+<div mat-dialog-title class="ac-dynamic-form-modal-header" *ngIf="titleLabel">
+  <span [innerHTML]="titleLabel"></span>
+</div>
+<mat-dialog-content class="ac-dynamic-form-modal-content">
+  <ac-dynamic-form [config]="config" #dynamicForm="dynamicForm" ></ac-dynamic-form>
+</mat-dialog-content>
+<mat-dialog-actions class="ac-dynamic-form-modal-actions" align="end">
+  <button mat-button mat-dialog-close>
+    <span [innerHTML]="cancelButtonLabel"></span>
+  </button>
+  <button mat-button [mat-dialog-close]="dynamicForm?.form?.value" [disabled]="!dynamicForm?.form?.valid"
+  color="primary">
+    <span [innerHTML]="submitButtonLabel"></span>
+  </button>
+</mat-dialog-actions>

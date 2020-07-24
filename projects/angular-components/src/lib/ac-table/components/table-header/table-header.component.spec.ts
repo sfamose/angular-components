@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableComponent } from './table.component';
+import { TableHeaderComponent } from './table-header.component';
 import {MaterialModule} from 'angular-components';
-import {DEFAULT_LABELS, LABELS} from '../config/default-config';
+import {DEFAULT_LABELS, LABELS} from '../../config/default-config';
 
-describe('TableComponent', () => {
-  let component: TableComponent;
-  let fixture: ComponentFixture<TableComponent>;
+describe('TableHeaderComponent', () => {
+  let component: TableHeaderComponent;
+  let fixture: ComponentFixture<TableHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MaterialModule],
-      declarations: [ TableComponent ],
+      declarations: [ TableHeaderComponent ],
       providers: [
         {
           provide: LABELS,
@@ -23,7 +23,7 @@ describe('TableComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableComponent);
+    fixture = TestBed.createComponent(TableHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
