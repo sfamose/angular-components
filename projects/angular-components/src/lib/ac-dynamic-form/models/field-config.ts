@@ -7,8 +7,10 @@ import {AcFieldTextareaConfig} from './field-textarea-config';
 import {AcFieldTimeConfig} from './field-time-config';
 import {AcFieldCheckboxConfig} from './field-checkbox-config';
 import {AcFieldCustomConfig} from './field-custom-config';
+import {AcFieldAutocompleteConfig} from './field-autocomplete-config';
 
 export type AcFieldConfig =
+  AcFieldAutocompleteConfig |
   AcFieldCheckboxConfig |
   AcFieldDateConfig |
   AcFieldDatetimeConfig |

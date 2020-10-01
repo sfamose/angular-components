@@ -4,24 +4,24 @@
   flex-direction: column;
 }
 
-.ac-table {
+.ac-table, .ac-table-container, .ac-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   overflow: auto;
   width: 100%;
 }
 
-table {
-  min-width: 100%;
+::ng-deep .mat-drawer-inner-container {
+  display: flex;
 }
 
-.mat-table__wrapper .mat-table {
-  min-width: auto !important;
-  width: auto !important;
+::ng-deep .mat-drawer-content {
+  display: flex !important;
+  flex-direction: column;
+  flex: 1;
 }
-
-.mat-header-row {
-  width: 100%;
-}
-
-.mat-row {
-  width: 100%;
+::ng-deep .mat-drawer-side.mat-drawer-end {
+  border-left: none;
+  border-right: none;
 }

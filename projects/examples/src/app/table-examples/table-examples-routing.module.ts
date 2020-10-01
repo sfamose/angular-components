@@ -5,6 +5,7 @@ import {ResponsiveComponent} from './responsive/responsive.component';
 import {SelectionComponent} from './selection/selection.component';
 import {PaginationComponent} from './pagination/pagination.component';
 import {EditionComponent} from './edition/edition.component';
+import {FilterComponent} from './filter/filter.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'selection', component: SelectionComponent},
   {path: 'pagination', component: PaginationComponent},
   {path: 'edition', component: EditionComponent},
+  {path: 'filter', component: FilterComponent},
 ];
 
 @NgModule({

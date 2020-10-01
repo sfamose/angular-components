@@ -13,7 +13,8 @@ export interface AcTableColumn {
   visibleIfMaxWidth?: number;
   hide?: boolean;
   pipe?: {
-    token: Type<PipeTransform>;
+    tokenName?: string;
+    token?: Type<PipeTransform>;
     args?: any[];
   };
   sort?: {
@@ -23,6 +24,7 @@ export interface AcTableColumn {
     start?: 'asc' | 'desc';
   };
   component?: Type<AcCell>;
+  componentName?: string;
   attributeKey?: string;
   buttons?: AcTableButton[];
 

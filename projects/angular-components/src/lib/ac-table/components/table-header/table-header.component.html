@@ -4,4 +4,9 @@
       <span [innerHTML]="addButtonLabel"></span>
     </button>
   </div>
+  <div class="ac-table-header-item" *ngIf="options?.filter">
+    <button class="mat-primary" mat-raised-button (click)="clickOpenFilter()" >
+      <span [innerHTML]="filterButtonLabel"></span>
+    </button>
+  </div>
 </div>

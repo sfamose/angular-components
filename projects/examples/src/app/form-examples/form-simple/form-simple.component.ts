@@ -94,6 +94,12 @@ export class FormSimpleComponent implements OnInit {
         type: 'datetime',
         label: 'Datetime',
         name: 'datetime'
+      },
+      {
+        type: 'autocomplete',
+        label: 'Autocomplete',
+        name: 'autocomplete',
+        options: ['One', 'Two', 'Three']
       }
 
     ]

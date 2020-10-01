@@ -1,5 +1,6 @@
 import {Sort, SortDirection} from '@angular/material/sort';
 import {Observable} from 'rxjs';
+import {MatDrawerMode} from '@angular/material/sidenav';
 
 export interface AcTableOptions {
   sort?: {
@@ -33,5 +34,15 @@ export interface AcTableOptions {
     cancelButtonLabel?: string;
     modalTitleLabel?: string;
     action?: (row: any) => Observable<any>;
+  };
+  filter?: {
+    filterButtonLabel?: string;
+    mode?: 'sidenav';
+    sidenavOptions?: {
+      mode?: MatDrawerMode;
+      position?: 'start' | 'end';
+      opened?: boolean;
+      disableClose?: boolean;
+    };
   };
 }

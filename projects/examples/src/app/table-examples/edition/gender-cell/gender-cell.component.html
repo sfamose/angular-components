@@ -1,0 +1,5 @@
+<div [ngSwitch]="value">
+  <div *ngSwitchCase="'female'"><i class="fas fa-female"></i></div>
+  <div *ngSwitchCase="'male'"><i class="fas fa-male"></i></div>
+  <div *ngSwitchDefault>{{value}}</div>
+</div>

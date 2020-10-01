@@ -12,6 +12,7 @@ import {TimeComponent} from './time/time.component';
 import {DatetimeComponent} from './datetime/datetime.component';
 import {DynamicExampleComponent} from './dynamic-example/dynamic-example.component';
 import {CustomInputComponent} from './custom-input/custom-input.component';
+import {AutocompleteComponent} from './autocomplete/autocomplete.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'datetime', component: DatetimeComponent},
   {path: 'dynamic-example', component: DynamicExampleComponent},
   {path: 'custom', component: CustomInputComponent},
+  {path: 'autocomplete', component: AutocompleteComponent},
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 {
   "name": "@sfamose/angular-components",
-  "version": "0.0.10",
+  "version": "0.0.14",
   "description": "a library of angular components",
   "peerDependencies": {
     "@angular/animations": "~10.0.2",

@@ -8,6 +8,7 @@ export interface AcTableLabels {
   deleteButtonLabel?: string;
   deleteConfirmationMessage?: string;
   deleteModalTitleLabel?: string;
+  filterButtonLabel?: string;
 }
 
 

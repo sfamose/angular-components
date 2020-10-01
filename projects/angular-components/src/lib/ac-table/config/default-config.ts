@@ -12,5 +12,6 @@ export const DEFAULT_LABELS: AcTableLabels = {
   editModalTitleLabel: 'Edit a row',
   deleteButtonLabel: 'Delete',
   deleteConfirmationMessage: 'Confirm the deletion of the row',
-  deleteModalTitleLabel: 'Delete a row'
+  deleteModalTitleLabel: 'Delete a row',
+  filterButtonLabel: 'Filter'
 };

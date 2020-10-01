@@ -19,6 +19,7 @@ import {InputRatingComponent} from './custom-input/input-rating/input-rating.com
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {AcDynamicFormModule} from 'angular-components';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
 const config = {
   locale: 'fr'
@@ -38,7 +39,8 @@ const config = {
     DatetimeComponent,
     DynamicExampleComponent,
     CustomInputComponent,
-    InputRatingComponent
+    InputRatingComponent,
+    AutocompleteComponent
   ],
   imports: [
     CommonModule,

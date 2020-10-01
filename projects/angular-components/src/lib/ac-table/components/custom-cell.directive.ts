@@ -1,4 +1,4 @@
-import {ComponentFactoryResolver, ComponentRef, Directive, Input, OnChanges, OnInit, ViewContainerRef} from '@angular/core';
+import {ComponentFactoryResolver, ComponentRef, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef} from '@angular/core';
 import {AcCell} from '../models/ac-cell';
 import {AcTableColumn} from '../models/ac-table-column';
 
@@ -28,7 +28,8 @@ export class CustomCellDirective implements OnChanges, OnInit {
         `Trying to use an empty component`
       );
     }
-    const component = this.resolver.resolveComponentFactory<AcCell>(this.column.component);
+
+    const component = this.resolver.resolveComponentFactory<AcCell>(this.column.component as Type<AcCell>);
     this.component = this.container.createComponent(component);
     this.component.instance.element = this.element;
     this.component.instance.column = this.column;

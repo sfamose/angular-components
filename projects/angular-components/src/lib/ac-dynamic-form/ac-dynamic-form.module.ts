@@ -28,6 +28,7 @@ import {
 import {AcDynamicFormConfig} from './config/ac-dynamic-form-config';
 import {AcDynamicFormComponent} from './dynamic-form/dynamic-form.component';
 import {DynamicFormModalComponent} from './dynamic-form-modal/dynamic-form-modal.component';
+import { FieldAutocompleteComponent } from './components/field-autocomplete/field-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {DynamicFormModalComponent} from './dynamic-form-modal/dynamic-form-modal
     DivTextComponent,
     FieldCustomComponent,
     FieldCustomDirective,
-    DynamicFormModalComponent
+    DynamicFormModalComponent,
+    FieldAutocompleteComponent
   ],
   exports: [AcDynamicFormComponent],
   imports: [

@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSortModule} from '@angular/material/sort';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatGridListModule,
     MatTableModule,
     MatSortModule,
-    MatToolbarModule
+    MatToolbarModule,
+    DragDropModule
   ],
   exports: [
     MatButtonModule,
@@ -71,7 +73,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatGridListModule,
     MatTableModule,
     MatSortModule,
-    MatToolbarModule
+    MatToolbarModule,
+    DragDropModule
   ]
 })
 export class MaterialModule {

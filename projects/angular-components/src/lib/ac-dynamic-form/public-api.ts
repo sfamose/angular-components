@@ -7,6 +7,7 @@ export * from './models/affix';
 export * from './models/custom-component';
 export * from './models/dynamic-form';
 export * from './models/field';
+export * from './models/field-autocomplete-config';
 export * from './models/field-checkbox-config';
 export * from './models/field-config';
 export * from './models/field-custom-config';

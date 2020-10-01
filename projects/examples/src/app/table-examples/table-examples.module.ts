@@ -8,6 +8,8 @@ import {ResponsiveComponent} from './responsive/responsive.component';
 import {SelectionComponent} from './selection/selection.component';
 import {PaginationComponent} from './pagination/pagination.component';
 import {EditionComponent} from './edition/edition.component';
+import { GenderCellComponent } from './edition/gender-cell/gender-cell.component';
+import { FilterComponent } from './filter/filter.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import {EditionComponent} from './edition/edition.component';
     ResponsiveComponent,
     SelectionComponent,
     PaginationComponent,
-    EditionComponent
+    EditionComponent,
+    GenderCellComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,

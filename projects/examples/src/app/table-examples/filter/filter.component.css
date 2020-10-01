@@ -1,0 +1,21 @@
+ac-table {
+  width: 80%;
+  height: 500px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+::ng-deep ac-table th, ::ng-deep ac-table td {
+  flex: 0 0 200px !important;
+  min-width: 200px;
+  width: 200px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: unset !important;
+
+}
+
+::ng-deep .mat-column-image {
+  text-align: center;
+}
+

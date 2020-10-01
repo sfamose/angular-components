@@ -1,6 +1,6 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {TableComponent} from './table/table.component';
+import {CommonModule, UpperCasePipe} from '@angular/common';
+import {AcTableComponent} from './table/table.component';
 import {AcPipeModule} from '../ac-pipe/ac-pipe.module';
 import {CustomCellDirective} from './components/custom-cell.directive';
 import {MaterialModule} from '../material.module';
@@ -17,20 +17,34 @@ import {
   DEFAULT_MAT_FORM_FIELD_APPEARANCE, DEFAULT_MAT_FORM_FIELD_FLOATLABEL, INPUT_MAXLENGTH,
   MAT_FORM_FIELD_APPEARANCE, MAT_FORM_FIELD_FLOATLABEL
 } from '../ac-dynamic-form/config/default-config';
+import {EditRowService} from './services/edit-row.service';
+import { SidenavFilterComponent } from './components/sidenav-filter/sidenav-filter.component';
+import { TableContentComponent } from './components/table-content/table-content.component';
+import {AcButtonModule} from '../ac-button/ac-button.module';
 
 
 @NgModule({
-  declarations: [TableComponent, CustomCellDirective, TableCellComponent, TableHeaderComponent, ConfirmationModalComponent],
+  declarations: [
+    AcTableComponent,
+    CustomCellDirective,
+    TableCellComponent,
+    TableHeaderComponent,
+    ConfirmationModalComponent,
+    SidenavFilterComponent,
+    TableContentComponent
+  ],
   exports: [
-    TableComponent
+    AcTableComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     AcPipeModule,
-    AcDynamicFormModule
+    AcDynamicFormModule,
+    AcButtonModule
   ],
   providers: [
+    EditRowService,
     {
       provide: LABELS,
       useValue: DEFAULT_LABELS

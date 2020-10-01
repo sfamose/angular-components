@@ -1,0 +1,59 @@
+<div [ngSwitch]="config?.type">
+  <button *ngSwitchCase="'mat-raised-button'"
+          mat-raised-button
+          [color]="config?.color"
+          [disabled]="config?.disabled"
+          [disableRipple]="config?.disableRipple"
+          [innerHTML]="config?.label"
+          [attr.aria-label]="config?.ariaLabel"
+          (click)="clickButton()"></button>
+
+  <button *ngSwitchCase="'mat-stroked-button'"
+          mat-stroked-button
+          [color]="config?.color"
+          [disabled]="config?.disabled"
+          [disableRipple]="config?.disableRipple"
+          [innerHTML]="config?.label"
+          [attr.aria-label]="config?.ariaLabel"
+          (click)="clickButton()"></button>
+
+  <button *ngSwitchCase="'mat-flat-button'"
+          mat-flat-button
+          [color]="config?.color"
+          [disabled]="config?.disabled"
+          [innerHTML]="config?.label"
+          [attr.aria-label]="config?.ariaLabel"
+          (click)="clickButton()"></button>
+
+  <button *ngSwitchCase="'mat-icon-button'"
+          mat-icon-button
+          [color]="config?.color"
+          [disabled]="config?.disabled"
+          [innerHTML]="config?.label"
+          [attr.aria-label]="config?.ariaLabel"
+          (click)="clickButton()"></button>
+
+  <button *ngSwitchCase="'mat-fab'"
+          mat-fab
+          [color]="config?.color"
+          [disabled]="config?.disabled"
+          [innerHTML]="config?.label"
+          [attr.aria-label]="config?.ariaLabel"
+          (click)="clickButton()"></button>
+
+  <button *ngSwitchCase="'mat-mini-fab'"
+          mat-mini-fab
+          [color]="config?.color"
+          [disabled]="config?.disabled"
+          [innerHTML]="config?.label"
+          [attr.aria-label]="config?.ariaLabel"
+          (click)="clickButton()"></button>
+
+  <button *ngSwitchDefault
+          mat-button
+          [color]="config?.color"
+          [disabled]="config?.disabled"
+          [innerHTML]="config?.label"
+          [attr.aria-label]="config?.ariaLabel"
+          (click)="clickButton()"></button>
+</div>

@@ -22,7 +22,8 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   providers: [
     { provide: 'moment', useFactory: (): any => moment },
-    UpperCasePipe
+    UpperCasePipe,
+    {provide: 'UpperCasePipe', useClass: UpperCasePipe}
   ],
   bootstrap: [AppComponent]
 })

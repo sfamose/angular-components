@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, PipeTransform, Type} from '@angular/core';
 import {AcTableColumn, AcTableOptions} from 'angular-components';
 import {UpperCasePipe} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {Validators} from '@angular/forms';
+import {GenderCellComponent} from './gender-cell/gender-cell.component';
+import {AcTableConversions} from '../../../../../angular-components/src/lib/ac-table/models/ac-table-conversions';
+import {AcCell} from '../../../../../angular-components/src/lib/ac-table/models/ac-cell';
 
 @Component({
   selector: 'app-edition',
@@ -15,7 +18,7 @@ export class EditionComponent implements OnInit {
     [
       {
         key: 'name', label: 'name',
-        pipe: {token: UpperCasePipe},
+        pipe: {tokenName: 'UpperCasePipe'},
         sticky: 'start',
         addable: true,
         editable: true,
@@ -33,7 +36,7 @@ export class EditionComponent implements OnInit {
           ]
         }
       },
-      {key: 'gender', label: 'Gender'},
+      {key: 'gender', label: 'Gender', componentName: 'GenderCellComponent'},
       {key: 'eye_color', label: 'Eye color'},
       {key: 'hair_color', label: 'Hair color'},
       {key: 'skin_color', label: 'Skin color'},
@@ -62,6 +65,12 @@ export class EditionComponent implements OnInit {
       deleteButtonLabel: '<i class="fas fa-trash-alt"></i>'
     }
   };
+  conversionMap: AcTableConversions = {
+    pipes: new Map<string, Type<PipeTransform>>(),
+    components: new Map<string, Type<AcCell>>(),
+    buttonActions: new Map<string, (element: any, column?: AcTableColumn) => void>()
+  };
+
 
   constructor(private http: HttpClient) {
     this.http.get('assets/people.json').subscribe((items: any[]) => {
@@ -73,6 +82,8 @@ export class EditionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.conversionMap.pipes.set('UpperCasePipe', UpperCasePipe);
+    this.conversionMap.components.set('GenderCellComponent', GenderCellComponent);
   }
 
 }

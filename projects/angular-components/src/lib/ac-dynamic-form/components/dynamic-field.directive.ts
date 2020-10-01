@@ -23,8 +23,10 @@ import {FieldDatetimeComponent} from './field-datetime/field-datetime.component'
 import {DivTextComponent} from './div-text/div-text.component';
 import {AcTextConfig} from '../models/text-config';
 import {FieldCustomComponent} from './field-custom/field-custom.component';
+import {FieldAutocompleteComponent} from './field-autocomplete/field-autocomplete.component';
 
 const components: { [type: string]: Type<AcField> } = {
+  autocomplete: FieldAutocompleteComponent,
   checkbox: FieldCheckboxComponent,
   input: FieldInputComponent,
   select: FieldSelectComponent,
