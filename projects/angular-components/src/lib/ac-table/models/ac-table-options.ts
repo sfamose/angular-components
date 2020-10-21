@@ -1,42 +1,51 @@
 import {Sort, SortDirection} from '@angular/material/sort';
 import {Observable} from 'rxjs';
 import {MatDrawerMode} from '@angular/material/sidenav';
+import {AcTableLabels} from './ac-table-labels';
+import {ThemePalette} from '@angular/material/core';
+import {PageEvent} from '@angular/material/paginator';
 
 export interface AcTableOptions {
-  sort?: {
+  selection?: boolean;
+  externalStore?: boolean;
+  sort?: boolean;
+  sortOptions?: {
     active?: string;
     direction?: SortDirection;
     disabled?: boolean;
     disableClear?: boolean;
     start?: 'asc' | 'desc';
-    sortChange: (sort: Sort) => void;
+    sortChange?: (sort: Sort, page?: PageEvent) => void;
+    externalSort?: boolean;
+    sortingDataAccessor?: ((data: any, sortHeaderId: string) => string | number);
+    ignoreCase?: boolean;
   };
-  selection?: boolean;
-  addRow?: {
-    addButtonLabel?: string;
-    submitButtonLabel?: string;
-    cancelButtonLabel?: string;
-    modalTitleLabel?: string;
+  pagination?: boolean;
+  paginationOptions?: {
+    pageSize?: number,
+    pageSizeOptions?: number[],
+    color?: ThemePalette,
+    hidePageSize?: boolean,
+    showFirstLastButtons?: boolean
+    pageChange?: (page: PageEvent, sort?: Sort) => void;
+    externalPagination?: boolean;
+  };
+  addRow?: boolean;
+  addRowOptions?: {
     action?: (row: any) => Observable<any>;
   };
-  editRow?: {
-    editButtonLabel?: string;
-    submitButtonLabel?: string;
-    cancelButtonLabel?: string;
-    modalTitleLabel?: string;
+  editRow?: boolean;
+  editRowOptions?: {
     action?: (row: any) => Observable<any>;
   };
-  deleteRow?: {
-    deleteButtonLabel?: string;
+  deleteRow?: boolean;
+  deleteRowOptions?: {
     confirmation?: boolean;
-    confirmationMessage?: string;
-    submitButtonLabel?: string;
-    cancelButtonLabel?: string;
-    modalTitleLabel?: string;
     action?: (row: any) => Observable<any>;
   };
-  filter?: {
-    filterButtonLabel?: string;
+  globalFilter?: boolean;
+  filter?: boolean;
+  filterOptions?: {
     mode?: 'sidenav';
     sidenavOptions?: {
       mode?: MatDrawerMode;
@@ -45,4 +54,13 @@ export interface AcTableOptions {
       disableClose?: boolean;
     };
   };
+  exportCSV?: {
+    fileName: string;
+    separator?: string;
+    addDoubleQuote?: boolean;
+    formatDate?: string;
+    externalExport?: () => Observable<string>;
+    mimeType?: string;
+  };
+  labels?: AcTableLabels;
 }

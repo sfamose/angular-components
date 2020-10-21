@@ -1,5 +1,5 @@
 export interface ConfirmationData {
   cancelButtonLabel?: string;
-  submitButtonLabel?: string;
+  confirmButtonLabel?: string;
   confirmMessage?: string;
 }

@@ -4,7 +4,7 @@ import {Type} from '@angular/core';
 
 export interface AcFieldCustomConfig {
   type: 'customInput';
-  name: string;
+  name?: string;
   className?: string | string[];
   value?: any;
   disabled?: boolean;

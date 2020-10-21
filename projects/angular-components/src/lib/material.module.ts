@@ -23,6 +23,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSortModule} from '@angular/material/sort';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     CommonModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
@@ -50,11 +53,13 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatTableModule,
     MatSortModule,
     MatToolbarModule,
-    DragDropModule
+    DragDropModule,
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
@@ -74,7 +79,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatTableModule,
     MatSortModule,
     MatToolbarModule,
-    DragDropModule
+    DragDropModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule {

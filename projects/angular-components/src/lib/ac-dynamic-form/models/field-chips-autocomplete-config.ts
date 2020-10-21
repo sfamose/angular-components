@@ -3,12 +3,13 @@ import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-fie
 import {AcHint} from './hint';
 import {AcAffix} from './affix';
 import {Observable} from 'rxjs';
+import {ThemePalette} from '@angular/material/core';
 
-export interface AcFieldAutocompleteConfig {
-  type: 'autocomplete';
+export interface FieldChipsAutocompleteConfig {
+  type: 'chipsAutocomplete';
   name?: string;
   label?: string;
-  value?: boolean;
+  value?: any;
   disabled?: boolean;
   validations?: AcValidator[];
   className?: string | string[];
@@ -23,9 +24,12 @@ export interface AcFieldAutocompleteConfig {
   suffixes?: AcAffix[];
   prefixes?: AcAffix[];
 
-  options?: any[];
-  asyncOptions?: Observable<any[]>;
-  labelKey?: string;
-  valueKey?: string;
-  matchOption?: boolean;
+  noSelectable?: boolean;
+  noRemovable?: boolean;
+  addOnBlur?: boolean;
+  separatorKeysCodes?: number[];
+  deleteLabel?: string;
+  options?: string[];
+  asyncOptions?: Observable<string[]>;
+  color?: ThemePalette;
 }

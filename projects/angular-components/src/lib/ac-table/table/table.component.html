@@ -1,24 +1,25 @@
 <mat-drawer-container class="ac-table" autosize>
 
   <mat-drawer #drawer class="ac-table-sidenav"
-              [mode]="options?.filter?.sidenavOptions?.mode"
-              [position]="options?.filter?.sidenavOptions?.position"
-              [disableClose]="options?.filter?.sidenavOptions?.disableClose"
-              [opened]="options?.filter?.sidenavOptions?.opened"
+              [mode]="options?.filterOptions?.sidenavOptions?.mode"
+              [position]="options?.filterOptions?.sidenavOptions?.position"
+              [disableClose]="options?.filterOptions?.sidenavOptions?.disableClose"
+              [opened]="options?.filterOptions?.sidenavOptions?.opened"
   >
-    <ac-sidenav-filter *ngIf="drawer.opened"></ac-sidenav-filter>
+    <ac-sidenav-filter *ngIf="drawer.opened" [columns]="columns" [options]="options"></ac-sidenav-filter>
   </mat-drawer>
 
-  <div class="ac-table-container">
-    <div class="ac-table-header">
-      <ac-table-header [columns]="columns" [options]="options" (openFilter)="drawer.toggle()"></ac-table-header>
+  <mat-drawer-content>
+    <div class="ac-table-container">
+      <div class="ac-table-header">
+        <ac-table-header (openFilter)="drawer.toggle()"
+        ></ac-table-header>
+      </div>
+      <div class="ac-table-wrapper">
+        <ac-table-content (sortChange)="onSortChange($event)"
+        ></ac-table-content>
+      </div>
     </div>
-    <div class="ac-table-wrapper" >
-      <ac-table-content [options]="options"
-                        [dataSource]="dataSource"
-                        [columns]="columns"
-      ></ac-table-content>
-    </div>
-  </div>
+  </mat-drawer-content>
 
 </mat-drawer-container>

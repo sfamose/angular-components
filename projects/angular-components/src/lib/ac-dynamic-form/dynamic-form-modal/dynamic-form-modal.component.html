@@ -2,13 +2,14 @@
   <span [innerHTML]="titleLabel"></span>
 </div>
 <mat-dialog-content class="ac-dynamic-form-modal-content">
+  <mat-toolbar-row class="ac-dynamic-form-modal-error" *ngIf="error" [innerHTML]="error"></mat-toolbar-row>
   <ac-dynamic-form [config]="config" #dynamicForm="dynamicForm" ></ac-dynamic-form>
 </mat-dialog-content>
 <mat-dialog-actions class="ac-dynamic-form-modal-actions" align="end">
   <button mat-button mat-dialog-close>
     <span [innerHTML]="cancelButtonLabel"></span>
   </button>
-  <button mat-button [mat-dialog-close]="dynamicForm?.form?.value" [disabled]="!dynamicForm?.form?.valid"
+  <button mat-button (click)="save(dynamicForm?.form?.value)" [disabled]="!dynamicForm?.form?.valid"
   color="primary">
     <span [innerHTML]="submitButtonLabel"></span>
   </button>

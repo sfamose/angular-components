@@ -1,98 +1,117 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {AcTableColumn} from '../../models/ac-table-column';
 import {AcTableOptions} from '../../models/ac-table-options';
 import {MatSort, Sort} from '@angular/material/sort';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatDialog} from '@angular/material/dialog';
-import {LABELS} from '../../config/default-config';
-import {AcTableLabels} from '../../config/ac-table-config';
 import {EditRowService} from '../../services/edit-row.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {StoreService} from '../../services/store.service';
+import {Subject} from 'rxjs';
+import {AcTableLabels} from '../../models/ac-table-labels';
+import {takeUntil} from 'rxjs/operators';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'ac-table-content',
   templateUrl: './table-content.component.html',
   styleUrls: ['./table-content.component.css']
 })
-export class TableContentComponent implements OnChanges, AfterViewInit {
-  @Input() dataSource: MatTableDataSource<any>;
-  @Input() columns: AcTableColumn[];
-  @Input() options: AcTableOptions;
+export class TableContentComponent implements AfterViewInit, OnDestroy {
   @Output() selectChange: EventEmitter<any[]> = new EventEmitter<any[]>();
-  @ViewChild('container', {static: true}) container: ElementRef;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  displayedColumns: string[];
+  @Output() sortChange: EventEmitter<Sort> = new EventEmitter<Sort>();
+  @Output() pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+  @ViewChild('container') container: ElementRef;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   selection = new SelectionModel<any>(true, []);
-  editButtonLabel: string;
-  deleteButtonLabel: string;
+  unsubscribe$: Subject<void> = new Subject<void>();
+  dataSource: MatTableDataSource<any>;
+  rowsLength: number;
 
-  constructor(public dialog: MatDialog,
-              @Inject(LABELS) public labels: AcTableLabels,
+  get displayedColumns(): string[] {
+    return this.storeService.displayedColumns;
+  }
+
+  get columns(): AcTableColumn[] {
+    return this.storeService.columns;
+  }
+
+  get options(): AcTableOptions {
+    return this.storeService.options;
+  }
+
+  get labels(): AcTableLabels {
+    return this.storeService.labels;
+  }
+
+  constructor(private storeService: StoreService,
               private editService: EditRowService) {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.setDisplayedColumns();
-
-    if (this.options && this.options.editRow) {
-      this.editButtonLabel = this.options.editRow.editButtonLabel ?
-        this.options.editRow.editButtonLabel : this.labels.editButtonLabel;
-    }
-    if (this.options && this.options.deleteRow) {
-      this.deleteButtonLabel = this.options.deleteRow.deleteButtonLabel ?
-        this.options.deleteRow.deleteButtonLabel : this.labels.deleteButtonLabel;
-    }
-    this.dataSource.sort = this.sort;
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
-    this.setDisplayedColumns();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.setDisplayedColumns();
+      this.storeService.setDisplayedColumns(); // this.container.nativeElement.offsetWidth
+      this.storeService.getRows$()
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(rows => {
+          this.dataSource = new MatTableDataSource(rows);
+          if (this.options && this.options.sort
+            && (!this.options.sortOptions || !this.options.sortOptions.externalSort)) {
+            if (this.options.sortOptions.sortingDataAccessor) {
+              this.dataSource.sortingDataAccessor = this.options.sortOptions.sortingDataAccessor;
+            } else {
+              this.dataSource.sortingDataAccessor = (data, attribute) => {
+                return data[attribute] && this.options.sortOptions.ignoreCase ? data[attribute].toLowerCase() : data[attribute];
+              };
+            }
+            this.dataSource.sort = this.sort;
+          }
+          if (this.options && this.options.pagination
+            && (!this.options.paginationOptions || !this.options.paginationOptions.externalPagination)) {
+            this.dataSource.paginator = this.paginator;
+          }
+          this.rowsLength = this.storeService.rowsLength ? this.storeService.rowsLength : rows.length;
+
+          if (this.storeService.filterValue$.value) {
+            this.dataSource.filter = this.storeService.filterValue$.value;
+          }
+        });
+
+      this.storeService.filterValue$.asObservable().pipe(takeUntil(this.unsubscribe$)).subscribe(filterValue => {
+        this.dataSource.filter = filterValue;
+      });
     }, 0);
   }
 
-  onResize() {
-    this.setDisplayedColumns();
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+    this.storeService.setDisplayedColumns();
   }
 
-  setDisplayedColumns() {
-    this.displayedColumns = this.options && !!this.options.selection ? ['select'] : [];
-
-    const width = this.container.nativeElement.offsetWidth;
-    const cols = this.columns ? this.columns.filter(x =>
-      !x.hide && (!x.visibleIfMinWidth || width >= x.visibleIfMinWidth) && (!x.visibleIfMaxWidth || width <= x.visibleIfMaxWidth)
-    ).map(x => x.key) : [];
-
-    if (this.options && this.options.editRow) {
-      cols.push('editRow');
-    }
-    if (this.options && this.options.deleteRow) {
-      cols.push('deleteRow');
-    }
-    this.displayedColumns = this.displayedColumns.concat(cols);
+  onResize() {
+    this.storeService.setDisplayedColumns();
   }
 
   onSortChange(sort: Sort) {
-    if (this.options && this.options.sort && this.options.sort.sortChange) {
-      this.options.sort.sortChange(sort);
+    if (this.options && this.options.sortOptions && this.options.sortOptions.sortChange) {
+      const page: PageEvent = this.paginator ? {
+        pageIndex: this.paginator.pageIndex,
+        pageSize: this.paginator.pageSize,
+        length: this.paginator.length,
+        previousPageIndex: null
+      } : null;
+      this.options.sortOptions.sortChange(sort, page);
     }
+    this.sortChange.emit(sort);
+  }
+
+  onPageChange(page: PageEvent) {
+    if (this.options && this.options.paginationOptions && this.options.paginationOptions.pageChange) {
+      const sort: Sort = this.sort ? {active: this.sort.active, direction: this.sort.direction} : null;
+      this.options.paginationOptions.pageChange(page, sort);
+    }
+    this.pageChange.emit(page);
   }
 
   isAllSelected() {
@@ -121,11 +140,15 @@ export class TableContentComponent implements OnChanges, AfterViewInit {
   }
 
   openEditForm(row: any) {
-    this.editService.openEditForm(row, this.columns, this.options);
+    this.editService.openEditForm(row);
   }
 
   openConfirmDeleteMessage(row: any) {
-    this.editService.openConfirmDeleteMessage(row, this.options);
+    this.editService.openConfirmDeleteMessage(row);
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

@@ -1,12 +1,23 @@
 <div class="ac-table-header-row">
   <div class="ac-table-header-item" *ngIf="options?.addRow">
     <button class="mat-primary" mat-raised-button (click)="clickAddRow()" >
-      <span [innerHTML]="addButtonLabel"></span>
+      <span [innerHTML]="labels.addButtonLabel"></span>
     </button>
   </div>
   <div class="ac-table-header-item" *ngIf="options?.filter">
     <button class="mat-primary" mat-raised-button (click)="clickOpenFilter()" >
-      <span [innerHTML]="filterButtonLabel"></span>
+      <span [innerHTML]="labels.filterButtonLabel"></span>
     </button>
+  </div>
+  <div class="ac-table-header-item" *ngIf="options?.exportCSV">
+    <button class="mat-primary" mat-raised-button (click)="clickExportCSV()" >
+      <span [innerHTML]="labels.exportButtonLabel"></span>
+    </button>
+  </div>
+  <div class="ac-table-header-item" *ngIf="options?.exportCSV">
+    <mat-form-field>
+      <mat-label>{{labels.globalFilterLabel}}</mat-label>
+      <input matInput (keyup)="applyFilter($event)" [placeholder]="labels.globalFilterPlaceholder" #input>
+    </mat-form-field>
   </div>
 </div>

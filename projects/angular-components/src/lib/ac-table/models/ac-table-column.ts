@@ -17,7 +17,7 @@ export interface AcTableColumn {
     token?: Type<PipeTransform>;
     args?: any[];
   };
-  sort?: {
+  sortOptions?: {
     arrowPosition?: 'before' | 'after';
     disabled?: boolean;
     disableClear?: boolean;
@@ -28,7 +28,13 @@ export interface AcTableColumn {
   attributeKey?: string;
   buttons?: AcTableButton[];
 
-  addable?: boolean;
-  editable?: boolean;
+  skipAddRow?: 'disabled' | 'hide';
+  skipEditRow?: 'disabled' | 'hide';
   field?: AcFieldConfig;
+
+  filterable?: boolean;
+  filterField?: AcFieldConfig;
+
+  exportLabel?: string;
+  exportable?: boolean;
 }

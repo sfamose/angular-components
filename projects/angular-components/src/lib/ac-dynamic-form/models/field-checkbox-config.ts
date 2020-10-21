@@ -3,7 +3,7 @@ import {FormGroup} from '@angular/forms';
 
 export interface AcFieldCheckboxConfig {
   type: 'checkbox';
-  name: string;
+  name?: string;
   label?: string;
   value?: boolean;
   disabled?: boolean;

@@ -6,9 +6,9 @@ ac-table {
 }
 
 ::ng-deep ac-table th, ::ng-deep ac-table td {
-  flex: 0 0 200px !important;
+  /*flex: 0 0 200px !important;
   min-width: 200px;
-  width: 200px;
+  width: 200px;*/
   overflow-wrap: break-word;
   word-wrap: break-word;
   white-space: unset !important;
@@ -17,4 +17,9 @@ ac-table {
 
 ::ng-deep .mat-column-image {
   text-align: center;
+}
+
+::ng-deep .mat-column-editRow, ::ng-deep .mat-column-deleteRow {
+  min-width: 60px !important;
+  width: 60px !important;
 }

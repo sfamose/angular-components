@@ -24,6 +24,8 @@ import {DivTextComponent} from './div-text/div-text.component';
 import {AcTextConfig} from '../models/text-config';
 import {FieldCustomComponent} from './field-custom/field-custom.component';
 import {FieldAutocompleteComponent} from './field-autocomplete/field-autocomplete.component';
+import {FieldChipsInputComponent} from './field-chips-input/field-chips-input.component';
+import {FieldChipsAutocompleteComponent} from './field-chips-autocomplete/field-chips-autocomplete.component';
 
 const components: { [type: string]: Type<AcField> } = {
   autocomplete: FieldAutocompleteComponent,
@@ -37,7 +39,9 @@ const components: { [type: string]: Type<AcField> } = {
   textarea: FieldTextareaComponent,
   datetime: FieldDatetimeComponent,
   text: DivTextComponent,
-  customInput: FieldCustomComponent
+  customInput: FieldCustomComponent,
+  chipsInput: FieldChipsInputComponent,
+  chipsAutocomplete: FieldChipsAutocompleteComponent
 };
 
 @Directive({

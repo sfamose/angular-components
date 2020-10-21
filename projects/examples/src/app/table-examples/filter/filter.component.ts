@@ -20,20 +20,11 @@ export class FilterComponent implements OnInit {
         key: 'name', label: 'name',
         pipe: {tokenName: 'UpperCasePipe'},
         sticky: 'start',
-        addable: true,
-        editable: true,
-        field: {
-          type: 'input',
+        filterable: true,
+        filterField: {
+          type: 'chipsInput',
           name: 'name',
-          label: 'name',
-          required: true,
-          validations: [
-            {
-              name: 'required',
-              validator: Validators.required,
-              message: 'The name is required'
-            }
-          ]
+          label: 'Name',
         }
       },
       {key: 'gender', label: 'Gender', componentName: 'GenderCellComponent'},
@@ -45,8 +36,8 @@ export class FilterComponent implements OnInit {
       {key: 'image', label: 'Image', sticky: 'end'},
     ];
   options: AcTableOptions = {
-    filter: {
-      filterButtonLabel: '<i class="fas fa-filter"></i>',
+    filterOptions: {
+      // filterButtonLabel: '<i class="fas fa-filter"></i>',
       mode: 'sidenav',
       sidenavOptions: {
         position: 'end',

@@ -9,7 +9,7 @@ export interface AcFieldInputConfig {
   type: 'input';
   inputType?: 'color' | 'date' | 'datetime-local' | 'email' | 'month' | 'number'
     | 'password' | 'search' | 'tel' | 'text' | 'time' | 'url' | 'week';
-  name: string;
+  name?: string;
   label?: string;
   value?: any;
   disabled?: boolean;

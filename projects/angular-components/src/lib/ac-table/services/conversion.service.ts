@@ -3,7 +3,7 @@ import {AcTableColumn} from '../models/ac-table-column';
 import {AcTableConversions} from '../models/ac-table-conversions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class ConversionService {
 

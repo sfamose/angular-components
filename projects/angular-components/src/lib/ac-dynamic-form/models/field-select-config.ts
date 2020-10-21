@@ -7,7 +7,7 @@ import {FormGroup} from '@angular/forms';
 
 export interface AcFieldSelectConfig {
   type: 'select';
-  name: string;
+  name?: string;
   label?: string;
   value?: any;
   disabled?: boolean;

@@ -14,4 +14,5 @@ export interface AcDynamicFormConfig {
   matFormFieldAppearance?: string;
   matFormFieldFloatlabel?: string;
   inputMaxlength?: number;
+  separatorKeysCodes?: number[];
 }

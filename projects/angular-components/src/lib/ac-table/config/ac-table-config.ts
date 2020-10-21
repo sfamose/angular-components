@@ -1,16 +1,4 @@
-export interface AcTableLabels {
-  cancelButtonLabel?: string;
-  submitButtonLabel?: string;
-  addButtonLabel?: string;
-  addModalTitleLabel?: string;
-  editButtonLabel?: string;
-  editModalTitleLabel?: string;
-  deleteButtonLabel?: string;
-  deleteConfirmationMessage?: string;
-  deleteModalTitleLabel?: string;
-  filterButtonLabel?: string;
-}
-
+import {AcTableLabels} from '../models/ac-table-labels';
 
 export interface AcTableConfig {
   labels?: AcTableLabels;

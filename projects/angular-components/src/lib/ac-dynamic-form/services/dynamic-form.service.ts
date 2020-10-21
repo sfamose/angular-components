@@ -23,6 +23,11 @@ export class DynamicFormService {
   createGroup(fields: (AcFieldConfig | AcGroupConfig)[]) {
     const group = this.fb.group({});
     fields.forEach(control => {
+      if (!control.name) {
+        throw new Error(
+          `this attribute "name" is required`
+        );
+      }
       if (control.type === 'group') {
         group.addControl(control.name, this.createGroup((control as AcGroupConfig).fields as AcFieldConfig[]));
       } else {

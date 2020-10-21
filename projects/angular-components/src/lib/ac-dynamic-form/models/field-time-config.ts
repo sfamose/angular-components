@@ -7,7 +7,7 @@ import {FormGroup} from '@angular/forms';
 
 export interface AcFieldTimeConfig {
   type: 'time';
-  name: string;
+  name?: string;
   label?: string;
   value?: any;
   disabled?: boolean;

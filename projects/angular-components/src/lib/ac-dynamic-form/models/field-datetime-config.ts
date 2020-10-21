@@ -8,7 +8,7 @@ import {NgxMaterialTimepickerTheme} from 'ngx-material-timepicker';
 
 export interface AcFieldDatetimeConfig {
   type: 'datetime';
-  name: string;
+  name?: string;
   label?: string;
   value?: any;
   disabled?: boolean;

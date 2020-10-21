@@ -5,7 +5,7 @@ import {ThemePalette} from '@angular/material/core';
 
 export interface AcFieldRadioButtonConfig {
   type: 'radiobutton';
-  name: string;
+  name?: string;
   label?: string;
   value?: any;
   disabled?: boolean;

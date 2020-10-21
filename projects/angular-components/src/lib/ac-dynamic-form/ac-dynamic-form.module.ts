@@ -21,14 +21,19 @@ import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {
   DEFAULT_DATE_FORMAT,
   DEFAULT_INPUT_MAXLENGTH,
-  DEFAULT_LOCALE, DEFAULT_MAT_FORM_FIELD_APPEARANCE, DEFAULT_MAT_FORM_FIELD_FLOATLABEL,
+  DEFAULT_LOCALE,
+  DEFAULT_MAT_FORM_FIELD_APPEARANCE,
+  DEFAULT_MAT_FORM_FIELD_FLOATLABEL, DEFAULT_SEPARATOR_KEY_CODE,
   INPUT_MAXLENGTH,
-  MAT_FORM_FIELD_APPEARANCE, MAT_FORM_FIELD_FLOATLABEL
+  MAT_FORM_FIELD_APPEARANCE,
+  MAT_FORM_FIELD_FLOATLABEL, SEPARATOR_KEY_CODE
 } from './config/default-config';
 import {AcDynamicFormConfig} from './config/ac-dynamic-form-config';
 import {AcDynamicFormComponent} from './dynamic-form/dynamic-form.component';
 import {DynamicFormModalComponent} from './dynamic-form-modal/dynamic-form-modal.component';
-import { FieldAutocompleteComponent } from './components/field-autocomplete/field-autocomplete.component';
+import {FieldAutocompleteComponent} from './components/field-autocomplete/field-autocomplete.component';
+import { FieldChipsAutocompleteComponent } from './components/field-chips-autocomplete/field-chips-autocomplete.component';
+import { FieldChipsInputComponent } from './components/field-chips-input/field-chips-input.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,9 @@ import { FieldAutocompleteComponent } from './components/field-autocomplete/fiel
     FieldCustomComponent,
     FieldCustomDirective,
     DynamicFormModalComponent,
-    FieldAutocompleteComponent
+    FieldAutocompleteComponent,
+    FieldChipsAutocompleteComponent,
+    FieldChipsInputComponent
   ],
   exports: [AcDynamicFormComponent],
   imports: [
@@ -71,6 +78,10 @@ import { FieldAutocompleteComponent } from './components/field-autocomplete/fiel
     {
       provide: INPUT_MAXLENGTH,
       useValue: DEFAULT_INPUT_MAXLENGTH
+    },
+    {
+      provide: SEPARATOR_KEY_CODE,
+      useValue: DEFAULT_SEPARATOR_KEY_CODE
     }
   ]
 })
@@ -92,6 +103,10 @@ export class AcDynamicFormModule {
         {
           provide: INPUT_MAXLENGTH,
           useValue: config.inputMaxlength ? config.inputMaxlength : DEFAULT_INPUT_MAXLENGTH
+        },
+        {
+          provide: SEPARATOR_KEY_CODE,
+          useValue: config.separatorKeysCodes ? config.separatorKeysCodes : DEFAULT_SEPARATOR_KEY_CODE
         }
       ]
     };

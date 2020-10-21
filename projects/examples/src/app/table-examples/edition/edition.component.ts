@@ -20,8 +20,7 @@ export class EditionComponent implements OnInit {
         key: 'name', label: 'name',
         pipe: {tokenName: 'UpperCasePipe'},
         sticky: 'start',
-        addable: true,
-        editable: true,
+        exportable: true,
         field: {
           type: 'input',
           name: 'name',
@@ -37,15 +36,15 @@ export class EditionComponent implements OnInit {
         }
       },
       {key: 'gender', label: 'Gender', componentName: 'GenderCellComponent'},
-      {key: 'eye_color', label: 'Eye color'},
-      {key: 'hair_color', label: 'Hair color'},
+      {key: 'eye_color', label: 'Eye color', exportable: true},
+      {key: 'hair_color', label: 'Hair color', exportable: true},
       {key: 'skin_color', label: 'Skin color'},
       {key: 'height', label: 'Height'},
       {key: 'birth_year', label: 'Birthyear'},
       {key: 'image', label: 'Image', sticky: 'end'},
     ];
   options: AcTableOptions = {
-    addRow: {
+    /*addRow: {
       modalTitleLabel: 'Add a row',
       cancelButtonLabel: 'Cancel',
       submitButtonLabel: 'Submit',
@@ -63,6 +62,9 @@ export class EditionComponent implements OnInit {
       cancelButtonLabel: 'Cancel',
       submitButtonLabel: 'Submit',
       deleteButtonLabel: '<i class="fas fa-trash-alt"></i>'
+    },*/
+    exportCSV: {
+      fileName: 'test.csv'
     }
   };
   conversionMap: AcTableConversions = {

@@ -1,14 +1,14 @@
-import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-field';
-import {AcAffix} from './affix';
 import {AcValidator} from './validator';
+import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-field';
 import {AcHint} from './hint';
-import {FormGroup} from '@angular/forms';
+import {AcAffix} from './affix';
+import {ThemePalette} from '@angular/material/core';
 
-export interface AcFieldTextareaConfig {
-  type: 'textarea';
+export interface AcFieldChipsInputConfig {
+  type: 'chipsInput';
   name?: string;
   label?: string;
-  value?: string;
+  value?: any;
   disabled?: boolean;
   validations?: AcValidator[];
   className?: string | string[];
@@ -22,11 +22,13 @@ export interface AcFieldTextareaConfig {
   endHint?: AcHint;
   suffixes?: AcAffix[];
   prefixes?: AcAffix[];
+  autocomplete?: string;
 
-  readonly?: boolean;
-  autosize?: boolean;
-  minRows?: number;
-  maxRows?: number;
 
-  onValueChanges?: (value: any, field?: AcFieldTextareaConfig, group?: FormGroup) => void;
+  noSelectable?: boolean;
+  noRemovable?: boolean;
+  addOnBlur?: boolean;
+  separatorKeysCodes?: number[];
+  deleteLabel?: string;
+  color?: ThemePalette;
 }

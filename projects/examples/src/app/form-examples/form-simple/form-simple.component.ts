@@ -100,6 +100,20 @@ export class FormSimpleComponent implements OnInit {
         label: 'Autocomplete',
         name: 'autocomplete',
         options: ['One', 'Two', 'Three']
+      },
+      {
+        type: 'chipsInput',
+        label: 'Chips',
+        name: 'chipsInput',
+        value: ['Lemon', 'Lime', 'Apple'],
+        deleteLabel: '<i class="fas fa-times"></i>'
+      },
+      {
+        type: 'chipsAutocomplete',
+        label: 'Chips Autocomplete',
+        name: 'chipsAutocomplete',
+        options: ['Lemon', 'Lime', 'Apple'],
+        deleteLabel: '<i class="fas fa-times"></i>'
       }
 
     ]

@@ -8,7 +8,7 @@ import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-fie
 
 export interface AcFieldDateConfig {
   type: 'date';
-  name: string;
+  name?: string;
   label?: string;
   value?: Moment;
   disabled?: boolean;

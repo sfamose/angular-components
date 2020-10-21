@@ -1,4 +1,9 @@
 .ac-table-header-row {
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+}
+
+.ac-table-header-item {
+  margin-right: 20px;
 }
