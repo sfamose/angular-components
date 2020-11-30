@@ -14,11 +14,11 @@ export class ResponsiveComponent implements OnInit {
     [
       {key: 'name', label: 'name', pipe: {token: UpperCasePipe}, sticky: 'start'},
       {key: 'gender', label: 'Gender'},
-      {key: 'eye_color', label: 'Eye color', visibleIfMinWidth: 700},
-      {key: 'hair_color', label: 'Hair color', visibleIfMinWidth: 700},
-      {key: 'skin_color', label: 'Skin color', visibleIfMinWidth: 700},
-      {key: 'height', label: 'Height', visibleIfMinWidth: 700},
-      {key: 'birth_year', label: 'Birthyear', visibleIfMinWidth: 700},
+      {key: 'eye_color', label: 'Eye color'},
+      {key: 'hair_color', label: 'Hair color'},
+      {key: 'skin_color', label: 'Skin color'},
+      {key: 'height', label: 'Height'},
+      {key: 'birth_year', label: 'Birthyear'},
       {key: 'image', label: 'Image'}
     ];
 

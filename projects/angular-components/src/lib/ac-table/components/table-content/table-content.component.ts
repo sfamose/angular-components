@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, HostListener, OnDestroy, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {AcTableColumn} from '../../models/ac-table-column';
 import {AcTableOptions} from '../../models/ac-table-options';
@@ -89,8 +89,9 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
     this.storeService.setDisplayedColumns();
   }
 
+  @HostListener('window:resize', ['$event'])
   onResize() {
-    this.storeService.setDisplayedColumns();
+    this.storeService.onResize();
   }
 
   onSortChange(sort: Sort) {
@@ -116,7 +117,7 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSource && this.dataSource.data.length;
     return numSelected === numRows;
   }
 

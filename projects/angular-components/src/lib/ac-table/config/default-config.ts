@@ -15,6 +15,11 @@ export const DEFAULT_LABELS: AcTableLabels = {
   deleteConfirmationMessage: 'Confirm the deletion of the row',
   deleteModalTitleLabel: 'Delete a row',
   filterButtonLabel: 'Filter',
+  filterAppliedLabel: 'Applied filters',
+  filterTitleLabel: 'Filter',
+  filterFormLabel: 'Filters',
+  noFiltersLabel: 'No filters',
+  deleteFilterButtonLabel: 'Delete filters',
   exportButtonLabel: 'Export',
   globalFilterPlaceholder: 'Filter...',
   globalFilterLabel: 'Filter'

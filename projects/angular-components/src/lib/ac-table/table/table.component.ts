@@ -9,6 +9,7 @@ import {EditRowService} from '../services/edit-row.service';
 import {Subject} from 'rxjs';
 import {AcTableConversions} from '../models/ac-table-conversions';
 import {StoreService} from '../services/store.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'ac-table',
@@ -27,6 +28,8 @@ export class AcTableComponent implements OnInit, OnChanges, OnDestroy {
   @Output() rowEdit: EventEmitter<any> = new EventEmitter<any>();
   @Output() rowDelete: EventEmitter<any> = new EventEmitter<any>();
   @Output() sortChange: EventEmitter<Sort> = new EventEmitter<Sort>();
+  @Output() pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+  @Output() filterChange: EventEmitter<any> = new EventEmitter<any>();
   unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(@Inject(LABELS) public labels: AcTableLabels,
@@ -64,8 +67,20 @@ export class AcTableComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  onSortChange(sort: Sort) {
+  onSortChange(sort: Sort): void {
     this.sortChange.emit(sort);
+  }
+
+  onSelectChange(selectedRows: any[]): void {
+    this.selectChange.emit(selectedRows);
+  }
+
+  onPageChange(page: PageEvent): void {
+    this.pageChange.emit(page);
+  }
+
+  onFilterChange(filters: any) {
+    this.filterChange.emit(filters);
   }
 
   ngOnDestroy(): void {

@@ -10,6 +10,11 @@ export interface AcTableLabels {
   deleteConfirmationMessage?: string;
   deleteModalTitleLabel?: string;
   filterButtonLabel?: string;
+  filterTitleLabel?: string;
+  filterAppliedLabel?: string;
+  filterFormLabel?: string;
+  noFiltersLabel?: string;
+  deleteFilterButtonLabel?: string;
   exportButtonLabel?: string;
   globalFilterPlaceholder?: string;
   globalFilterLabel?: string;

@@ -6,4 +6,6 @@ import {AcGroupConfig} from './group-config';
 export interface AcDynamicForm {
   fields: (AcFieldConfig | AcTextConfig | AcGroupConfig)[];
   submitButton?: AcSubmitButton;
+  debounceTime?: number;
+  updateOn?: 'change' | 'blur' | 'submit';
 }

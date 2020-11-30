@@ -6,7 +6,11 @@
               [disableClose]="options?.filterOptions?.sidenavOptions?.disableClose"
               [opened]="options?.filterOptions?.sidenavOptions?.opened"
   >
-    <ac-sidenav-filter *ngIf="drawer.opened" [columns]="columns" [options]="options"></ac-sidenav-filter>
+    <ac-sidenav-filter *ngIf="drawer.opened"
+                       [columns]="columns"
+                       [options]="options"
+                       (filterChange)="onFilterChange($event)"
+    ></ac-sidenav-filter>
   </mat-drawer>
 
   <mat-drawer-content>
@@ -17,6 +21,8 @@
       </div>
       <div class="ac-table-wrapper">
         <ac-table-content (sortChange)="onSortChange($event)"
+                          (selectChange)="onSelectChange($event)"
+                          (pageChange)="onPageChange($event)"
         ></ac-table-content>
       </div>
     </div>

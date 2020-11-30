@@ -4,6 +4,9 @@ import {MatDrawerMode} from '@angular/material/sidenav';
 import {AcTableLabels} from './ac-table-labels';
 import {ThemePalette} from '@angular/material/core';
 import {PageEvent} from '@angular/material/paginator';
+import {AcTableHeaderItem} from './ac-table-header-item';
+import {ComponentType} from '@angular/cdk/portal';
+import {AcSubmitButton} from '../../ac-dynamic-form/models/submit-button';
 
 export interface AcTableOptions {
   selection?: boolean;
@@ -33,10 +36,12 @@ export interface AcTableOptions {
   addRow?: boolean;
   addRowOptions?: {
     action?: (row: any) => Observable<any>;
+    component?: ComponentType<any>;
   };
   editRow?: boolean;
   editRowOptions?: {
     action?: (row: any) => Observable<any>;
+    component?: ComponentType<any>;
   };
   deleteRow?: boolean;
   deleteRowOptions?: {
@@ -53,14 +58,18 @@ export interface AcTableOptions {
       opened?: boolean;
       disableClose?: boolean;
     };
+    externalFilter?: boolean;
+    submitButton?: AcSubmitButton;
+    debounceTime?: number;
+    updateOn?: 'change' | 'blur' | 'submit';
   };
   exportCSV?: {
     fileName: string;
     separator?: string;
     addDoubleQuote?: boolean;
     formatDate?: string;
-    externalExport?: () => Observable<string>;
-    mimeType?: string;
+    externalExport?: () => void;
   };
   labels?: AcTableLabels;
+  headerItems?: AcTableHeaderItem[];
 }

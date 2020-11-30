@@ -45,9 +45,18 @@ export class TableComponent implements OnInit {
           },
         ],
       },
+      mediaQueries: ['(min-width: 600px)'],
+      filterable: true,
+      filterField: {
+        name: 'libelle',
+        label: 'Libellé',
+        type: 'chipsInput',
+        deleteLabel: '<i class="fas fa-times"></i>'
+      }
     },
   ];
   options: AcTableOptions = {
+    selection: true,
     externalStore: false,
     sort: true,
     sortOptions: {
@@ -94,10 +103,47 @@ export class TableComponent implements OnInit {
       mode: 'sidenav',
       sidenavOptions: {
         position: 'end',
-        mode: 'over',
-        opened: false
+        mode: 'side',
+        opened: true
+      },
+      // updateOn: 'blur',
+      debounceTime: 500
+    },
+    headerItems: [
+      {
+        type: 'menu',
+        options: {
+          label: 'Menu',
+          subMenuItems: [
+            {type: 'addRow'},
+            {type: 'export'},
+            {
+              type: 'custom',
+              options: {
+                label: 'Custom',
+                action: () => {
+                  console.log('test1');
+                }
+              }
+            }
+          ]
+        },
+        mediaQueries: ['(max-width: 600px)']
+      },
+      {type: 'addRow', mediaQueries: ['(min-width: 600px)']},
+      {type: 'export', mediaQueries: ['(min-width: 600px)']},
+      {type: 'filter'},
+      {type: 'globalFilter'},
+      {
+        type: 'custom',
+        options: {
+          label: 'Custom',
+          action: () => {
+            console.log('test2');
+          }
+        }, mediaQueries: ['(min-width: 600px)']
       }
-    }
+    ]
   };
   rows: any[];
 
@@ -136,5 +182,9 @@ export class TableComponent implements OnInit {
 
   onPage(page: PageEvent, sort: Sort): void {
     console.log(sort, page);
+  }
+
+  logEvent(event: any) {
+    console.log(event);
   }
 }

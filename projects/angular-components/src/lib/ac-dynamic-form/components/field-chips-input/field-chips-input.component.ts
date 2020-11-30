@@ -21,6 +21,9 @@ export class FieldChipsInputComponent implements OnInit, AcField {
   get values() {
     return this.group.get(this.field.name).value;
   }
+  set values(values: any[]) {
+    this.group.get(this.field.name).setValue(values);
+  }
 
   constructor(
     @Inject(SEPARATOR_KEY_CODE) public separatorKeysCodes: number[],
@@ -33,7 +36,7 @@ export class FieldChipsInputComponent implements OnInit, AcField {
     this.field.separatorKeysCodes = this.field.separatorKeysCodes || this.separatorKeysCodes;
 
     if (!this.values) {
-      this.group.get(this.field.name).setValue([]);
+      this.values = [];
     }
   }
 
@@ -46,7 +49,9 @@ export class FieldChipsInputComponent implements OnInit, AcField {
     const input = event.input;
     const value = event.value;
     if ((value || '').trim()) {
-      this.values.push(value.trim());
+      const list = this.values || [];
+      list.push(value.trim());
+      this.values = list;
     }
     if (input) {
       input.value = '';
@@ -57,6 +62,7 @@ export class FieldChipsInputComponent implements OnInit, AcField {
     const index = this.values.indexOf(item);
     if (index >= 0) {
       this.values.splice(index, 1);
+      this.values = this.values;
     }
   }
 

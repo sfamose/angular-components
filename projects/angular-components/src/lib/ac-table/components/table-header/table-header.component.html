@@ -1,23 +1,75 @@
 <div class="ac-table-header-row">
-  <div class="ac-table-header-item" *ngIf="options?.addRow">
-    <button class="mat-primary" mat-raised-button (click)="clickAddRow()" >
-      <span [innerHTML]="labels.addButtonLabel"></span>
-    </button>
-  </div>
-  <div class="ac-table-header-item" *ngIf="options?.filter">
-    <button class="mat-primary" mat-raised-button (click)="clickOpenFilter()" >
-      <span [innerHTML]="labels.filterButtonLabel"></span>
-    </button>
-  </div>
-  <div class="ac-table-header-item" *ngIf="options?.exportCSV">
-    <button class="mat-primary" mat-raised-button (click)="clickExportCSV()" >
-      <span [innerHTML]="labels.exportButtonLabel"></span>
-    </button>
-  </div>
-  <div class="ac-table-header-item" *ngIf="options?.exportCSV">
-    <mat-form-field>
-      <mat-label>{{labels.globalFilterLabel}}</mat-label>
-      <input matInput (keyup)="applyFilter($event)" [placeholder]="labels.globalFilterPlaceholder" #input>
-    </mat-form-field>
-  </div>
+  <ng-container *ngFor="let item of headerItems">
+    <div class="ac-table-header-item" [ngSwitch]="item.type">
+
+      <ac-button *ngSwitchCase="'addRow'"
+                 [label]="labels.addButtonLabel"
+                 color="primary"
+                 type="mat-raised-button"
+                 (buttonClick)="clickAddRow()"
+      ></ac-button>
+      <ac-button *ngSwitchCase="'filter'"
+                 [label]="labels.filterButtonLabel"
+                 [badge]="filterBadge"
+                 color="primary"
+                 type="mat-raised-button"
+                 (buttonClick)="clickOpenFilter()"
+      ></ac-button>
+      <ac-button *ngSwitchCase="'export'"
+                 [label]="labels.exportButtonLabel"
+                 color="primary"
+                 type="mat-raised-button"
+                 (buttonClick)="clickExportCSV()"
+      ></ac-button>
+      <ac-button *ngSwitchCase="'custom'"
+                 [label]="item.options?.label"
+                 color="primary"
+                 type="mat-raised-button"
+                 (buttonClick)="item.options?.action()"
+      ></ac-button>
+
+      <ng-container *ngSwitchCase="'globalFilter'">
+        <mat-form-field>
+          <mat-label>{{labels.globalFilterLabel}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)" [placeholder]="labels.globalFilterPlaceholder" #input>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'menu'">
+
+        <ac-button [label]="item.options?.label"
+                   color="primary"
+                   type="mat-raised-button"
+                   [matMenuTriggerFor]="menu"
+        ></ac-button>
+        <!--<button class="mat-primary" mat-raised-button  [innerHTML]="item.options?.label">Menu</button>-->
+        <mat-menu #menu="matMenu">
+          <ng-container *ngFor="let subItem of item.options?.subMenuItems">
+            <ac-button *ngIf="subItem.type === 'addRow'"
+                       [label]="labels.addButtonLabel"
+                       type="mat-menu-item"
+                       (buttonClick)="clickAddRow()"
+            ></ac-button>
+            <ac-button *ngIf="subItem.type === 'filter'"
+                       [label]="labels.filterButtonLabel"
+                       type="mat-menu-item"
+                       (buttonClick)="clickOpenFilter()"
+            ></ac-button>
+            <ac-button *ngIf="subItem.type === 'export'"
+                       [label]="labels.exportButtonLabel"
+                       type="mat-menu-item"
+                       (buttonClick)="clickExportCSV()"
+            ></ac-button>
+            <ac-button *ngIf="subItem.type === 'custom'"
+                       [label]="subItem.options?.label"
+                       type="mat-menu-item"
+                       (buttonClick)="subItem.options?.action()"
+            ></ac-button>
+          </ng-container>
+        </mat-menu>
+      </ng-container>
+    </div>
+    <div class="ac-table-header-divide"></div>
+  </ng-container>
+
 </div>

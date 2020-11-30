@@ -9,8 +9,7 @@ export interface AcTableColumn {
   className?: string | string[];
   headerClassName?: string | string[];
   sticky?: 'start' | 'end';
-  visibleIfMinWidth?: number;
-  visibleIfMaxWidth?: number;
+  mediaQueries?: string[];
   hide?: boolean;
   pipe?: {
     tokenName?: string;

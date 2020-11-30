@@ -20,9 +20,7 @@ export class ExportCsvService {
     }
 
     if (options.exportCSV.externalExport) {
-      options.exportCSV.externalExport().pipe(take(1)).subscribe(csvContent => {
-        this.download(csvContent, filename, options.exportCSV.mimeType);
-      });
+      options.exportCSV.externalExport();
     } else {
       this.internalExport(options, filename, columns, rows);
     }

@@ -1,4 +1,11 @@
 <ac-table [rows]="rows"
           [columns]="columns"
           [options]="options"
+          (selectChange)="logEvent($event)"
+          (sortChange)="logEvent($event)"
+          (filterChange)="logEvent($event)"
+          (pageChange)="logEvent($event)"
+          (rowEdit)="logEvent($event)"
+          (rowAdd)="logEvent($event)"
+          (rowDelete)="logEvent($event)"
 ></ac-table>

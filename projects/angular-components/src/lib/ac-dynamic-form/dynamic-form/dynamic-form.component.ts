@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {AcTextConfig} from '../models/text-config';
 import {DynamicFormService} from '../services/dynamic-form.service';
 import {AcGroupConfig} from '../models/group-config';
 import {AcFieldConfig} from '../models/field-config';
 import {AcDynamicForm} from '../models/dynamic-form';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {debounceTime, takeUntil} from 'rxjs/operators';
 
 @Component({
   exportAs: 'dynamicForm',
@@ -14,15 +15,17 @@ import {Observable} from 'rxjs';
   styleUrls: ['./dynamic-form.component.css'],
   providers: [DynamicFormService]
 })
-export class AcDynamicFormComponent implements OnChanges, OnInit {
+export class AcDynamicFormComponent implements OnChanges, OnInit, OnDestroy {
   @Input()
   config: AcDynamicForm = {
     submitButton: null,
-    fields: []
+    fields: [],
+    debounceTime: 0
   };
 
   @Output()
   formSubmit: EventEmitter<any> = new EventEmitter<any>();
+  unsubcribe$: Subject<void> = new Subject<void>();
 
   get form(): FormGroup {
     return this.dynamicFormService.getForm();
@@ -51,8 +54,17 @@ export class AcDynamicFormComponent implements OnChanges, OnInit {
 
 
   ngOnInit() {
-    this.dynamicFormService.createForm(this.config.fields);
+    this.dynamicFormService.createForm(this.config.fields, this.config.updateOn);
     this.fields = [].concat(this.config.fields);
+
+    if (!this.config.submitButton) {
+      this.form.valueChanges.pipe(
+        debounceTime(this.config.debounceTime ? this.config.debounceTime : 0),
+        takeUntil(this.unsubcribe$)
+      ).subscribe(values => {
+        this.formSubmit.emit(values);
+      });
+    }
   }
 
   ngOnChanges() {
@@ -60,6 +72,11 @@ export class AcDynamicFormComponent implements OnChanges, OnInit {
       this.dynamicFormService.updateForm(this.config.fields);
       this.fields = [].concat(this.config.fields);
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubcribe$.next();
+    this.unsubcribe$.complete();
   }
 
   handleSubmit(event: Event) {

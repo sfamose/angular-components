@@ -10,6 +10,7 @@ import {EditEvent} from '../models/edit-event';
 import {Observable, Subject} from 'rxjs';
 import {StoreService} from './store.service';
 import {AcTableColumn} from '../models/ac-table-column';
+import {ComponentType} from '@angular/cdk/portal';
 
 @Injectable({
   providedIn: 'any'
@@ -41,7 +42,10 @@ export class EditRowService {
     const fields: AcFieldConfig[] = this.storeService.columns.filter(col => !col.skipAddRow || col.skipAddRow !== 'hide').map(col => {
       return this.getField(col, col.skipAddRow === 'disabled');
     });
-    const dialogRef = this.dialog.open(DynamicFormModalComponent, {
+    const component: ComponentType<any> = this.storeService.options.addRowOptions
+    && this.storeService.options.addRowOptions.component ?
+      this.storeService.options.addRowOptions.component : DynamicFormModalComponent;
+    const dialogRef = this.dialog.open(component, {
       data: {
         fields,
         submitButtonLabel: this.storeService.labels.submitButtonLabel,
@@ -72,7 +76,10 @@ export class EditRowService {
       field.value = row[col.key];
       return field;
     });
-    const dialogRef = this.dialog.open(DynamicFormModalComponent, {
+    const component: ComponentType<any> = this.storeService.options.addRowOptions
+    && this.storeService.options.addRowOptions.component ?
+      this.storeService.options.addRowOptions.component : DynamicFormModalComponent;
+    const dialogRef = this.dialog.open(component, {
       data: {
         fields,
         submitButtonLabel: this.storeService.labels.submitButtonLabel,

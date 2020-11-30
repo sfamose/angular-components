@@ -25,12 +25,14 @@ import {MatSortModule} from '@angular/material/sort';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    MatBadgeModule,
     MatButtonModule,
     MatCheckboxModule,
     MatChipsModule,
@@ -57,6 +59,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatPaginatorModule
   ],
   exports: [
+    MatBadgeModule,
     MatButtonModule,
     MatCheckboxModule,
     MatChipsModule,

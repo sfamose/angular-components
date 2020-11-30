@@ -1,4 +1,4 @@
-<div class="ac-table-content" #container (window:resize)="onResize()" >
+<div class="ac-table-content" #container >
   <table mat-table matSort [dataSource]="dataSource"
          [matSortDisabled]="!options?.sort"
          [matSortActive]="options?.sortOptions?.active"

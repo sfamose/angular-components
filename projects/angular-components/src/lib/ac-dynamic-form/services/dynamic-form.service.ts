@@ -15,13 +15,14 @@ export class DynamicFormService {
     return this.form;
   }
 
-  createForm(fields: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) {
+  createForm(fields: (AcFieldConfig | AcTextConfig | AcGroupConfig)[], updateOn: 'change' | 'blur' | 'submit') {
     const formFields = fields.filter(x => x.type !== 'text') as (AcFieldConfig | AcGroupConfig)[];
-    this.form = this.createGroup(formFields);
+    this.form = this.createGroup(formFields, updateOn);
   }
 
-  createGroup(fields: (AcFieldConfig | AcGroupConfig)[]) {
-    const group = this.fb.group({});
+  createGroup(fields: (AcFieldConfig | AcGroupConfig)[], updateOn: 'change' | 'blur' | 'submit') {
+    const config = updateOn ? {updateOn} : {};
+    const group = this.fb.group({}, config);
     fields.forEach(control => {
       if (!control.name) {
         throw new Error(
@@ -29,7 +30,7 @@ export class DynamicFormService {
         );
       }
       if (control.type === 'group') {
-        group.addControl(control.name, this.createGroup((control as AcGroupConfig).fields as AcFieldConfig[]));
+        group.addControl(control.name, this.createGroup((control as AcGroupConfig).fields as AcFieldConfig[], null));
       } else {
         group.addControl(control.name, this.createControl(control));
       }
@@ -68,7 +69,7 @@ export class DynamicFormService {
       .forEach(name => {
         const config = formFields.find(control => control.name === name);
         if (config.type === 'group') {
-          form.addControl(name, this.createGroup((config as AcGroupConfig).fields as AcFieldConfig[]));
+          form.addControl(name, this.createGroup((config as AcGroupConfig).fields as AcFieldConfig[], null));
         } else {
           form.addControl(name, this.createControl(config as AcFieldConfig));
         }
