@@ -34,6 +34,7 @@ import {DynamicFormModalComponent} from './dynamic-form-modal/dynamic-form-modal
 import {FieldAutocompleteComponent} from './components/field-autocomplete/field-autocomplete.component';
 import { FieldChipsAutocompleteComponent } from './components/field-chips-autocomplete/field-chips-autocomplete.component';
 import { FieldChipsInputComponent } from './components/field-chips-input/field-chips-input.component';
+import {AcButtonModule} from '../ac-button/ac-button.module';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { FieldChipsInputComponent } from './components/field-chips-input/field-c
   ],
   exports: [AcDynamicFormComponent],
   imports: [
-    CommonModule, ReactiveFormsModule, MaterialModule
+    CommonModule, ReactiveFormsModule, MaterialModule, AcButtonModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: DEFAULT_LOCALE}, {

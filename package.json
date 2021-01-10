@@ -22,14 +22,13 @@
     "@angular/platform-browser": "~10.0.2",
     "@angular/platform-browser-dynamic": "~10.0.2",
     "@angular/router": "~10.0.2",
-    "@fortawesome/fontawesome-free": "^5.13.0",
     "moment": "^2.24.0",
-    "ngx-material-timepicker": "^5.5.1",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@angular-devkit/build-angular": "~0.1000.1",
     "@angular-devkit/build-ng-packagr": "~0.1000.1",
     "@angular/cli": "~10.0.1",

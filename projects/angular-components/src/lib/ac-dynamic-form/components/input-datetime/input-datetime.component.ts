@@ -4,7 +4,6 @@ import {Subject} from 'rxjs';
 import {FocusMonitor} from '@angular/cdk/a11y';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {Moment} from 'moment';
-import {NgxMaterialTimepickerComponent} from 'ngx-material-timepicker';
 import {AcFieldDatetimeConfig} from '../../models/field-datetime-config';
 import {MatFormFieldControl} from '@angular/material/form-field';
 
@@ -17,7 +16,7 @@ class MyDatetime {
 @Component({
   selector: 'ac-input-datetime',
   templateUrl: './input-datetime.component.html',
-  styleUrls: ['./input-datetime.component.css'],
+  styleUrls: ['./input-datetime.component.scss'],
   providers: [{provide: MatFormFieldControl, useExisting: InputDatetimeComponent}]
 })
 export class InputDatetimeComponent implements ControlValueAccessor, MatFormFieldControl<MyDatetime>, OnInit, OnDestroy {
@@ -27,7 +26,6 @@ export class InputDatetimeComponent implements ControlValueAccessor, MatFormFiel
   @Input()
   group: FormGroup;
 
-  @ViewChild('timePicker', {static: true}) timePicker: NgxMaterialTimepickerComponent;
   form: FormGroup;
   stateChanges = new Subject<void>();
   focused = false;

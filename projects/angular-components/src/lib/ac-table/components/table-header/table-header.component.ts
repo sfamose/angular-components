@@ -9,7 +9,7 @@ import {AcTableHeaderItem} from '../../models/ac-table-header-item';
 @Component({
   selector: 'ac-table-header',
   templateUrl: './table-header.component.html',
-  styleUrls: ['./table-header.component.css']
+  styleUrls: ['./table-header.component.scss']
 })
 export class TableHeaderComponent {
   @Output() openFilter: EventEmitter<void> = new EventEmitter<void>();

@@ -6,7 +6,7 @@ import {takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'app-dynamic-example',
   templateUrl: './dynamic-example.component.html',
-  styleUrls: ['./dynamic-example.component.css']
+  styleUrls: ['./dynamic-example.component.scss']
 })
 export class DynamicExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   config: AcDynamicForm = {

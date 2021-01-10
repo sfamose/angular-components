@@ -6,11 +6,13 @@
   <ac-dynamic-form [config]="config" #dynamicForm="dynamicForm" ></ac-dynamic-form>
 </mat-dialog-content>
 <mat-dialog-actions class="ac-dynamic-form-modal-actions" align="end">
-  <button mat-button mat-dialog-close>
-    <span [innerHTML]="cancelButtonLabel"></span>
-  </button>
-  <button mat-button (click)="save(dynamicForm?.form?.value)" [disabled]="!dynamicForm?.form?.valid"
-  color="primary">
-    <span [innerHTML]="submitButtonLabel"></span>
-  </button>
+  <ac-button [config]="data.cancelButton"
+             [label]="cancelButtonLabel"
+             (buttonClick)="cancel()"
+  ></ac-button>
+  <ac-button [config]="data.submitButton"
+             [label]="submitButtonLabel"
+             (buttonClick)="save(dynamicForm?.form?.value)"
+             [disabled]="!dynamicForm?.form?.valid"
+  ></ac-button>
 </mat-dialog-actions>

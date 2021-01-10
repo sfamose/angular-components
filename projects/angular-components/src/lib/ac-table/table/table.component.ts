@@ -10,11 +10,12 @@ import {Subject} from 'rxjs';
 import {AcTableConversions} from '../models/ac-table-conversions';
 import {StoreService} from '../services/store.service';
 import {PageEvent} from '@angular/material/paginator';
+import {MatDrawerMode} from '@angular/material/sidenav';
 
 @Component({
   selector: 'ac-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  styleUrls: ['./table.component.scss'],
   providers: [StoreService, EditRowService]
 })
 export class AcTableComponent implements OnInit, OnChanges, OnDestroy {
@@ -23,6 +24,7 @@ export class AcTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() columns: AcTableColumn[];
   @Input() options: AcTableOptions;
   @Input() conversionMap: AcTableConversions;
+  @Input() filterSidenavMode: MatDrawerMode;
   @Output() selectChange: EventEmitter<any[]> = new EventEmitter<any[]>();
   @Output() rowAdd: EventEmitter<any> = new EventEmitter<any>();
   @Output() rowEdit: EventEmitter<any> = new EventEmitter<any>();
@@ -64,6 +66,13 @@ export class AcTableComponent implements OnInit, OnChanges, OnDestroy {
     }
     if (changes.rowsLength) {
       this.storeService.setRowsLength(this.rowsLength);
+    }
+
+    if (!this.filterSidenavMode
+      && this.options
+      && this.options.filterOptions
+      && this.options.filterOptions.sidenavOptions) {
+      this.filterSidenavMode = this.options.filterOptions.sidenavOptions.mode;
     }
   }
 

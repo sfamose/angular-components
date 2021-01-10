@@ -8,7 +8,7 @@ import {Subject} from 'rxjs';
 @Component({
   selector: 'ac-field-checkbox',
   templateUrl: './field-checkbox.component.html',
-  styleUrls: ['./field-checkbox.component.css']
+  styleUrls: ['./field-checkbox.component.scss']
 })
 export class FieldCheckboxComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldCheckboxConfig;

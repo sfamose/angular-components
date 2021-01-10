@@ -12,12 +12,13 @@ import {takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-sidenav-filter',
   templateUrl: './sidenav-filter.component.html',
-  styleUrls: ['./sidenav-filter.component.css']
+  styleUrls: ['./sidenav-filter.component.scss']
 })
 export class SidenavFilterComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() columns: AcTableColumn[];
   @Input() options: AcTableOptions;
   @Output() filterChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() closeFilter: EventEmitter<void> = new EventEmitter<void>();
   config: AcDynamicForm;
   @ViewChild('dynamicForm') dynamicForm: AcDynamicFormComponent;
   values: { code: string, label: string, value: string }[];
@@ -49,6 +50,7 @@ export class SidenavFilterComponent implements OnInit, OnDestroy, AfterViewInit 
       debounceTime: this.options.filterOptions && this.options.filterOptions.debounceTime,
       updateOn: this.options.filterOptions ? this.options.filterOptions.updateOn : 'change'
     };
+    this.setValues(this.storeService.filterValues);
   }
 
   ngAfterViewInit(): void {
@@ -64,7 +66,8 @@ export class SidenavFilterComponent implements OnInit, OnDestroy, AfterViewInit 
 
   submit(values: any): void {
     Object.keys(values).forEach(key => {
-      if (values[key] === null || values[key] === undefined || values[key] === '') {
+      if (values[key] === null || values[key] === undefined || values[key] === ''
+        || (Array.isArray(values[key]) && values[key].length === 0)) {
         delete values[key];
       }
     });
@@ -74,24 +77,26 @@ export class SidenavFilterComponent implements OnInit, OnDestroy, AfterViewInit 
 
   setValues(values: any): void {
     this.values = [];
-    Object.keys(values).forEach(key => {
-      const col = this.storeService.columns.filter(x => x.key === key || (x.filterField && x.filterField.name === key))[0];
-      if (Array.isArray(values[key])) {
-        values[key].forEach(x => {
+    if (values) {
+      Object.keys(values).forEach(key => {
+        const col = this.storeService.columns.filter(x => x.key === key || (x.filterField && x.filterField.name === key))[0];
+        if (Array.isArray(values[key])) {
+          values[key].forEach(x => {
+            this.values.push({
+              code: key,
+              label: col.label,
+              value: x
+            });
+          });
+        } else if (values[key]) {
           this.values.push({
             code: key,
             label: col.label,
-            value: x
+            value: values[key]
           });
-        });
-      } else if (values[key]) {
-        this.values.push({
-          code: key,
-          label: col.label,
-          value: values[key]
-        });
-      }
-    });
+        }
+      });
+    }
   }
 
   deleteValues(): void {
@@ -106,5 +111,9 @@ export class SidenavFilterComponent implements OnInit, OnDestroy, AfterViewInit 
       val = null;
     }
     this.dynamicForm.form.get(item.code).setValue(val);
+  }
+
+  close() {
+    this.closeFilter.emit();
   }
 }

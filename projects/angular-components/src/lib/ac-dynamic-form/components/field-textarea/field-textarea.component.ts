@@ -11,7 +11,7 @@ import {takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-field-textarea',
   templateUrl: './field-textarea.component.html',
-  styleUrls: ['./field-textarea.component.css']
+  styleUrls: ['./field-textarea.component.scss']
 })
 export class FieldTextareaComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldTextareaConfig;

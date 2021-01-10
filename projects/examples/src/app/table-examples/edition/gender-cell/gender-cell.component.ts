@@ -4,7 +4,7 @@ import {AcTableColumn} from 'angular-components';
 @Component({
   selector: 'app-gender-cell',
   templateUrl: './gender-cell.component.html',
-  styleUrls: ['./gender-cell.component.css']
+  styleUrls: ['./gender-cell.component.scss']
 })
 export class GenderCellComponent implements OnInit {
 

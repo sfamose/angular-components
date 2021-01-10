@@ -6,21 +6,15 @@
 >
   <mat-label><span [innerHTML]="field.label"></span></mat-label>
   <div class="ac-dynamic-field-datetime-time">
-    <input matInput readonly [ngxTimepicker]="picker"
+    <input matInput readonly
            [formControlName]="field.name"
            [placeholder]="field.placeholder"
-           [format]="field.format"
            [required]="field.required"
            [autocomplete]="field.autocomplete"
            [min]="field.minTime"
            [max]="field.maxTime"
     />
-    <ngx-material-timepicker-toggle [for]="picker"></ngx-material-timepicker-toggle>
-    <ngx-material-timepicker #picker
-                             [defaultTime]="field.defaultTime"
-                             [minutesGap]="field.minutesGap"
-                             [theme]="field.theme"
-    ></ngx-material-timepicker>
+
   </div>
   <span matPrefix *ngFor="let b of field.prefixes">
     <button *ngIf="b.action" type="button" mat-button (click)="buttonAction($event, b)" [attr.aria-label]="b.actionAriaLabel">

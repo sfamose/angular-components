@@ -12,7 +12,7 @@ import {debounceTime, takeUntil} from 'rxjs/operators';
   exportAs: 'dynamicForm',
   selector: 'ac-dynamic-form',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.css'],
+  styleUrls: ['./dynamic-form.component.scss'],
   providers: [DynamicFormService]
 })
 export class AcDynamicFormComponent implements OnChanges, OnInit, OnDestroy {

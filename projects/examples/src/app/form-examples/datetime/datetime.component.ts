@@ -5,7 +5,7 @@ import {Moment} from 'moment';
 @Component({
   selector: 'app-datetime',
   templateUrl: './datetime.component.html',
-  styleUrls: ['./datetime.component.css']
+  styleUrls: ['./datetime.component.scss']
 })
 export class DatetimeComponent implements OnInit {
 
@@ -76,21 +76,7 @@ export class DatetimeComponent implements OnInit {
       {
         name: 'theme',
         type: 'datetime',
-        label: 'time with teme',
-        theme: {
-          container: {
-            bodyBackgroundColor: '#424242',
-            buttonColor: '#fff'
-          },
-          dial: {
-            dialBackgroundColor: '#555',
-          },
-          clockFace: {
-            clockFaceBackgroundColor: '#555',
-            clockHandColor: '#9fbd90',
-            clockFaceTimeInactiveColor: '#fff'
-          }
-        }
+        label: 'time with teme'
       }
     ]
   };

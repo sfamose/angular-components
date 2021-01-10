@@ -12,7 +12,7 @@ import {takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-field-datetime',
   templateUrl: './field-datetime.component.html',
-  styleUrls: ['./field-datetime.component.css']
+  styleUrls: ['./field-datetime.component.scss']
 })
 export class FieldDatetimeComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldDatetimeConfig;

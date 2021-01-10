@@ -12,7 +12,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 @Component({
   selector: 'ac-field-chips-input',
   templateUrl: './field-chips-input.component.html',
-  styleUrls: ['./field-chips-input.component.css']
+  styleUrls: ['./field-chips-input.component.scss']
 })
 export class FieldChipsInputComponent implements OnInit, AcField {
   field: AcFieldChipsInputConfig;

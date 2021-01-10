@@ -58,6 +58,7 @@ export interface AcTableOptions {
       opened?: boolean;
       disableClose?: boolean;
     };
+    badgeColor?: ThemePalette;
     externalFilter?: boolean;
     submitButton?: AcSubmitButton;
     debounceTime?: number;

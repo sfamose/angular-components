@@ -11,7 +11,7 @@ import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-fie
 @Component({
   selector: 'ac-field-select',
   templateUrl: './field-select.component.html',
-  styleUrls: ['./field-select.component.css']
+  styleUrls: ['./field-select.component.scss']
 })
 export class FieldSelectComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldSelectConfig;

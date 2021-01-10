@@ -2,7 +2,6 @@ import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-fie
 import {AcAffix} from './affix';
 import {AcValidator} from './validator';
 import {AcHint} from './hint';
-import {NgxMaterialTimepickerTheme} from 'ngx-material-timepicker';
 import {FormGroup} from '@angular/forms';
 
 export interface AcFieldTimeConfig {
@@ -30,7 +29,6 @@ export interface AcFieldTimeConfig {
   minTime?: string;
   maxTime?: string;
   minutesGap?: number;
-  theme?: NgxMaterialTimepickerTheme;
 
   onValueChanges?: (value: any, field?: AcFieldTimeConfig, group?: FormGroup) => void;
 }

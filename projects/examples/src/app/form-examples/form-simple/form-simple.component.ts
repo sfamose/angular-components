@@ -5,7 +5,7 @@ import {AcDynamicForm} from 'angular-components';
 @Component({
   selector: 'app-form-simple',
   templateUrl: './form-simple.component.html',
-  styleUrls: ['./form-simple.component.css']
+  styleUrls: ['./form-simple.component.scss']
 })
 export class FormSimpleComponent implements OnInit {
 

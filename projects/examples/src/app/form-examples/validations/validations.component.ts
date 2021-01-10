@@ -7,7 +7,7 @@ import {map} from 'rxjs/operators';
 @Component({
   selector: 'app-validations',
   templateUrl: './validations.component.html',
-  styleUrls: ['./validations.component.css']
+  styleUrls: ['./validations.component.scss']
 })
 export class ValidationsComponent implements OnInit {
 

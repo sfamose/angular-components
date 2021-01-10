@@ -9,10 +9,27 @@ import {PageEvent} from '@angular/material/paginator';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
   columns: AcTableColumn[] = [
+    {
+      key: 'ordre',
+      label: 'Ordre',
+      exportable: true,
+      field: {
+        type: 'input',
+        inputType: 'number',
+        required: true,
+        validations: [
+          {
+            name: 'required',
+            validator: Validators.required,
+            message: 'L\'ordre est obligatoire',
+          },
+        ],
+      }
+    },
     {
       key: 'code',
       label: 'Code',
@@ -35,7 +52,7 @@ export class TableComponent implements OnInit {
       label: 'Libellé',
       exportable: true,
       field: {
-        type: 'input',
+        type: 'textarea',
         required: true,
         validations: [
           {
@@ -54,6 +71,109 @@ export class TableComponent implements OnInit {
         deleteLabel: '<i class="fas fa-times"></i>'
       }
     },
+    {
+      key: 'ordre2',
+      label: 'Ordre',
+      exportable: true,
+      field: {
+        type: 'input',
+        inputType: 'number',
+        required: true,
+        validations: [
+          {
+            name: 'required',
+            validator: Validators.required,
+            message: 'L\'ordre est obligatoire',
+          },
+        ],
+      }
+    },
+    {
+      key: 'code2',
+      label: 'Code',
+      exportable: true,
+      field: {
+        type: 'input',
+        required: true,
+        validations: [
+          {
+            name: 'required',
+            validator: Validators.required,
+            message: 'Le code est obligatoire',
+          },
+        ],
+      },
+      filterable: true
+    },
+    {
+      key: 'libelle2',
+      label: 'Libellé',
+      exportable: true,
+      field: {
+        type: 'textarea',
+        required: true,
+        validations: [
+          {
+            name: 'required',
+            validator: Validators.required,
+            message: 'Le libelle est obligatoire',
+          },
+        ],
+      },
+      mediaQueries: ['(min-width: 600px)']
+    },
+    {
+      key: 'ordre3',
+      label: 'Ordre',
+      exportable: true,
+      field: {
+        type: 'input',
+        inputType: 'number',
+        required: true,
+        validations: [
+          {
+            name: 'required',
+            validator: Validators.required,
+            message: 'L\'ordre est obligatoire',
+          },
+        ],
+      }
+    },
+    {
+      key: 'code3',
+      label: 'Code',
+      exportable: true,
+      field: {
+        type: 'input',
+        required: true,
+        validations: [
+          {
+            name: 'required',
+            validator: Validators.required,
+            message: 'Le code est obligatoire',
+          },
+        ],
+      },
+      filterable: true
+    },
+    {
+      key: 'libelle3',
+      label: 'Libellé',
+      exportable: true,
+      field: {
+        type: 'textarea',
+        required: true,
+        validations: [
+          {
+            name: 'required',
+            validator: Validators.required,
+            message: 'Le libelle est obligatoire',
+          },
+        ],
+      },
+      mediaQueries: ['(min-width: 600px)'],
+      filterable: true
+    }
   ];
   options: AcTableOptions = {
     selection: true,
@@ -107,7 +227,8 @@ export class TableComponent implements OnInit {
         opened: true
       },
       // updateOn: 'blur',
-      debounceTime: 500
+      debounceTime: 500,
+      badgeColor: 'accent'
     },
     headerItems: [
       {
@@ -160,6 +281,7 @@ export class TableComponent implements OnInit {
     for (let i = 0; i < 100; i++) {
       rows.push({
         id: i,
+        ordre: i,
         code: (i % 2 === 0 ? 'C' : 'c') + 'ode' + i,
         libelle: 'libelle ' + i
       });

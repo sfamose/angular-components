@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
@@ -49,7 +48,6 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatMenuModule,
     MatSidenavModule,
     MatBottomSheetModule,
-    NgxMaterialTimepickerModule,
     ScrollingModule,
     MatGridListModule,
     MatTableModule,
@@ -76,7 +74,6 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatMenuModule,
     MatSidenavModule,
     MatBottomSheetModule,
-    NgxMaterialTimepickerModule,
     ScrollingModule,
     MatGridListModule,
     MatTableModule,

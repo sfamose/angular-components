@@ -1,6 +1,7 @@
 <div class="ac-table-header-row">
+  <div class="ac-table-header-divide" [ngClass]="'ac-table-header-divide-first'"></div>
   <ng-container *ngFor="let item of headerItems">
-    <div class="ac-table-header-item" [ngSwitch]="item.type">
+    <div class="ac-table-header-item" [ngSwitch]="item.type" [ngClass]="'ac-table-header-item-' + item.type" >
 
       <ac-button *ngSwitchCase="'addRow'"
                  [label]="labels.addButtonLabel"
@@ -11,6 +12,7 @@
       <ac-button *ngSwitchCase="'filter'"
                  [label]="labels.filterButtonLabel"
                  [badge]="filterBadge"
+                 [badgeColor]="options?.filterOptions?.badgeColor"
                  color="primary"
                  type="mat-raised-button"
                  (buttonClick)="clickOpenFilter()"
@@ -69,7 +71,7 @@
         </mat-menu>
       </ng-container>
     </div>
-    <div class="ac-table-header-divide"></div>
+    <div class="ac-table-header-divide" [ngClass]="'ac-table-header-divide-after-' + item.type"></div>
   </ng-container>
 
 </div>

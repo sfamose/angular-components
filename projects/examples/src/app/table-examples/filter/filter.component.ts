@@ -10,7 +10,7 @@ import {GenderCellComponent} from '../edition/gender-cell/gender-cell.component'
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
   dataSource;

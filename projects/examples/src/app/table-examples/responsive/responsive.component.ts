@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 @Component({
   selector: 'app-responsive',
   templateUrl: './responsive.component.html',
-  styleUrls: ['./responsive.component.css']
+  styleUrls: ['./responsive.component.scss']
 })
 export class ResponsiveComponent implements OnInit {
   dataSource;

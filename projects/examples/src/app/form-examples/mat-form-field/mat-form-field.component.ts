@@ -5,7 +5,7 @@ import {Validators} from '@angular/forms';
 @Component({
   selector: 'app-mat-form-field',
   templateUrl: './mat-form-field.component.html',
-  styleUrls: ['./mat-form-field.component.css']
+  styleUrls: ['./mat-form-field.component.scss']
 })
 export class MatFormFieldComponent implements OnInit {
 

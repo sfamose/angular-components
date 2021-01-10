@@ -6,7 +6,7 @@ import {MatBadgePosition, MatBadgeSize} from '@angular/material/badge';
 @Component({
   selector: 'ac-button',
   templateUrl: './ac-button.component.html',
-  styleUrls: ['./ac-button.component.css'],
+  styleUrls: ['./ac-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AcButtonComponent {

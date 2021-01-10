@@ -6,7 +6,7 @@ import {AcFieldCustomConfig} from '../../models/field-custom-config';
 @Component({
   selector: 'ac-field-custom',
   templateUrl: './field-custom.component.html',
-  styleUrls: ['./field-custom.component.css']
+  styleUrls: ['./field-custom.component.scss']
 })
 export class FieldCustomComponent implements OnInit, AcField {
   field: AcFieldCustomConfig;

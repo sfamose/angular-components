@@ -6,7 +6,7 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'ac-div-text',
   templateUrl: './div-text.component.html',
-  styleUrls: ['./div-text.component.css']
+  styleUrls: ['./div-text.component.scss']
 })
 export class DivTextComponent implements AcField {
   field: AcTextConfig;

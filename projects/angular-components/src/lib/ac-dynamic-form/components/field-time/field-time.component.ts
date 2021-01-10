@@ -12,7 +12,7 @@ import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-fie
 @Component({
   selector: 'ac-field-time',
   templateUrl: './field-time.component.html',
-  styleUrls: ['./field-time.component.css']
+  styleUrls: ['./field-time.component.scss']
 })
 export class FieldTimeComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldTimeConfig;

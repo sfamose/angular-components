@@ -64,7 +64,7 @@
               "projects/examples/src/assets"
             ],
             "styles": [
-              "projects/examples/src/styles.css"
+              "projects/examples/src/styles.scss"
             ],
             "scripts": []
           },
@@ -128,7 +128,7 @@
               "projects/examples/src/assets"
             ],
             "styles": [
-              "projects/examples/src/styles.css"
+              "projects/examples/src/styles.scss"
             ],
             "scripts": []
           }
@@ -159,6 +159,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-components"
+    }
+  },
+  "defaultProject": "angular-components",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  }
 }

@@ -10,7 +10,7 @@ import {AcCell} from '../../../../../angular-components/src/lib/ac-table/models/
 @Component({
   selector: 'app-edition',
   templateUrl: './edition.component.html',
-  styleUrls: ['./edition.component.css']
+  styleUrls: ['./edition.component.scss']
 })
 export class EditionComponent implements OnInit {
   dataSource;

@@ -15,7 +15,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 @Component({
   selector: 'ac-table-content',
   templateUrl: './table-content.component.html',
-  styleUrls: ['./table-content.component.css']
+  styleUrls: ['./table-content.component.scss']
 })
 export class TableContentComponent implements AfterViewInit, OnDestroy {
   @Output() selectChange: EventEmitter<any[]> = new EventEmitter<any[]>();
@@ -27,7 +27,6 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
   selection = new SelectionModel<any>(true, []);
   unsubscribe$: Subject<void> = new Subject<void>();
   dataSource: MatTableDataSource<any>;
-  rowsLength: number;
 
   get displayedColumns(): string[] {
     return this.storeService.displayedColumns;
@@ -43,6 +42,10 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
 
   get labels(): AcTableLabels {
     return this.storeService.labels;
+  }
+
+  get rowsLength(): number {
+    return this.storeService.rowsLength ? this.storeService.rowsLength : this.storeService.rows.length;
   }
 
   constructor(private storeService: StoreService,
@@ -62,7 +65,8 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
               this.dataSource.sortingDataAccessor = this.options.sortOptions.sortingDataAccessor;
             } else {
               this.dataSource.sortingDataAccessor = (data, attribute) => {
-                return data[attribute] && this.options.sortOptions.ignoreCase ? data[attribute].toLowerCase() : data[attribute];
+                return data[attribute] && this.options.sortOptions.ignoreCase
+                && typeof data[attribute] === 'string' ? data[attribute].toLowerCase() : data[attribute];
               };
             }
             this.dataSource.sort = this.sort;
@@ -71,7 +75,6 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
             && (!this.options.paginationOptions || !this.options.paginationOptions.externalPagination)) {
             this.dataSource.paginator = this.paginator;
           }
-          this.rowsLength = this.storeService.rowsLength ? this.storeService.rowsLength : rows.length;
 
           if (this.storeService.filterValue$.value) {
             this.dataSource.filter = this.storeService.filterValue$.value;
@@ -84,17 +87,17 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
     }, 0);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
     this.storeService.setDisplayedColumns();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize() {
+  @HostListener('window:resize', [])
+  onResize(): void {
     this.storeService.onResize();
   }
 
-  onSortChange(sort: Sort) {
+  onSortChange(sort: Sort): void {
     if (this.options && this.options.sortOptions && this.options.sortOptions.sortChange) {
       const page: PageEvent = this.paginator ? {
         pageIndex: this.paginator.pageIndex,
@@ -107,7 +110,7 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
     this.sortChange.emit(sort);
   }
 
-  onPageChange(page: PageEvent) {
+  onPageChange(page: PageEvent): void {
     if (this.options && this.options.paginationOptions && this.options.paginationOptions.pageChange) {
       const sort: Sort = this.sort ? {active: this.sort.active, direction: this.sort.direction} : null;
       this.options.paginationOptions.pageChange(page, sort);
@@ -115,20 +118,20 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
     this.pageChange.emit(page);
   }
 
-  isAllSelected() {
+  isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource && this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  masterToggle() {
+  masterToggle(): void {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
     this.selectChange.emit(this.selection.selected);
   }
 
-  toggle(row: any) {
+  toggle(row: any): void {
     this.selection.toggle(row);
     this.selectChange.emit(this.selection.selected);
   }
@@ -140,15 +143,15 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
-  openEditForm(row: any) {
+  openEditForm(row: any): void {
     this.editService.openEditForm(row);
   }
 
-  openConfirmDeleteMessage(row: any) {
+  openConfirmDeleteMessage(row: any): void {
     this.editService.openConfirmDeleteMessage(row);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

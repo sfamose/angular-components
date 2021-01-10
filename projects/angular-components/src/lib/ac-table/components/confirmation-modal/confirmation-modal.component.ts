@@ -5,7 +5,7 @@ import {ConfirmationData} from '../../models/confirmation-data';
 @Component({
   selector: 'ac-confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
-  styleUrls: ['./confirmation-modal.component.css']
+  styleUrls: ['./confirmation-modal.component.scss']
 })
 export class ConfirmationModalComponent implements OnInit {
 

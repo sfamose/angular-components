@@ -1,34 +1,43 @@
 <div class="ac-filter-header">
   <span [innerHTML]="labels.filterTitleLabel"></span>
-</div>
-<div class="ac-filter-summary">
-  <div class="ac-filter-summary-title">
-    <span [innerHTML]="labels.filterAppliedLabel"></span>
-  </div>
-  <div class="ac-filter-summary-content">
-    <div *ngIf="values && values.length > 0"  >
-      <mat-chip-list >
-        <mat-chip *ngFor="let item of values">
-          <span class="label">{{item.label}} :</span>
-          <span class="value">{{item.value}}</span>
-          <span class="delete" (click)="deleteValue(item)"><i class="fa fa-times"></i></span>
-        </mat-chip>
-      </mat-chip-list>
-      <div>
-        <ac-button [label]="labels.deleteFilterButtonLabel"
-                   [type]="'mat-button'"
-                   (buttonClick)="deleteValues()"
-        ></ac-button>
-      </div>
-    </div>
-    <div *ngIf="!values || values.length === 0" class="ac-filter-summary-no-filter" >
-      <span [innerHTML]="labels.noFiltersLabel"></span>
-    </div>
-  </div>
+  <span>
+    <button mat-icon-button (click)="close()"><i class="fas fa-times"></i></button>
+  </span>
 </div>
 <div class="ac-filter-content">
-  <div class="ac-filter-content-title">
-    <span [innerHTML]="labels.filterFormLabel"></span>
+  <div class="ac-filter-summary">
+    <div class="ac-filter-summary-title">
+      <span [innerHTML]="labels.filterAppliedLabel"></span>
+    </div>
+    <div class="ac-filter-summary-content">
+      <div *ngIf="values && values.length > 0"  >
+        <mat-chip-list >
+          <mat-chip *ngFor="let item of values">
+            <span class="label">{{item.label}} :</span>
+            <span class="value">{{item.value}}</span>
+            <span class="delete" (click)="deleteValue(item)"><i class="fa fa-times"></i></span>
+          </mat-chip>
+        </mat-chip-list>
+        <div>
+          <ac-button [label]="labels.deleteFilterButtonLabel"
+                     [type]="'mat-button'"
+                     (buttonClick)="deleteValues()"
+          ></ac-button>
+        </div>
+      </div>
+      <div *ngIf="!values || values.length === 0" class="ac-filter-summary-no-filter" >
+        <span [innerHTML]="labels.noFiltersLabel"></span>
+      </div>
+    </div>
   </div>
-  <ac-dynamic-form [config]="config" (formSubmit)="submit($event)" #dynamicForm ></ac-dynamic-form>
+  <div class="ac-filter-form">
+    <div class="ac-filter-form-title">
+      <span [innerHTML]="labels.filterFormLabel"></span>
+    </div>
+    <ac-dynamic-form class="ac-filter-form-content"
+                     [config]="config"
+                     (formSubmit)="submit($event)"
+                     #dynamicForm
+    ></ac-dynamic-form>
+  </div>
 </div>

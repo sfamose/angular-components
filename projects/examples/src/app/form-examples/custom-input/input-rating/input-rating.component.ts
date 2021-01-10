@@ -5,7 +5,7 @@ import {AcFieldCustomConfig, AcCustomComponentField} from 'angular-components';
 @Component({
   selector: 'app-input-rating',
   templateUrl: './input-rating.component.html',
-  styleUrls: ['./input-rating.component.css'],
+  styleUrls: ['./input-rating.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

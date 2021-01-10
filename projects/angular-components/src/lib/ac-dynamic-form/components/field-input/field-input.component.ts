@@ -12,7 +12,7 @@ import {takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-field-input',
   templateUrl: './field-input.component.html',
-  styleUrls: ['./field-input.component.css']
+  styleUrls: ['./field-input.component.scss']
 })
 export class FieldInputComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldInputConfig;

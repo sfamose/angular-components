@@ -1,15 +1,16 @@
 <mat-drawer-container class="ac-table" autosize>
 
   <mat-drawer #drawer class="ac-table-sidenav"
-              [mode]="options?.filterOptions?.sidenavOptions?.mode"
+              [mode]="filterSidenavMode"
               [position]="options?.filterOptions?.sidenavOptions?.position"
               [disableClose]="options?.filterOptions?.sidenavOptions?.disableClose"
               [opened]="options?.filterOptions?.sidenavOptions?.opened"
   >
-    <ac-sidenav-filter *ngIf="drawer.opened"
+    <ac-sidenav-filter *ngIf="drawer.opened" class="ac-sidenav-filter"
                        [columns]="columns"
                        [options]="options"
                        (filterChange)="onFilterChange($event)"
+                       (closeFilter)="drawer.close()"
     ></ac-sidenav-filter>
   </mat-drawer>
 

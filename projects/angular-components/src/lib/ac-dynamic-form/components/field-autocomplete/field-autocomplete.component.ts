@@ -12,7 +12,7 @@ import {map, startWith, takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-field-autocomplete',
   templateUrl: './field-autocomplete.component.html',
-  styleUrls: ['./field-autocomplete.component.css']
+  styleUrls: ['./field-autocomplete.component.scss']
 })
 export class FieldAutocompleteComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldAutocompleteConfig;

@@ -15,7 +15,7 @@ import {MatDatepicker} from '@angular/material/datepicker';
 @Component({
   selector: 'ac-field-date',
   templateUrl: './field-date.component.html',
-  styleUrls: ['./field-date.component.css']
+  styleUrls: ['./field-date.component.scss']
 })
 export class FieldDateComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldDateConfig;

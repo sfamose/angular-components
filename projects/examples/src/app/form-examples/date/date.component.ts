@@ -5,7 +5,7 @@ import {Moment} from 'moment';
 @Component({
   selector: 'app-date',
   templateUrl: './date.component.html',
-  styleUrls: ['./date.component.css']
+  styleUrls: ['./date.component.scss']
 })
 export class DateComponent implements OnInit {
 

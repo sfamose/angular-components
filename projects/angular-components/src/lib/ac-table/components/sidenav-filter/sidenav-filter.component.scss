@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+}
+
+.ac-filter-header {
+  padding: 20px;
+  text-align: center;
+}
+
+.ac-filter-content {
+  flex: 1;
+  overflow: auto;
+
+  .ac-filter-summary {
+    .ac-filter-summary-title {
+      padding: 0 20px 10px;
+    }
+
+    .ac-filter-summary-content {
+      padding: 0 20px;
+
+      .delete, .value {
+        padding-left: 10px;
+      }
+
+      .ac-filter-summary-no-filter {
+        font-style: italic;
+        font-size: 0.8em;
+      }
+    }
+  }
+
+  .ac-filter-form {
+    padding: 20px;
+  }
+}

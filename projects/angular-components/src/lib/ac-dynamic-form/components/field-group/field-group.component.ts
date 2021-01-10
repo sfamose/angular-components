@@ -8,7 +8,7 @@ import {takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-field-group',
   templateUrl: './field-group.component.html',
-  styleUrls: ['./field-group.component.css']
+  styleUrls: ['./field-group.component.scss']
 })
 export class FieldGroupComponent implements OnInit, OnDestroy, AcField {
   field: AcGroupConfig;

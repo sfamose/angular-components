@@ -8,7 +8,7 @@ import {takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-field-radio-button',
   templateUrl: './field-radio-button.component.html',
-  styleUrls: ['./field-radio-button.component.css']
+  styleUrls: ['./field-radio-button.component.scss']
 })
 export class FieldRadioButtonComponent implements OnInit, OnDestroy, AcField {
   field: AcFieldRadioButtonConfig;

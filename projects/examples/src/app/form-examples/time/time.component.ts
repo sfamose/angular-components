@@ -4,7 +4,7 @@ import {AcDynamicForm} from 'angular-components';
 @Component({
   selector: 'app-time',
   templateUrl: './time.component.html',
-  styleUrls: ['./time.component.css']
+  styleUrls: ['./time.component.scss']
 })
 export class TimeComponent implements OnInit {
 
@@ -52,21 +52,7 @@ export class TimeComponent implements OnInit {
       {
         name: 'theme',
         type: 'time',
-        label: 'time with teme',
-        theme: {
-          container: {
-            bodyBackgroundColor: '#424242',
-            buttonColor: '#fff'
-          },
-          dial: {
-            dialBackgroundColor: '#555',
-          },
-          clockFace: {
-            clockFaceBackgroundColor: '#555',
-            clockHandColor: '#9fbd90',
-            clockFaceTimeInactiveColor: '#fff'
-          }
-        }
+        label: 'time with teme'
       }
     ]
   };

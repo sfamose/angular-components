@@ -14,7 +14,7 @@ import {map, startWith, takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'ac-field-chips-autocomplete',
   templateUrl: './field-chips-autocomplete.component.html',
-  styleUrls: ['./field-chips-autocomplete.component.css']
+  styleUrls: ['./field-chips-autocomplete.component.scss']
 })
 export class FieldChipsAutocompleteComponent implements OnInit, OnDestroy, AcField {
   field: FieldChipsAutocompleteConfig;

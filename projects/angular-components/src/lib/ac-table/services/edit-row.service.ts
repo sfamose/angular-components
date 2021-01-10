@@ -48,8 +48,8 @@ export class EditRowService {
     const dialogRef = this.dialog.open(component, {
       data: {
         fields,
-        submitButtonLabel: this.storeService.labels.submitButtonLabel,
-        cancelButtonLabel: this.storeService.labels.cancelButtonLabel,
+        submitButton: {label: this.storeService.labels.submitButtonLabel},
+        cancelButton: {label: this.storeService.labels.cancelButtonLabel},
         titleLabel: this.storeService.labels.addModalTitleLabel,
         saveAction: this.storeService.options.addRowOptions ? this.storeService.options.addRowOptions.action : null,
       } as DynamicFormModalData
@@ -82,8 +82,8 @@ export class EditRowService {
     const dialogRef = this.dialog.open(component, {
       data: {
         fields,
-        submitButtonLabel: this.storeService.labels.submitButtonLabel,
-        cancelButtonLabel: this.storeService.labels.cancelButtonLabel,
+        submitButton: {label: this.storeService.labels.submitButtonLabel},
+        cancelButton: {label: this.storeService.labels.cancelButtonLabel},
         titleLabel: this.storeService.labels.editModalTitleLabel,
         saveAction: this.storeService.options.editRowOptions ? this.storeService.options.editRowOptions.action : null,
         initialObject: row

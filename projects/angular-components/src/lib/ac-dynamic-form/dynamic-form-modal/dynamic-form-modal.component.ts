@@ -8,14 +8,14 @@ import {Subject} from 'rxjs';
 @Component({
   selector: 'ac-dynamic-form-modal',
   templateUrl: './dynamic-form-modal.component.html',
-  styleUrls: ['./dynamic-form-modal.component.css']
+  styleUrls: ['./dynamic-form-modal.component.scss']
 })
 export class DynamicFormModalComponent implements OnInit, OnDestroy {
   config: AcDynamicForm;
   titleLabel: string;
+  error: string;
   submitButtonLabel: string;
   cancelButtonLabel: string;
-  error: string;
   private unsubcribe$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -29,8 +29,8 @@ export class DynamicFormModalComponent implements OnInit, OnDestroy {
       fields: this.data.fields
     };
     this.titleLabel = this.data.titleLabel;
-    this.submitButtonLabel = this.data.submitButtonLabel ? this.data.submitButtonLabel : 'Save';
-    this.cancelButtonLabel = this.data.cancelButtonLabel ? this.data.cancelButtonLabel : 'Cancel';
+    this.submitButtonLabel = this.data.submitButton ? this.data.submitButton.label : 'Save';
+    this.cancelButtonLabel = this.data.cancelButton ? this.data.cancelButton.label : 'Cancel';
   }
 
   ngOnDestroy(): void {
@@ -57,4 +57,7 @@ export class DynamicFormModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  cancel() {
+    this.dialogRef.close();
+  }
 }

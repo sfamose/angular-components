@@ -6,7 +6,7 @@ import {AcTableConversions} from '../../models/ac-table-conversions';
 @Component({
   selector: 'ac-table-cell',
   templateUrl: './table-cell.component.html',
-  styleUrls: ['./table-cell.component.css']
+  styleUrls: ['./table-cell.component.scss']
 })
 export class TableCellComponent implements OnInit, AcCell {
   @Input()
