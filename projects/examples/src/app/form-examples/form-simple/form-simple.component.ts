@@ -77,11 +77,6 @@ export class FormSimpleComponent implements OnInit {
             type: 'date',
             label: 'Date',
             name: 'birthdate',
-          },
-          {
-            type: 'time',
-            label: 'Time',
-            name: 'time'
           }
         ]
       },
@@ -89,11 +84,6 @@ export class FormSimpleComponent implements OnInit {
         type: 'textarea',
         label: 'Comment',
         name: 'comment'
-      },
-      {
-        type: 'datetime',
-        label: 'Datetime',
-        name: 'datetime'
       },
       {
         type: 'autocomplete',

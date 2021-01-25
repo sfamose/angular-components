@@ -37,17 +37,7 @@ export class MatFormFieldComponent implements OnInit {
             name: 'inputDate',
             type: 'date',
             label: 'Date'
-          },
-          {
-            name: 'inputTime',
-            type: 'time',
-            label: 'Time'
-          },
-          {
-            name: 'inputDateTime',
-            type: 'datetime',
-            label: 'DateTime'
-          },
+          }
         ]
       },
       {

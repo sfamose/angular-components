@@ -7,8 +7,8 @@ import {FormGroup} from '@angular/forms';
 export interface AcFieldInputConfig {
 
   type: 'input';
-  inputType?: 'color' | 'date' | 'datetime-local' | 'email' | 'month' | 'number'
-    | 'password' | 'search' | 'tel' | 'text' | 'time' | 'url' | 'week';
+  inputType?: 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' |
+    'password' | 'radio' | 'range' | 'reset' | 'search' | 'tel' | 'text' | 'time' | 'url' | 'week';
   name?: string;
   label?: string;
   value?: any;
