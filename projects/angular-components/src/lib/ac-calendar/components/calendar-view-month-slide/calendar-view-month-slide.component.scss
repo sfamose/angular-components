@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 20px;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border-right: 1px solid #888888;
+  border-left: 1px solid #888888;
+}
+
+.ac-calendar-week {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+
+
+  .ac-calendar-week-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: 1px solid silver;
+    width: 0;
+    position: relative;
+    background-color: white;
+
+    &.inactive, &.weekend.inactive {
+      background-color: rgba(150, 150, 150, 0.3);
+    }
+
+    &.weekend, &.weekend.active {
+      background-color: rgba(150, 150, 150, 0.2);
+    }
+
+    &.today.active, &.today.weekend {
+      background-color: rgba(0, 0, 255, 0.2);
+    }
+  }
+
+}
+
+.ac-calendar-days {
+  display: flex;
+  flex-direction: row;
+
+  .ac-calendar-days-item {
+    flex: 1;
+    border: 1px solid silver;
+    text-align: center;
+  }
+}

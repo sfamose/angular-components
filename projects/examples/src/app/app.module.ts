@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import * as moment from 'moment';
 import {UpperCasePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
+import {IonicModule} from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    IonicModule.forRoot()
   ],
   providers: [
     { provide: 'moment', useFactory: (): any => moment },

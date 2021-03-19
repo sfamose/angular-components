@@ -1,0 +1,18 @@
+<ion-slides #slider [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()" >
+  <ion-slide>
+    <ac-calendar-view-day-slide [day]="previousDay"
+                                [options]="options"
+    ></ac-calendar-view-day-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-day-slide [day]="day"
+                                [options]="options"
+                                active="true"
+    ></ac-calendar-view-day-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-day-slide [day]="nextDay"
+                                [options]="options"
+    ></ac-calendar-view-day-slide>
+  </ion-slide>
+</ion-slides>

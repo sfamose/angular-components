@@ -2,6 +2,7 @@ import {PipeTransform, Type} from '@angular/core';
 import {AcCell} from './ac-cell';
 import {AcTableButton} from './ac-table-button';
 import {AcFieldConfig} from '../../ac-dynamic-form/models/field-config';
+import {AcGroupConfig} from '../../ac-dynamic-form/models/group-config';
 
 export interface AcTableColumn {
   key: string;
@@ -29,10 +30,10 @@ export interface AcTableColumn {
 
   skipAddRow?: 'disabled' | 'hide';
   skipEditRow?: 'disabled' | 'hide';
-  field?: AcFieldConfig;
+  field?: AcFieldConfig | AcGroupConfig;
 
   filterable?: boolean;
-  filterField?: AcFieldConfig;
+  filterField?: AcFieldConfig | AcGroupConfig;
 
   exportLabel?: string;
   exportable?: boolean;

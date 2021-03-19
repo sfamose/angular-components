@@ -26,7 +26,14 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   selection = new SelectionModel<any>(true, []);
   unsubscribe$: Subject<void> = new Subject<void>();
-  dataSource: MatTableDataSource<any>;
+
+  get dataSource(): MatTableDataSource<any> {
+    return this.storeService.dataSource;
+  }
+
+  set dataSource(source: MatTableDataSource<any>) {
+    this.storeService.dataSource = source;
+  }
 
   get displayedColumns(): string[] {
     return this.storeService.displayedColumns;

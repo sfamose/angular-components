@@ -38,9 +38,13 @@ export class EditRowService {
     return field as AcFieldConfig;
   }
 
-  openAddForm() {
+  openAddForm(initialValues?: any) {
     const fields: AcFieldConfig[] = this.storeService.columns.filter(col => !col.skipAddRow || col.skipAddRow !== 'hide').map(col => {
-      return this.getField(col, col.skipAddRow === 'disabled');
+      const field: AcFieldConfig = this.getField(col, col.skipAddRow === 'disabled');
+      if (initialValues) {
+        field.value = initialValues[col.key];
+      }
+      return field;
     });
     const component: ComponentType<any> = this.storeService.options.addRowOptions
     && this.storeService.options.addRowOptions.component ?

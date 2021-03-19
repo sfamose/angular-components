@@ -1,0 +1,25 @@
+<ac-calendar-header [date]="date"
+                    [view]="view"
+                    [options]="options"
+                    (changeView)="onChangeView($event)"
+></ac-calendar-header>
+<div class="ac-calendar-content" [ngSwitch]="view">
+  <ac-calendar-view-day *ngSwitchCase="Views.DAY"
+                        [(day)]="date"
+                        [options]="options"
+  ></ac-calendar-view-day>
+  <ac-calendar-view-week *ngSwitchCase="Views.WEEK"
+                         [(week)]="date"
+                         [options]="options"
+                         (changeView)="onChangeViewAndDate($event)"
+  ></ac-calendar-view-week>
+  <ac-calendar-view-month *ngSwitchCase="Views.MONTH"
+                          [(month)]="date"
+                          (changeView)="onChangeViewAndDate($event)"
+  ></ac-calendar-view-month>
+  <ac-calendar-view-year *ngSwitchCase="Views.YEAR"
+                         [(year)]="date"
+                         (changeView)="onChangeViewAndDate($event)"
+  ></ac-calendar-view-year>
+  <ac-calendar-view-list *ngSwitchCase="Views.LIST"></ac-calendar-view-list>
+</div>

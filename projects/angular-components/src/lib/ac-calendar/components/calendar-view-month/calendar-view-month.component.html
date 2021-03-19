@@ -1,0 +1,14 @@
+<ion-slides #slider [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()" >
+  <ion-slide>
+    <ac-calendar-view-month-slide [month]="previousMonth" *ngIf="!init" ></ac-calendar-view-month-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-month-slide [month]="month" *ngIf="!init"
+                                  active="true"
+                                  (changeView)="onChangeView($event)"
+    ></ac-calendar-view-month-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-month-slide [month]="nextMonth" *ngIf="!init"  ></ac-calendar-view-month-slide>
+  </ion-slide>
+</ion-slides>

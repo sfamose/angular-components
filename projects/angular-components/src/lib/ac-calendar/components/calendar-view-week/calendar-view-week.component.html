@@ -1,0 +1,19 @@
+<ion-slides #slider [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()" >
+  <ion-slide>
+    <ac-calendar-view-week-slide [week]="previousWeek"
+                                 [options]="options"
+    ></ac-calendar-view-week-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-week-slide [week]="week"
+                                 active="true"
+                                 [options]="options"
+                                 (changeView)="onChangeView($event)"
+    ></ac-calendar-view-week-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-week-slide [week]="nextWeek"
+                                 [options]="options"
+    ></ac-calendar-view-week-slide>
+  </ion-slide>
+</ion-slides>

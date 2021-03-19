@@ -1,7 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {AcTableOptions} from '../models/ac-table-options';
 import {AcTableColumn} from '../models/ac-table-column';
-import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'any'

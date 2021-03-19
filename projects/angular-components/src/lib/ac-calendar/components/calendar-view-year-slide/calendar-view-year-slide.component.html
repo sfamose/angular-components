@@ -1,0 +1,6 @@
+
+<div class="content" >
+  <div class="item" *ngFor="let month of months" (click)="goToMonth(month)">
+    <ac-calendar-view-year-item [date]="month"></ac-calendar-view-year-item>
+  </div>
+</div>

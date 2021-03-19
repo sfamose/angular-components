@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'table',
     loadChildren: () => import('./table-examples/table-examples.module').then(mod => mod.TableExamplesModule)
+  },
+  {
+    path: 'calendar',
+    loadChildren: () => import('./calendar-examples/calendar-examples.module').then(mod => mod.CalendarExamplesModule)
   }
 ];
 

@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+}
+ion-slides {
+  height: 100%;
+  width: 100%;
+}
+ion-slide {
+  display: flex;
+  flex-direction: column;
+}
+ion-slide >:first-child {
+  width: 100%;
+}
+
+ion-slide {
+  width: 100% !important;
+}
+

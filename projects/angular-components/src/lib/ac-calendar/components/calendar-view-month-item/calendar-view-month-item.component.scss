@@ -1,0 +1,74 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.jour {
+  color: grey;
+  height: 12px;
+  line-height: 12px;
+  font-size: 12px;
+}
+
+.jour.active {
+  color: black;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.content .ligne {
+  display: flex;
+  flex-direction: row;
+  height: 11px;
+  line-height: 11px;
+  font-size: 10px;
+  width: 100%;
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.content .ligne .ellip {
+  padding: 0 5px;
+}
+
+.content .ligne .activite {
+  height: 100%;
+  flex: 1;
+  background-color: #2873ce;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.content .ligne .activite.start {
+  margin-left: 1px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.content .ligne .activite.end {
+  margin-right: 1px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.content .ligne .activite .label {
+  padding: 0 5px;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.content .ligne .activite.active {
+  z-index: 5;
+}
+
+.content .ligne .activite.end .label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

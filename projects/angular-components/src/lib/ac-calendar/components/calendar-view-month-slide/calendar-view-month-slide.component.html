@@ -1,0 +1,14 @@
+<div class="content">
+  <div class="ac-calendar-days">
+    <div class="ac-calendar-days-item" *ngFor="let i of days">{{ i }}</div>
+  </div>
+  <div class="ac-calendar-week" *ngFor="let w of weeks; let i = index">
+    <div class="ac-calendar-week-item" *ngFor="let d of w; let j = index"
+         [ngClass]="{ 'active': d.currentMonth, 'inactive': !d.currentMonth, 'today': d.today , 'weekend': d.weekend }">
+      <ac-calendar-view-month-item [active]="d.currentMonth"
+                                   [date]="d.date"
+                                   (click)="goToDate(d.date)"
+      ></ac-calendar-view-month-item>
+    </div>
+  </div>
+</div>

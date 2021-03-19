@@ -1,4 +1,6 @@
-<ac-table [rows]="rows"
+<button (click)="addRow()">add row</button>
+<ac-table #acTable
+          [rows]="rows"
           [columns]="columns"
           [options]="options"
           (selectChange)="logEvent($event)"

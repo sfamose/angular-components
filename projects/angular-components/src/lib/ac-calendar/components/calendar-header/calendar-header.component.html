@@ -1,0 +1,25 @@
+<div class="ac-calendar-header">
+  <div class="ac-calendar-header-menu">
+    <button mat-button [matMenuTriggerFor]="menu"><i class="fas fa-ellipsis-v"></i></button>
+    <mat-menu #menu="matMenu" class="menu">
+      <button mat-menu-item (click)="seeView(Views.DAY)" [innerHTML]="dayLabel"></button>
+      <button mat-menu-item (click)="seeView(Views.WEEK)" [innerHTML]="weekLabel"></button>
+      <button mat-menu-item (click)="seeView(Views.MONTH)" [innerHTML]="monthLabel"></button>
+      <button mat-menu-item (click)="seeView(Views.YEAR)" [innerHTML]="yearLabel"></button>
+      <!--<button mat-menu-item (click)="seeView(Views.LIST)">Liste</button>-->
+    </mat-menu>
+  </div>
+
+  <div class="ac-calendar-header-title">
+    <ng-container [ngSwitch]="view" >
+      <span *ngSwitchCase="Views.DAY" >{{date | date : 'dd/MM/yyyy'}}</span>
+      <span *ngSwitchCase="Views.WEEK" >{{weekLabel}} {{date | date : 'ww yyyy'}}</span>
+      <span *ngSwitchCase="Views.MONTH" >{{date | date : 'MMMM yyyy'}}</span>
+      <span *ngSwitchCase="Views.YEAR" >{{date | date : 'yyyy'}}</span>
+    </ng-container>
+  </div>
+
+  <div class="ac-calendar-header-filter">
+    <i class="fas fa-filter"></i>
+  </div>
+</div>

@@ -44,7 +44,10 @@ export class TableHeaderComponent {
   }
 
   clickExportCSV(): void {
-    this.exportCsvService.exportCSV(this.storeService.options, this.storeService.columns, this.storeService.rows);
+    const exportFilteredData = this.storeService.options && this.storeService.options.exportCSV
+      && this.storeService.options.exportCSV.exportFilteredData;
+    this.exportCsvService.exportCSV(this.storeService.options, this.storeService.columns,
+      exportFilteredData ? this.storeService.dataSource.filteredData : this.storeService.rows);
   }
 
   applyFilter(event: KeyboardEvent): void {

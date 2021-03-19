@@ -8,6 +8,7 @@ import {AcTableLabels} from '../../models/ac-table-labels';
 import {AcDynamicFormComponent} from '../../../ac-dynamic-form/dynamic-form/dynamic-form.component';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {AcGroupConfig} from '../../../ac-dynamic-form/models/group-config';
 
 @Component({
   selector: 'ac-sidenav-filter',
@@ -85,18 +86,28 @@ export class SidenavFilterComponent implements OnInit, OnDestroy, AfterViewInit 
             this.values.push({
               code: key,
               label: col.label,
-              value: x
+              value: this.getValue(x, col.filterField)
             });
           });
         } else if (values[key]) {
           this.values.push({
             code: key,
             label: col.label,
-            value: values[key]
+            value: this.getValue(values[key], col.filterField)
           });
         }
       });
     }
+  }
+
+  getValue(value: any, filterField: AcFieldConfig | AcGroupConfig): any {
+    let resp = '';
+    if (filterField && filterField.type === 'select' && filterField.labelKey) {
+      resp = value[filterField.labelKey];
+    } else {
+      resp = value;
+    }
+    return resp;
   }
 
   deleteValues(): void {

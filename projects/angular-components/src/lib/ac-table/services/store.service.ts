@@ -8,6 +8,7 @@ import {LABELS} from '../config/default-config';
 import {AcTableLabels} from '../models/ac-table-labels';
 import {AcTableHeaderItem} from '../models/ac-table-header-item';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Injectable({
   providedIn: 'any'
@@ -19,6 +20,7 @@ export class StoreService {
   options: AcTableOptions;
   headerItems: AcTableHeaderItem[];
   conversionMap: AcTableConversions;
+  dataSource: MatTableDataSource<any>;
   labels: AcTableLabels;
   rows$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   filterValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');

@@ -1,0 +1,14 @@
+<ion-slides #slider [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()" >
+  <ion-slide>
+    <ac-calendar-view-year-slide [year]="previousYear" ></ac-calendar-view-year-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-year-slide [year]="year"
+                                 active="true"
+                                 (changeView)="onChangeView($event)"
+    ></ac-calendar-view-year-slide>
+  </ion-slide>
+  <ion-slide>
+    <ac-calendar-view-year-slide [year]="nextYear" ></ac-calendar-view-year-slide>
+  </ion-slide>
+</ion-slides>

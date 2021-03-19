@@ -1,0 +1,24 @@
+<div class="view-day-content">
+  <div class="allDay" [ngClass]="{ 'all': allDayEvents && allDayEvents.length > 3 && isAllDaysShown }">
+    <div class="col-hour" >
+      <span [innerHTML]="allDay"></span>
+    </div>
+    <div class="col-events">
+      <ng-container *ngFor="let e of allDayEvents; let i = index">
+        <div class="activite" *ngIf="i < 3 || isAllDaysShown">
+          <div class="label">{{ e.label }}</div>
+        </div>
+      </ng-container>
+      <div class="ellip" *ngIf="allDayEvents && allDayEvents.length > 3 && !isAllDaysShown"><i class="fas fa-ellipsis-h" (click)="showAllDays()"></i></div>
+      <div class="ellip" *ngIf="allDayEvents && allDayEvents.length > 3 && isAllDaysShown"><i class="fas fa-chevron-up" (click)="hideAllDays()"></i></div>
+    </div>
+  </div>
+  <div class="hours" >
+    <div class="row-hour" *ngFor="let hour of hours">
+      <div class="col-hour">{{ hour }}</div>
+      <div class="col-events">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </div>
+</div>

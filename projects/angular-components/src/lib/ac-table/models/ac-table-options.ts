@@ -69,6 +69,7 @@ export interface AcTableOptions {
     separator?: string;
     addDoubleQuote?: boolean;
     formatDate?: string;
+    exportFilteredData?: boolean;
     externalExport?: () => void;
   };
   labels?: AcTableLabels;

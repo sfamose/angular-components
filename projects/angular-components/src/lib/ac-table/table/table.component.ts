@@ -88,8 +88,12 @@ export class AcTableComponent implements OnInit, OnChanges, OnDestroy {
     this.pageChange.emit(page);
   }
 
-  onFilterChange(filters: any) {
+  onFilterChange(filters: any): void {
     this.filterChange.emit(filters);
+  }
+
+  openAddForm(initialValues?: any): void {
+    this.editService.openAddForm(initialValues);
   }
 
   ngOnDestroy(): void {

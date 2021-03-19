@@ -1,0 +1,44 @@
+
+<div class="view-week-content">
+  <div class="label">
+    <div class="col-hour"></div>
+    <div class="col-events">
+      <div class="col-day" *ngFor="let day of days" (click)="goToDate(day.date)"
+        [ngClass]="{'weekend': day.weekend, 'today': day.today}">
+        <div class="row-day">{{day.label }}</div>
+        <div class="row-number">{{day.date | date : 'dd' }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="allDay">
+    <div class="col-hour">
+      <span [innerHTML]="allDay"></span>
+    </div>
+    <div class="col-events">
+      <div class="col-day" *ngFor="let day of days"
+           [ngClass]="{'weekend': day.weekend, 'today': day.today}">
+
+      </div>
+    </div>
+  </div>
+  <div class="hours">
+    <div class="row-hour row-hour-first" >
+      <div class="col-hour"></div>
+      <div class="col-events">
+        <div class="col-day" *ngFor="let day of days"
+             [ngClass]="{'weekend': day.weekend, 'today': day.today}">
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+    </div>
+    <div class="row-hour" *ngFor="let hour of hours">
+      <div class="col-hour">{{ hour }}</div>
+      <div class="col-events">
+        <div class="col-day" *ngFor="let day of days"
+             [ngClass]="{'weekend': day.weekend, 'today': day.today}">
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

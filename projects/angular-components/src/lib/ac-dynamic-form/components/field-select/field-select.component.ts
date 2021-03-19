@@ -29,6 +29,14 @@ export class FieldSelectComponent implements OnInit, OnDestroy, AcField {
       this.group.get(this.field.name).valueChanges.pipe(takeUntil(this.unsubcribe$))
         .subscribe(value => this.field.onValueChanges(value, this.field, this.group));
     }
+    if (this.field.asyncOptions) {
+      this.field.asyncOptions.pipe(takeUntil(this.unsubcribe$))
+        .subscribe(options => this.field.options = [].concat(options));
+    }
+    if (this.field.asyncOptionGroups) {
+      this.field.asyncOptionGroups.pipe(takeUntil(this.unsubcribe$))
+        .subscribe(optionGroups => this.field.optionGroups = [].concat(optionGroups));
+    }
   }
 
   ngOnDestroy(): void {

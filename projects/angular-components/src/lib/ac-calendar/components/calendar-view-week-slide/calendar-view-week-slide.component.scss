@@ -1,0 +1,89 @@
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+}
+
+.view-week-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+
+  .label {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+
+    .row-day, .row-number {
+      height: 20px;
+    }
+  }
+
+  .allDay {
+    min-height: 60px;
+    max-height: 90px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 5px 5px -2px rgba(0, 0, 0, .2);
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+
+    &.all {
+      height: auto;
+      max-height: none;
+    }
+
+    .col-hour {
+      font-size: 10px;
+    }
+  }
+
+  .hours {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .row-hour {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+
+    .col-hour {
+      margin-top: -8px;
+      font-size: 14px;
+    }
+
+    &.row-hour-first {
+      height: 20px;
+    }
+  }
+
+  .col-hour {
+    width: 50px;
+    padding-left: 10px;
+  }
+
+  .col-events {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    .col-day {
+      flex: 1;
+      border-left: 1px dotted silver;
+
+      &.weekend {
+        background-color: rgba(150, 150, 150, 0.2);
+      }
+
+      &.today, &.today.weekend {
+        background-color: rgba(63, 81, 181, 0.2);
+      }
+    }
+  }
+}
+
+

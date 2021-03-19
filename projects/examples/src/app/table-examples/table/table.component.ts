@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {AcTableColumn, AcTableOptions} from 'angular-components';
-import {Validators} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {AcFieldSelectConfig, AcTableColumn, AcTableComponent, AcTableOptions} from 'angular-components';
+import {FormGroup, Validators} from '@angular/forms';
 import {Observable, of, throwError} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {Sort} from '@angular/material/sort';
@@ -12,6 +12,7 @@ import {PageEvent} from '@angular/material/paginator';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  @ViewChild('acTable') acTable: AcTableComponent;
   columns: AcTableColumn[] = [
     {
       key: 'ordre',
@@ -72,107 +73,41 @@ export class TableComponent implements OnInit {
       }
     },
     {
-      key: 'ordre2',
-      label: 'Ordre',
+      key: 'type',
+      label: 'Type',
       exportable: true,
       field: {
-        type: 'input',
-        inputType: 'number',
+        type: 'select',
+        options: ['Type1', 'Type2'],
         required: true,
         validations: [
           {
             name: 'required',
             validator: Validators.required,
-            message: 'L\'ordre est obligatoire',
-          },
-        ],
-      }
-    },
-    {
-      key: 'code2',
-      label: 'Code',
-      exportable: true,
-      field: {
-        type: 'input',
-        required: true,
-        validations: [
-          {
-            name: 'required',
-            validator: Validators.required,
-            message: 'Le code est obligatoire',
-          },
-        ],
-      },
-      filterable: true
-    },
-    {
-      key: 'libelle2',
-      label: 'Libellé',
-      exportable: true,
-      field: {
-        type: 'textarea',
-        required: true,
-        validations: [
-          {
-            name: 'required',
-            validator: Validators.required,
-            message: 'Le libelle est obligatoire',
-          },
-        ],
-      },
-      mediaQueries: ['(min-width: 600px)']
-    },
-    {
-      key: 'ordre3',
-      label: 'Ordre',
-      exportable: true,
-      field: {
-        type: 'input',
-        inputType: 'number',
-        required: true,
-        validations: [
-          {
-            name: 'required',
-            validator: Validators.required,
-            message: 'L\'ordre est obligatoire',
-          },
-        ],
-      }
-    },
-    {
-      key: 'code3',
-      label: 'Code',
-      exportable: true,
-      field: {
-        type: 'input',
-        required: true,
-        validations: [
-          {
-            name: 'required',
-            validator: Validators.required,
-            message: 'Le code est obligatoire',
-          },
-        ],
-      },
-      filterable: true
-    },
-    {
-      key: 'libelle3',
-      label: 'Libellé',
-      exportable: true,
-      field: {
-        type: 'textarea',
-        required: true,
-        validations: [
-          {
-            name: 'required',
-            validator: Validators.required,
-            message: 'Le libelle est obligatoire',
+            message: 'Le type est obligatoire',
           },
         ],
       },
       mediaQueries: ['(min-width: 600px)'],
-      filterable: true
+      filterable: true,
+      filterField: {
+        name: 'type',
+        label: 'Type',
+        type: 'select',
+        options: [{id: 1, type: 'Type1'}, {id: 2, type: 'Type2'}],
+        labelKey: 'type',
+        multiple: true,
+        startHint: {
+          label: 'Deselect all', action: (field, group) => {
+            group.controls[field.name].setValue(null);
+          }
+        },
+        endHint: {
+          label: 'Select all', action: (field: AcFieldSelectConfig, group: FormGroup) => {
+            group.controls[field.name].setValue(field.options);
+          }
+        }
+      }
     }
   ];
   options: AcTableOptions = {
@@ -209,7 +144,8 @@ export class TableComponent implements OnInit {
     globalFilter: true,
     exportCSV: {
       fileName: 'export_[date].csv',
-      formatDate: 'YYYY-MM-DD'
+      formatDate: 'YYYY-MM-DD',
+      exportFilteredData: true
     },
     labels: {
       addButtonLabel: '<i class="fas fa-plus"></i> Add a row',
@@ -283,6 +219,7 @@ export class TableComponent implements OnInit {
         id: i,
         ordre: i,
         code: (i % 2 === 0 ? 'C' : 'c') + 'ode' + i,
+        type: (i % 2 === 0 ? 'Type1' : 'Type2'),
         libelle: 'libelle ' + i
       });
     }
@@ -290,7 +227,6 @@ export class TableComponent implements OnInit {
   }
 
   saveRow(row: any): Observable<any> {
-    row.code += '!';
     return row.code !== 'KO!' ? of(row).pipe(delay(1000)) : throwError('KO');
   }
 
@@ -308,5 +244,14 @@ export class TableComponent implements OnInit {
 
   logEvent(event: any) {
     console.log(event);
+  }
+
+  addRow() {
+    this.acTable.openAddForm({
+      ordre: 1,
+      code: 'test',
+      libelle: 'test',
+      type: 'Type1',
+    });
   }
 }

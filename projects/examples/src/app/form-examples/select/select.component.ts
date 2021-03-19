@@ -56,7 +56,18 @@ export class SelectComponent implements OnInit {
         name: 'async',
         type: 'select',
         label: 'Select with async options',
-        asyncOptions: of(['option1', 'option2', 'option3'])
+        multiple: true,
+        asyncOptions: of(['option1', 'option2', 'option3']),
+        startHint: {
+          label: 'Deselect all', action: (field, group) => {
+            group.controls[field.name].setValue(null);
+          }
+        },
+        endHint: {
+          label: 'Select all', action: (field: AcFieldSelectConfig, group: FormGroup) => {
+            group.controls[field.name].setValue(field.options);
+          }
+        }
       },
       {
         name: 'optionGroups',

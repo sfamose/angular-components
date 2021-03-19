@@ -1,6 +1,6 @@
 {
   "name": "@sfamose/angular-components",
-  "version": "0.0.37",
+  "version": "0.0.40",
   "description": "a library of angular components",
   "peerDependencies": {
     "@angular/cdk": ">=10.0.1",

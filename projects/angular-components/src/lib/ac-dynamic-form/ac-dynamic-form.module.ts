@@ -2,14 +2,11 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DynamicFieldDirective} from './components/dynamic-field.directive';
 import {FieldGroupComponent} from './components/field-group/field-group.component';
-import {FieldDatetimeComponent} from './components/field-datetime/field-datetime.component';
 import {FieldSelectComponent} from './components/field-select/field-select.component';
 import {FieldInputComponent} from './components/field-input/field-input.component';
 import {FieldRadioButtonComponent} from './components/field-radio-button/field-radio-button.component';
 import {FieldCheckboxComponent} from './components/field-checkbox/field-checkbox.component';
 import {FieldTextareaComponent} from './components/field-textarea/field-textarea.component';
-import {InputDatetimeComponent} from './components/input-datetime/input-datetime.component';
-import {FieldTimeComponent} from './components/field-time/field-time.component';
 import {DivTextComponent} from './components/div-text/div-text.component';
 import {FieldCustomComponent} from './components/field-custom/field-custom.component';
 import {FieldDateComponent} from './components/field-date/field-date.component';
@@ -45,11 +42,8 @@ import {AcButtonModule} from '../ac-button/ac-button.module';
     FieldRadioButtonComponent,
     DynamicFieldDirective,
     FieldSelectComponent,
-    FieldTimeComponent,
     FieldGroupComponent,
     FieldTextareaComponent,
-    FieldDatetimeComponent,
-    InputDatetimeComponent,
     DivTextComponent,
     FieldCustomComponent,
     FieldCustomDirective,
