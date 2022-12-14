@@ -10,6 +10,7 @@ import {Moment} from 'moment';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {MatDatepicker} from '@angular/material/datepicker';
+import {DynamicFormService} from '../../services/dynamic-form.service';
 
 
 @Component({
@@ -24,14 +25,15 @@ export class FieldDateComponent implements OnInit, OnDestroy, AcField {
 
   constructor(
     @Inject(MAT_FORM_FIELD_APPEARANCE) public appearance: MatFormFieldAppearance,
-    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType
+    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType,
+    private dynamicFormService: DynamicFormService
   ) {
   }
 
   ngOnInit(): void {
     if (this.field.onValueChanges) {
       this.group.get(this.field.name).valueChanges.pipe(takeUntil(this.unsubcribe$))
-        .subscribe(value => this.field.onValueChanges(value, this.field, this.group));
+        .subscribe(value => this.field.onValueChanges(value, this.field, this.group, this.dynamicFormService.getFields()));
     }
   }
 

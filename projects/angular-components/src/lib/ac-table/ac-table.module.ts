@@ -28,6 +28,15 @@ import {AcButtonModule} from '../ac-button/ac-button.module';
 import {StoreService} from './services/store.service';
 import {ConversionService} from './services/conversion.service';
 import {ExportCsvService} from './services/export-csv.service';
+import {FilterFieldDirective} from './components/filter-field.directive';
+import {FilterFieldTextComponent} from './components/filter-field-text/filter-field-text.component';
+import {FilterFieldSelectComponent} from './components/filter-field-select/filter-field-select.component';
+import {FilterFieldNumberComponent} from './components/filter-field-number/filter-field-number.component';
+import {FilterFieldDateComponent} from './components/filter-field-date/filter-field-date.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { FilterFieldChipsComponent } from './components/filter-field-chips/filter-field-chips.component';
+import { SidenavColumnComponent } from './components/sidenav-column/sidenav-column.component';
+import { FilterFieldCheckboxComponent } from './components/filter-field-checkbox/filter-field-checkbox.component';
 
 
 @NgModule({
@@ -38,18 +47,27 @@ import {ExportCsvService} from './services/export-csv.service';
     TableHeaderComponent,
     ConfirmationModalComponent,
     SidenavFilterComponent,
-    TableContentComponent
+    TableContentComponent,
+    FilterFieldDirective,
+    FilterFieldTextComponent,
+    FilterFieldSelectComponent,
+    FilterFieldNumberComponent,
+    FilterFieldDateComponent,
+    FilterFieldChipsComponent,
+    SidenavColumnComponent,
+    FilterFieldCheckboxComponent
   ],
   exports: [
     AcTableComponent
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    AcPipeModule,
-    AcDynamicFormModule,
-    AcButtonModule
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        AcPipeModule,
+        AcDynamicFormModule,
+        AcButtonModule,
+        ReactiveFormsModule
+    ],
   providers: [
     {
       provide: LABELS,

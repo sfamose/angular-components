@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AcCell} from '../../models/ac-cell';
 import {AcTableColumn} from '../../models/ac-table-column';
-import {AcTableConversions} from '../../models/ac-table-conversions';
+import {ToolsService} from '../../services/tools.service';
 
 @Component({
   selector: 'ac-table-cell',
@@ -14,7 +14,11 @@ export class TableCellComponent implements OnInit, AcCell {
   @Input()
   column: AcTableColumn;
 
-  constructor() {
+  get value() {
+    return this.toolsService.getCellValue(this.element, this.column);
+  }
+
+  constructor(private toolsService: ToolsService) {
   }
 
   ngOnInit(): void {

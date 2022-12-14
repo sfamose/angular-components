@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, HostListener, OnDestroy, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {AcTableColumn} from '../../models/ac-table-column';
 import {AcTableOptions} from '../../models/ac-table-options';
@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
 import {AcTableLabels} from '../../models/ac-table-labels';
 import {takeUntil} from 'rxjs/operators';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {ToolsService} from '../../services/tools.service';
 
 @Component({
   selector: 'ac-table-content',
@@ -56,7 +57,8 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(private storeService: StoreService,
-              private editService: EditRowService) {
+              private editService: EditRowService,
+              private toolsService: ToolsService) {
   }
 
   ngAfterViewInit(): void {
@@ -72,8 +74,10 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
               this.dataSource.sortingDataAccessor = this.options.sortOptions.sortingDataAccessor;
             } else {
               this.dataSource.sortingDataAccessor = (data, attribute) => {
-                return data[attribute] && this.options.sortOptions.ignoreCase
-                && typeof data[attribute] === 'string' ? data[attribute].toLowerCase() : data[attribute];
+                const col = this.columns.filter(x => x.key === attribute)[0];
+                const d = this.toolsService.getCellValue(data, col);
+                return d && this.options.sortOptions.ignoreCase
+                && typeof d === 'string' ? d.toLowerCase() : d;
               };
             }
             this.dataSource.sort = this.sort;
@@ -83,12 +87,12 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
             this.dataSource.paginator = this.paginator;
           }
 
-          if (this.storeService.filterValue$.value) {
-            this.dataSource.filter = this.storeService.filterValue$.value;
+          if (this.storeService.globalFilterValue$.value) {
+            this.dataSource.filter = this.storeService.globalFilterValue$.value;
           }
         });
 
-      this.storeService.filterValue$.asObservable().pipe(takeUntil(this.unsubscribe$)).subscribe(filterValue => {
+      this.storeService.globalFilterValue$.asObservable().pipe(takeUntil(this.unsubscribe$)).subscribe(filterValue => {
         this.dataSource.filter = filterValue;
       });
     }, 0);

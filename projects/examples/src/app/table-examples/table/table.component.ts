@@ -1,10 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AcFieldSelectConfig, AcTableColumn, AcTableComponent, AcTableOptions} from 'angular-components';
+import {AcTableColumn, AcTableComponent, AcTableOptions} from 'angular-components';
 import {FormGroup, Validators} from '@angular/forms';
 import {Observable, of, throwError} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {Sort} from '@angular/material/sort';
 import {PageEvent} from '@angular/material/paginator';
+import {DatePipe} from '@angular/common';
+import {AcFieldSelectConfig} from '../../../../../angular-components/src/lib/ac-dynamic-form/models/field-select-config';
+import {AcFieldInputConfig} from '../../../../../angular-components/src/lib/ac-dynamic-form/models/field-input-config';
 
 @Component({
   selector: 'app-table',
@@ -13,11 +16,15 @@ import {PageEvent} from '@angular/material/paginator';
 })
 export class TableComponent implements OnInit {
   @ViewChild('acTable') acTable: AcTableComponent;
+  types = [{id: 1, label: 'Type1'}, {id: 2, label: 'Type2'}, {id: 3, label: 'Type3'}];
   columns: AcTableColumn[] = [
     {
       key: 'ordre',
       label: 'Ordre',
-      exportable: true,
+      getValue: (element: any) => {
+        return (element.ordre % 2 === 0 ? 'a°' : 'N° ') + element.ordre;
+      },
+      fieldOrder: 3,
       field: {
         type: 'input',
         inputType: 'number',
@@ -29,12 +36,16 @@ export class TableComponent implements OnInit {
             message: 'L\'ordre est obligatoire',
           },
         ],
+      },
+      filterable: true,
+      filterField: {
+        type: 'number',
       }
     },
     {
       key: 'code',
       label: 'Code',
-      exportable: true,
+      fieldOrder: 2,
       field: {
         type: 'input',
         required: true,
@@ -44,6 +55,11 @@ export class TableComponent implements OnInit {
             validator: Validators.required,
             message: 'Le code est obligatoire',
           },
+          {
+            name: 'pattern',
+            validator: Validators.pattern(/[0-9]{3}/),
+            message: 'Le code doit être composé de 3 chiffres',
+          },
         ],
       },
       filterable: true
@@ -51,7 +67,7 @@ export class TableComponent implements OnInit {
     {
       key: 'libelle',
       label: 'Libellé',
-      exportable: true,
+      fieldOrder: 4,
       field: {
         type: 'textarea',
         required: true,
@@ -66,20 +82,22 @@ export class TableComponent implements OnInit {
       mediaQueries: ['(min-width: 600px)'],
       filterable: true,
       filterField: {
-        name: 'libelle',
         label: 'Libellé',
-        type: 'chipsInput',
-        deleteLabel: '<i class="fas fa-times"></i>'
+        type: 'chips',
       }
     },
     {
       key: 'type',
       label: 'Type',
-      exportable: true,
+      attributeKey: 'label',
+      fieldOrder: 1,
       field: {
         type: 'select',
-        options: ['Type1', 'Type2'],
+        options: this.types,
         required: true,
+        getLabel: (item: any) => {
+          return item.id + ' - ' + item.label;
+        },
         validations: [
           {
             name: 'required',
@@ -87,27 +105,54 @@ export class TableComponent implements OnInit {
             message: 'Le type est obligatoire',
           },
         ],
+        onValueChanges: (value: any, field: AcFieldSelectConfig, group: FormGroup, fields: any[]) => {
+          console.log(fields);
+          const item = fields.filter(x => x.name === 'code')[0];
+          if (item) {
+            (item as AcFieldInputConfig).prefixes = [
+              {label: 'test'}
+            ];
+          }
+        }
       },
       mediaQueries: ['(min-width: 600px)'],
       filterable: true,
       filterField: {
-        name: 'type',
         label: 'Type',
         type: 'select',
-        options: [{id: 1, type: 'Type1'}, {id: 2, type: 'Type2'}],
-        labelKey: 'type',
-        multiple: true,
-        startHint: {
-          label: 'Deselect all', action: (field, group) => {
-            group.controls[field.name].setValue(null);
-          }
-        },
-        endHint: {
-          label: 'Select all', action: (field: AcFieldSelectConfig, group: FormGroup) => {
-            group.controls[field.name].setValue(field.options);
+        options: [{id: 1, label: 'Type1'}, {id: 2, label: 'Type2'}, {id: 3, label: 'Type3'}],
+        labelKey: 'label'
+      }
+    },
+    {
+      key: 'date',
+      label: 'Date',
+      pipe: {
+        token: DatePipe,
+        args: ['dd/MM/yyyy']
+      },
+      skipAddRow: 'hide',
+      skipEditRow: 'hide',
+      filterable: true,
+      filterField: {
+        type: 'date',
+        label: 'Date de début',
+        label2: 'Date de fin',
+        operatorList: ['equal' , 'more' , 'moreOrEqual' , 'less' , 'lessOrEqual' , 'between']
+      }
+    },
+    {
+      key: 'copy',
+      skipAddRow: 'hide',
+      skipEditRow: 'hide',
+      buttons: [
+        {
+          label: '<i class="fa fa-copy"></i>',
+          action: (element, column) => {
+            this.copy(element, column);
           }
         }
-      }
+      ]
     }
   ];
   options: AcTableOptions = {
@@ -145,9 +190,11 @@ export class TableComponent implements OnInit {
     exportCSV: {
       fileName: 'export_[date].csv',
       formatDate: 'YYYY-MM-DD',
-      exportFilteredData: true
+      exportFilteredData: true,
+      addDoubleQuote: true
     },
     labels: {
+      tableTitle: 'My table',
       addButtonLabel: '<i class="fas fa-plus"></i> Add a row',
       editButtonLabel: '<i class="fas fa-pencil-alt"></i>',
       deleteButtonLabel: '<i class="fas fa-trash-alt"></i>',
@@ -157,15 +204,19 @@ export class TableComponent implements OnInit {
     filterOptions: {
       // filterButtonLabel: '<i class="fas fa-filter"></i>',
       mode: 'sidenav',
-      sidenavOptions: {
-        position: 'end',
-        mode: 'side',
-        opened: true
-      },
       // updateOn: 'blur',
       debounceTime: 500,
-      badgeColor: 'accent'
+      badgeColor: 'accent',
+      additionalfilters: [
+        {key: 'key', label: 'test', type: 'checkbox'}
+      ]
     },
+    sidenavOptions: {
+      position: 'end',
+      mode: 'side',
+      opened: true
+    },
+    columnManagement: true,
     headerItems: [
       {
         type: 'menu',
@@ -190,6 +241,7 @@ export class TableComponent implements OnInit {
       {type: 'addRow', mediaQueries: ['(min-width: 600px)']},
       {type: 'export', mediaQueries: ['(min-width: 600px)']},
       {type: 'filter'},
+      {type: 'column'},
       {type: 'globalFilter'},
       {
         type: 'custom',
@@ -214,13 +266,23 @@ export class TableComponent implements OnInit {
 
   setRows() {
     const rows = [];
+    rows.push({
+      id: 0,
+      ordre: -1,
+      code: '"Test"',
+      type: 'Type1',
+      libelle: 'Test ""Quote""',
+      date: new Date()
+    });
+
     for (let i = 0; i < 100; i++) {
       rows.push({
         id: i,
         ordre: i,
         code: (i % 2 === 0 ? 'C' : 'c') + 'ode' + i,
-        type: (i % 2 === 0 ? 'Type1' : 'Type2'),
-        libelle: 'libelle ' + i
+        type: (i % 2 === 0 ? this.types[0] : this.types[1]),
+        libelle: 'libelle ' + i,
+        date: new Date()
       });
     }
     this.rows = rows;
@@ -246,6 +308,11 @@ export class TableComponent implements OnInit {
     console.log(event);
   }
 
+  copy(element, column) {
+    console.log(element, column);
+    this.acTable.openAddForm(element);
+  }
+
   addRow() {
     this.acTable.openAddForm({
       ordre: 1,
@@ -253,5 +320,9 @@ export class TableComponent implements OnInit {
       libelle: 'test',
       type: 'Type1',
     });
+  }
+
+  changePage() {
+    this.acTable.firstPage();
   }
 }

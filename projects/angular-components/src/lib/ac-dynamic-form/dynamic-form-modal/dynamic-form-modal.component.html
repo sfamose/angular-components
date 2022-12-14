@@ -12,6 +12,8 @@
   ></ac-button>
   <ac-button [config]="data.submitButton"
              [label]="submitButtonLabel"
+             type="mat-raised-button"
+             color="primary"
              (buttonClick)="save(dynamicForm?.form?.value)"
              [disabled]="!dynamicForm?.form?.valid"
   ></ac-button>

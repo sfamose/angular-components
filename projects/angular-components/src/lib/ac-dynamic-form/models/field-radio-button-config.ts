@@ -2,6 +2,9 @@ import {AcValidator} from './validator';
 import {Observable} from 'rxjs';
 import {FormGroup} from '@angular/forms';
 import {ThemePalette} from '@angular/material/core';
+import {AcFieldConfig} from './field-config';
+import {AcTextConfig} from './text-config';
+import {AcGroupConfig} from './group-config';
 
 export interface AcFieldRadioButtonConfig {
   type: 'radiobutton';
@@ -20,5 +23,5 @@ export interface AcFieldRadioButtonConfig {
   disabledKey?: string;
   colorKey?: string;
 
-  onValueChanges?: (value: any, field?: AcFieldRadioButtonConfig, group?: FormGroup) => void;
+  onValueChanges?: (value: any, field?: AcFieldRadioButtonConfig, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }

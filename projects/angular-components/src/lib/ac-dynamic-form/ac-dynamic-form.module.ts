@@ -52,7 +52,7 @@ import {AcButtonModule} from '../ac-button/ac-button.module';
     FieldChipsAutocompleteComponent,
     FieldChipsInputComponent
   ],
-  exports: [AcDynamicFormComponent],
+  exports: [AcDynamicFormComponent, DynamicFormModalComponent],
   imports: [
     CommonModule, ReactiveFormsModule, MaterialModule, AcButtonModule
   ],

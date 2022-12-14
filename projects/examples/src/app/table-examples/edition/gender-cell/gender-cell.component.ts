@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {AcTableColumn} from 'angular-components';
+import {AcCell, AcTableColumn} from 'angular-components';
 
 @Component({
   selector: 'app-gender-cell',
   templateUrl: './gender-cell.component.html',
   styleUrls: ['./gender-cell.component.scss']
 })
-export class GenderCellComponent implements OnInit {
+export class GenderCellComponent implements OnInit, AcCell {
 
   column: AcTableColumn;
   element: any;

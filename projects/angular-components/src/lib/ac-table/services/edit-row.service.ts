@@ -38,8 +38,24 @@ export class EditRowService {
     return field as AcFieldConfig;
   }
 
+  sortColumn(a: AcTableColumn, b: AcTableColumn): number {
+    if (a.fieldOrder && b.fieldOrder) {
+      if (a.fieldOrder < b.fieldOrder) {
+        return -1;
+      }
+      if (a.fieldOrder > b.fieldOrder) {
+        return 1;
+      }
+      return 0;
+    }
+    return 0;
+  }
+
   openAddForm(initialValues?: any) {
-    const fields: AcFieldConfig[] = this.storeService.columns.filter(col => !col.skipAddRow || col.skipAddRow !== 'hide').map(col => {
+    const cols = this.storeService.columns
+      .filter(col => !col.skipAddRow || col.skipAddRow !== 'hide');
+    cols.sort(this.sortColumn);
+    const fields: AcFieldConfig[] = cols.map(col => {
       const field: AcFieldConfig = this.getField(col, col.skipAddRow === 'disabled');
       if (initialValues) {
         field.value = initialValues[col.key];
@@ -75,11 +91,18 @@ export class EditRowService {
   }
 
   openEditForm(row: any) {
-    const fields: AcFieldConfig[] = this.storeService.columns.filter(col => !col.skipEditRow || col.skipEditRow !== 'hide').map(col => {
-      const field: AcFieldConfig = this.getField(col, col.skipEditRow === 'disabled');
-      field.value = row[col.key];
-      return field;
+    this.editEvent.next({
+      event: 'open-update',
+      row
     });
+    const fields: AcFieldConfig[] = this.storeService.columns
+      .filter(col => !col.skipEditRow || col.skipEditRow !== 'hide')
+      .sort(this.sortColumn)
+      .map(col => {
+        const field: AcFieldConfig = this.getField(col, col.skipEditRow === 'disabled');
+        field.value = row[col.key];
+        return field;
+      });
     const component: ComponentType<any> = this.storeService.options.addRowOptions
     && this.storeService.options.addRowOptions.component ?
       this.storeService.options.addRowOptions.component : DynamicFormModalComponent;
@@ -114,6 +137,7 @@ export class EditRowService {
       && this.storeService.options.deleteRowOptions.confirmation) {
       const dialogRef = this.dialog.open(ConfirmationModalComponent, {
         data: {
+          titleLabel: this.storeService.labels.deleteModalTitleLabel,
           confirmButtonLabel: this.storeService.labels.confirmButtonLabel,
           cancelButtonLabel: this.storeService.labels.cancelButtonLabel,
           confirmMessage: this.storeService.labels.deleteConfirmationMessage,

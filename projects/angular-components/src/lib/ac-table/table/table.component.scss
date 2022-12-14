@@ -12,6 +12,10 @@
   width: 100%;
 }
 
+.mat-drawer-container {
+  background-color: transparent;
+}
+
 ::ng-deep .mat-drawer-inner-container {
   display: flex;
 }
@@ -21,6 +25,7 @@
   flex-direction: column;
   flex: 1;
 }
+
 ::ng-deep .mat-drawer-side.mat-drawer-end {
   border-left: none;
   border-right: none;

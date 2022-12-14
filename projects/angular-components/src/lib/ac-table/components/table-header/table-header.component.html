@@ -1,3 +1,4 @@
+<h2 class="ac-table-titre" [innerHTML]="labels?.tableTitle" *ngIf="labels && labels.tableTitle"></h2>
 <div class="ac-table-header-row">
   <div class="ac-table-header-divide" [ngClass]="'ac-table-header-divide-first'"></div>
   <ng-container *ngFor="let item of headerItems">
@@ -16,6 +17,12 @@
                  color="primary"
                  type="mat-raised-button"
                  (buttonClick)="clickOpenFilter()"
+      ></ac-button>
+      <ac-button *ngSwitchCase="'column'"
+                 [label]="labels.columnButtonLabel"
+                 color="primary"
+                 type="mat-raised-button"
+                 (buttonClick)="clickOpenColumn()"
       ></ac-button>
       <ac-button *ngSwitchCase="'export'"
                  [label]="labels.exportButtonLabel"
@@ -56,6 +63,11 @@
                        [label]="labels.filterButtonLabel"
                        type="mat-menu-item"
                        (buttonClick)="clickOpenFilter()"
+            ></ac-button>
+            <ac-button *ngIf="subItem.type === 'column'"
+                       [label]="labels.columnButtonLabel"
+                       type="mat-menu-item"
+                       (buttonClick)="clickOpenColumn()"
             ></ac-button>
             <ac-button *ngIf="subItem.type === 'export'"
                        [label]="labels.exportButtonLabel"

@@ -68,6 +68,7 @@ export class AcDynamicFormComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnChanges() {
+    this.dynamicFormService.setFields(this.config.fields);
     if (this.form) {
       this.dynamicFormService.updateForm(this.config.fields);
       this.fields = [].concat(this.config.fields);

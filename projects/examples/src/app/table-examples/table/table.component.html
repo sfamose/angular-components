@@ -1,8 +1,10 @@
 <button (click)="addRow()">add row</button>
+<button (click)="changePage()">go Page 1</button>
 <ac-table #acTable
           [rows]="rows"
           [columns]="columns"
           [options]="options"
+          [initialFilterValues]="{libelle: {value: ['99']}}"
           (selectChange)="logEvent($event)"
           (sortChange)="logEvent($event)"
           (filterChange)="logEvent($event)"
@@ -10,4 +12,6 @@
           (rowEdit)="logEvent($event)"
           (rowAdd)="logEvent($event)"
           (rowDelete)="logEvent($event)"
+          (openEditRow)="logEvent($event)"
+
 ></ac-table>

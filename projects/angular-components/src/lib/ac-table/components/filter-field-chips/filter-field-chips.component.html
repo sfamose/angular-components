@@ -1,0 +1,17 @@
+<mat-form-field class="ac-filter-field ac-filter-field-text" >
+  <mat-label><span [innerHTML]="field.label"></span></mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let item of values"
+              [selectable]="true"
+              [removable]="true"
+              (removed)="remove(item)"
+    >
+      {{item}}
+      <span matChipRemove><i class="fa fa-times"></i></span>
+    </mat-chip>
+    <input [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="false"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</mat-form-field>

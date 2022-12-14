@@ -1,0 +1,14 @@
+<mat-checkbox (change)="$event ? masterToggle() : null" *ngIf="afterInit"
+              [checked]="select.selectedOptions.selected.length >0 && isAllSelected()"
+              [indeterminate]="select.selectedOptions.selected.length >0 && !isAllSelected()">
+</mat-checkbox>
+Sélectionner Tout
+
+<mat-selection-list #select>
+  <mat-list-option *ngFor="let item of field.options"
+                   [value]="item"
+                   [selected]="field.value && field.value.indexOf(item) !== -1">
+    {{field.labelKey ? item[field.labelKey] : item}}
+  </mat-list-option>
+</mat-selection-list>
+

@@ -4,6 +4,9 @@ import {AcValidator} from './validator';
 import {Observable} from 'rxjs';
 import {AcHint} from './hint';
 import {FormGroup} from '@angular/forms';
+import {AcFieldConfig} from './field-config';
+import {AcTextConfig} from './text-config';
+import {AcGroupConfig} from './group-config';
 
 export interface AcFieldSelectConfig {
   type: 'select';
@@ -37,6 +40,7 @@ export interface AcFieldSelectConfig {
   multiple?: boolean;
   panelClassName?: string | string[];
   compareWith?: (c1: any, c2: any) => boolean;
+  getLabel?: (item: any, field?: AcFieldSelectConfig) => any;
 
-  onValueChanges?: (value: any, field?: AcFieldSelectConfig, group?: FormGroup) => void;
+  onValueChanges?: (value: any, field?: AcFieldSelectConfig, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }

@@ -7,6 +7,7 @@
          [ngClass]="{ 'active': d.currentMonth, 'inactive': !d.currentMonth, 'today': d.today , 'weekend': d.weekend }">
       <ac-calendar-view-month-item [active]="d.currentMonth"
                                    [date]="d.date"
+                                   [eventList]="eventList"
                                    (click)="goToDate(d.date)"
       ></ac-calendar-view-month-item>
     </div>

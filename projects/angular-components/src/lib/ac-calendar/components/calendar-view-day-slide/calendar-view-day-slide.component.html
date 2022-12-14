@@ -9,16 +9,18 @@
           <div class="label">{{ e.label }}</div>
         </div>
       </ng-container>
-      <div class="ellip" *ngIf="allDayEvents && allDayEvents.length > 3 && !isAllDaysShown"><i class="fas fa-ellipsis-h" (click)="showAllDays()"></i></div>
-      <div class="ellip" *ngIf="allDayEvents && allDayEvents.length > 3 && isAllDaysShown"><i class="fas fa-chevron-up" (click)="hideAllDays()"></i></div>
+      <div class="ellip" *ngIf="allDayEvents && allDayEvents.length > 3 && !isAllDaysShown">
+        <i class="fas fa-ellipsis-h" (click)="showAllDays()"></i>
+      </div>
+      <div class="ellip" *ngIf="allDayEvents && allDayEvents.length > 3 && isAllDaysShown">
+        <i class="fas fa-chevron-up" (click)="hideAllDays()"></i>
+      </div>
     </div>
   </div>
   <div class="hours" >
     <div class="row-hour" *ngFor="let hour of hours">
       <div class="col-hour">{{ hour }}</div>
-      <div class="col-events">
-        <mat-divider></mat-divider>
-      </div>
+      <div class="col-events"><mat-divider></mat-divider></div>
     </div>
   </div>
 </div>

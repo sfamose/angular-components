@@ -7,6 +7,7 @@ import {AcAffix} from '../../models/affix';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-field';
+import {DynamicFormService} from '../../services/dynamic-form.service';
 
 @Component({
   selector: 'ac-field-select',
@@ -20,14 +21,15 @@ export class FieldSelectComponent implements OnInit, OnDestroy, AcField {
 
   constructor(
     @Inject(MAT_FORM_FIELD_APPEARANCE) public appearance: MatFormFieldAppearance,
-    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType
+    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType,
+    private dynamicFormService: DynamicFormService
   ) {
   }
 
   ngOnInit(): void {
     if (this.field.onValueChanges) {
       this.group.get(this.field.name).valueChanges.pipe(takeUntil(this.unsubcribe$))
-        .subscribe(value => this.field.onValueChanges(value, this.field, this.group));
+        .subscribe(value => this.field.onValueChanges(value, this.field, this.group, this.dynamicFormService.getFields()));
     }
     if (this.field.asyncOptions) {
       this.field.asyncOptions.pipe(takeUntil(this.unsubcribe$))
@@ -51,5 +53,15 @@ export class FieldSelectComponent implements OnInit, OnDestroy, AcField {
 
   compareWith(c1: any, c2: any): boolean {
     return c1 === c2;
+  }
+
+  getLabel(item: any) {
+    if (this.field.getLabel) {
+      return this.field.getLabel(item, this.field);
+    } else if (this.field.labelKey) {
+      return item[this.field.labelKey];
+    } else {
+      return item;
+    }
   }
 }

@@ -17,14 +17,14 @@
     <ng-container *ngIf="field.options as options">
       <mat-option *ngFor="let item of options"
                   [value]="field.valueKey ? item[field.valueKey] : item">
-        {{ field.labelKey ? item[field.labelKey]: item }}
+        {{ getLabel(item) }}
       </mat-option>
     </ng-container>
     <ng-container *ngIf="field.optionGroups as groups">
       <mat-optgroup *ngFor="let group of groups" [label]="group[field.groupLabelKey]">
         <mat-option *ngFor="let item of group[field.optionsKey]"
                     [value]="field.valueKey ? item[field.valueKey] : item">
-          {{ field.labelKey ? item[field.labelKey]: item }}
+          {{ getLabel(item) }}
         </mat-option>
       </mat-optgroup>
     </ng-container>

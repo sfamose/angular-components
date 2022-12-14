@@ -7,7 +7,8 @@ import {Observable, Subject} from 'rxjs';
 import {AcAffix} from '../../models/affix';
 import {AcHint} from '../../models/hint';
 import {AcFieldAutocompleteConfig} from '../../models/field-autocomplete-config';
-import {map, startWith, takeUntil} from 'rxjs/operators';
+import {debounceTime, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {DynamicFormService} from '../../services/dynamic-form.service';
 
 @Component({
   selector: 'ac-field-autocomplete',
@@ -19,23 +20,27 @@ export class FieldAutocompleteComponent implements OnInit, OnDestroy, AcField {
   group: FormGroup;
   public filteredOptions: Observable<any[]>;
   private unsubcribe$: Subject<void> = new Subject<void>();
-  private options;
+  private options = [];
 
   constructor(
     @Inject(MAT_FORM_FIELD_APPEARANCE) public appearance: MatFormFieldAppearance,
-    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType
+    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType,
+    private dynamicFormService: DynamicFormService
   ) {
   }
 
   ngOnInit(): void {
     if (this.field.options) {
       this.options = this.field.options;
-      this.onValueChange();
     } else if (this.field.asyncOptions) {
       this.field.asyncOptions.pipe(takeUntil(this.unsubcribe$)).subscribe(x => {
         this.options = x;
-        this.onValueChange();
       });
+    }
+    this.onValueChange();
+    if (this.field.onValueChanges) {
+      this.group.get(this.field.name).valueChanges.pipe(takeUntil(this.unsubcribe$))
+        .subscribe(value => this.field.onValueChanges(value, this.field, this.group, this.dynamicFormService.getFields()));
     }
   }
 
@@ -71,11 +76,20 @@ export class FieldAutocompleteComponent implements OnInit, OnDestroy, AcField {
   }
 
   private onValueChange() {
-    this.filteredOptions = this.group.get(this.field.name).valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-      takeUntil(this.unsubcribe$)
-    );
+    if (this.field.externalFilteredOptions) {
+      this.filteredOptions = this.group.get(this.field.name).valueChanges.pipe(
+        debounceTime(500),
+        startWith(''),
+        switchMap(value => this.field.externalFilteredOptions(value, this.field, this.group)),
+        takeUntil(this.unsubcribe$)
+      );
+    } else {
+      this.filteredOptions = this.group.get(this.field.name).valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+        takeUntil(this.unsubcribe$)
+      );
+    }
   }
 
   private _filter(value: string): string[] {

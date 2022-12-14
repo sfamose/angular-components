@@ -7,6 +7,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {AcTableHeaderItem} from './ac-table-header-item';
 import {ComponentType} from '@angular/cdk/portal';
 import {AcSubmitButton} from '../../ac-dynamic-form/models/submit-button';
+import {AcTableFilterFieldConfig} from './ac-table-filter-field-config';
 
 export interface AcTableOptions {
   selection?: boolean;
@@ -50,19 +51,21 @@ export interface AcTableOptions {
   };
   globalFilter?: boolean;
   filter?: boolean;
+  columnManagement?: boolean;
   filterOptions?: {
     mode?: 'sidenav';
-    sidenavOptions?: {
-      mode?: MatDrawerMode;
-      position?: 'start' | 'end';
-      opened?: boolean;
-      disableClose?: boolean;
-    };
     badgeColor?: ThemePalette;
     externalFilter?: boolean;
     submitButton?: AcSubmitButton;
     debounceTime?: number;
     updateOn?: 'change' | 'blur' | 'submit';
+    additionalfilters?: AcTableFilterFieldConfig[];
+  };
+  sidenavOptions?: {
+    mode?: MatDrawerMode;
+    position?: 'start' | 'end';
+    opened?: boolean;
+    disableClose?: boolean;
   };
   exportCSV?: {
     fileName: string;

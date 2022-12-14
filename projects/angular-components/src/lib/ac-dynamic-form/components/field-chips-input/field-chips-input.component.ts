@@ -49,7 +49,7 @@ export class FieldChipsInputComponent implements OnInit, AcField {
     const input = event.input;
     const value = event.value;
     if ((value || '').trim()) {
-      const list = this.values || [];
+      const list = this.values ? [].concat(this.values) : [];
       list.push(value.trim());
       this.values = list;
     }

@@ -3,6 +3,9 @@ import {AcAffix} from './affix';
 import {AcValidator} from './validator';
 import {AcHint} from './hint';
 import {FormGroup} from '@angular/forms';
+import {AcFieldConfig} from './field-config';
+import {AcTextConfig} from './text-config';
+import {AcGroupConfig} from './group-config';
 
 export interface AcFieldInputConfig {
 
@@ -30,6 +33,6 @@ export interface AcFieldInputConfig {
   autocomplete?: string;
   readonly?: boolean;
 
-  onValueChanges?: (value: any, field?: AcFieldInputConfig, group?: FormGroup) => void;
+  onValueChanges?: (value: any, field?: AcFieldInputConfig, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }
 

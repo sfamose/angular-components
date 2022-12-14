@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {MaterialModule} from 'angular-components';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import * as moment from 'moment';
-import {UpperCasePipe} from '@angular/common';
+import {DatePipe, UpperCasePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {IonicModule} from '@ionic/angular';
 
@@ -25,7 +25,8 @@ import {IonicModule} from '@ionic/angular';
   providers: [
     { provide: 'moment', useFactory: (): any => moment },
     UpperCasePipe,
-    {provide: 'UpperCasePipe', useClass: UpperCasePipe}
+    {provide: 'UpperCasePipe', useClass: UpperCasePipe},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

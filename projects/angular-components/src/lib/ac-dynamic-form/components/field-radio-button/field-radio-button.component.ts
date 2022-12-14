@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {AcFieldRadioButtonConfig} from '../../models/field-radio-button-config';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {DynamicFormService} from '../../services/dynamic-form.service';
 
 @Component({
   selector: 'ac-field-radio-button',
@@ -15,10 +16,13 @@ export class FieldRadioButtonComponent implements OnInit, OnDestroy, AcField {
   group: FormGroup;
   private unsubcribe$: Subject<void> = new Subject<void>();
 
+  constructor(private dynamicFormService: DynamicFormService) {
+  }
+
   ngOnInit(): void {
     if (this.field.onValueChanges) {
       this.group.get(this.field.name).valueChanges.pipe(takeUntil(this.unsubcribe$))
-        .subscribe(value => this.field.onValueChanges(value, this.field, this.group));
+        .subscribe(value => this.field.onValueChanges(value, this.field, this.group, this.dynamicFormService.getFields()));
     }
   }
 

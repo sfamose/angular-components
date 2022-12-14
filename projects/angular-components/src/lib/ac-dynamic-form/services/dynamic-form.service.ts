@@ -7,6 +7,7 @@ import {AcTextConfig} from '../models/text-config';
 @Injectable()
 export class DynamicFormService {
   private form: FormGroup;
+  private fields: (AcFieldConfig | AcTextConfig | AcGroupConfig)[];
 
   constructor(private fb: FormBuilder) {
   }
@@ -91,5 +92,13 @@ export class DynamicFormService {
         form.get(control).enable();
       }
     });
+  }
+
+  getFields(): (AcFieldConfig | AcTextConfig | AcGroupConfig)[] {
+    return this.fields;
+  }
+
+  setFields(fields: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) {
+    this.fields = fields;
   }
 }

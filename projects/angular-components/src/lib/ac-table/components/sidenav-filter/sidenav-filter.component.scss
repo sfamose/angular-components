@@ -3,6 +3,11 @@
   flex-direction: column;
   flex: 1;
   overflow: auto;
+  max-width: 500px;
+}
+
+::ng-deep mat-form-field {
+  width: 100%;
 }
 
 .ac-filter-header {
@@ -35,5 +40,13 @@
 
   .ac-filter-form {
     padding: 20px;
+
+    .ac-filter-form-title {
+      padding-bottom: 10px;
+    }
+
+    mat-panel-description {
+      flex-direction: row-reverse;
+    }
   }
 }

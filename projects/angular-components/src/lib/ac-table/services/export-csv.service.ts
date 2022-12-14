@@ -1,13 +1,16 @@
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable, Injector, PipeTransform} from '@angular/core';
 import {AcTableOptions} from '../models/ac-table-options';
 import {AcTableColumn} from '../models/ac-table-column';
+import {ToolsService} from './tools.service';
 
 @Injectable({
   providedIn: 'any'
 })
 export class ExportCsvService {
 
-  constructor(@Inject('moment') private moment) {
+  constructor(@Inject('moment') private moment,
+              private injector: Injector,
+              private toolsService: ToolsService) {
   }
 
   exportCSV(options: AcTableOptions, columns: AcTableColumn[], rows: any[]): void {
@@ -35,7 +38,7 @@ export class ExportCsvService {
 
   convertData(columns: AcTableColumn[], rows: any[], addDoubleQuote: boolean): string[][] {
     const data: string[][] = [];
-    const exportColumns = columns.filter(x => x.exportable);
+    const exportColumns = columns.filter(x => !x.skipExport);
     data.push(this.getHeaderRow(exportColumns, addDoubleQuote));
     rows.forEach(row => {
       data.push(this.getRow(row, exportColumns, addDoubleQuote));
@@ -47,8 +50,9 @@ export class ExportCsvService {
     const d = [];
     columns.forEach(col => {
       let text = col.exportLabel ? col.exportLabel : col.label;
+      text = text != null && text !== 'null' ? text : '';
       if (addDoubleQuote) {
-        text = '"' + text + '"';
+        text = '"' + text.replace(/"/g, '""') + '"';
       }
       d.push(text);
     });
@@ -58,9 +62,14 @@ export class ExportCsvService {
   getRow(row: any, columns: AcTableColumn[], addDoubleQuote: boolean): string[] {
     const d = [];
     columns.forEach(col => {
-      let text = row[col.key] && col.attributeKey ? row[col.key][col.attributeKey] : row[col.key];
+      let text = this.toolsService.getCellValue(row, col);
+      if (col.pipe && col.pipe.token) {
+        const pipe = this.injector.get(col.pipe.token);
+        text = pipe.transform(text, col.pipe.args);
+      }
+      text = text != null && text !== 'null' ? text : '';
       if (addDoubleQuote) {
-        text = '"' + text + '"';
+        text = '"' + text.toString().replace(/"/g, '""') + '"';
       }
       d.push(text);
     });

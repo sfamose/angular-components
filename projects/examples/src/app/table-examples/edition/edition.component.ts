@@ -20,7 +20,6 @@ export class EditionComponent implements OnInit {
         key: 'name', label: 'name',
         pipe: {tokenName: 'UpperCasePipe'},
         sticky: 'start',
-        exportable: true,
         field: {
           type: 'input',
           name: 'name',
@@ -36,8 +35,8 @@ export class EditionComponent implements OnInit {
         }
       },
       {key: 'gender', label: 'Gender', componentName: 'GenderCellComponent'},
-      {key: 'eye_color', label: 'Eye color', exportable: true},
-      {key: 'hair_color', label: 'Hair color', exportable: true},
+      {key: 'eye_color', label: 'Eye color'},
+      {key: 'hair_color', label: 'Hair color'},
       {key: 'skin_color', label: 'Skin color'},
       {key: 'height', label: 'Height'},
       {key: 'birth_year', label: 'Birthyear'},

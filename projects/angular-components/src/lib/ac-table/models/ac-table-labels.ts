@@ -1,4 +1,5 @@
 export interface AcTableLabels {
+  tableTitle?: string;
   cancelButtonLabel?: string;
   submitButtonLabel?: string;
   confirmButtonLabel?: string;
@@ -18,4 +19,6 @@ export interface AcTableLabels {
   exportButtonLabel?: string;
   globalFilterPlaceholder?: string;
   globalFilterLabel?: string;
+  columnButtonLabel?: string;
+  columnTitleLabel?: string;
 }

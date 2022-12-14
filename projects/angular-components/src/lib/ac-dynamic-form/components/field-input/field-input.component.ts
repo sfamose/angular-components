@@ -8,6 +8,7 @@ import {AcAffix} from '../../models/affix';
 import {AcHint} from '../../models/hint';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {DynamicFormService} from '../../services/dynamic-form.service';
 
 @Component({
   selector: 'ac-field-input',
@@ -22,7 +23,8 @@ export class FieldInputComponent implements OnInit, OnDestroy, AcField {
   constructor(
     @Inject(INPUT_MAXLENGTH) public maxlength: number,
     @Inject(MAT_FORM_FIELD_APPEARANCE) public appearance: MatFormFieldAppearance,
-    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType
+    @Inject(MAT_FORM_FIELD_FLOATLABEL) public floatLabel: FloatLabelType,
+    private dynamicFormService: DynamicFormService
   ) {
   }
 
@@ -31,7 +33,7 @@ export class FieldInputComponent implements OnInit, OnDestroy, AcField {
 
     if (this.field.onValueChanges) {
       this.group.get(this.field.name).valueChanges.pipe(takeUntil(this.unsubcribe$))
-        .subscribe(value => this.field.onValueChanges(value, this.field, this.group));
+        .subscribe(value => this.field.onValueChanges(value, this.field, this.group, this.dynamicFormService.getFields()));
     }
   }
 

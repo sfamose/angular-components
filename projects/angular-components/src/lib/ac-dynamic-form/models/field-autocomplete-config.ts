@@ -3,6 +3,10 @@ import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-fie
 import {AcHint} from './hint';
 import {AcAffix} from './affix';
 import {Observable} from 'rxjs';
+import {FormGroup} from '@angular/forms';
+import {AcFieldConfig} from './field-config';
+import {AcTextConfig} from './text-config';
+import {AcGroupConfig} from './group-config';
 
 export interface AcFieldAutocompleteConfig {
   type: 'autocomplete';
@@ -28,4 +32,9 @@ export interface AcFieldAutocompleteConfig {
   labelKey?: string;
   valueKey?: string;
   matchOption?: boolean;
+
+  externalFilteredOptions?: (value: any, field?: AcFieldAutocompleteConfig, group?: FormGroup) => Observable<any[]>;
+  data?: any;
+
+  onValueChanges?: (value: any, field?: AcFieldAutocompleteConfig, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }

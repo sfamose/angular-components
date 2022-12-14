@@ -13,9 +13,12 @@ import {AcTableHeaderItem} from '../../models/ac-table-header-item';
 })
 export class TableHeaderComponent {
   @Output() openFilter: EventEmitter<void> = new EventEmitter<void>();
+  @Output() openColumn: EventEmitter<void> = new EventEmitter<void>();
 
   get filterBadge(): number {
-    return this.storeService.filterValues ? Object.keys(this.storeService.filterValues).length : null;
+    return this.storeService.filterValues ?
+      Object.keys(this.storeService.filterValues).filter(x => this.storeService.filterValues[x]
+        && this.storeService.filterValues[x].isFiltered).length : null;
   }
 
   get headerItems(): AcTableHeaderItem[] {
@@ -43,6 +46,10 @@ export class TableHeaderComponent {
     this.openFilter.emit();
   }
 
+  clickOpenColumn() {
+    this.openColumn.emit();
+  }
+
   clickExportCSV(): void {
     const exportFilteredData = this.storeService.options && this.storeService.options.exportCSV
       && this.storeService.options.exportCSV.exportFilteredData;
@@ -52,6 +59,6 @@ export class TableHeaderComponent {
 
   applyFilter(event: KeyboardEvent): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.storeService.filterValue$.next(filterValue.trim().toLowerCase());
+    this.storeService.globalFilterValue$.next(filterValue.trim().toLowerCase());
   }
 }

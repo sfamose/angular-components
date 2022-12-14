@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+  max-width: 500px;
+}
+
+.ac-filter-header {
+  padding: 20px;
+  text-align: center;
+}
+
+.ac-filter-content {
+  flex: 1;
+  overflow: auto;
+}

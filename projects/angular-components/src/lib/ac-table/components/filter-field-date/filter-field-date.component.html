@@ -1,0 +1,30 @@
+<form [formGroup]="formGroup">
+  <mat-form-field class="ac-filter-field ac-filter-field-select" *ngIf="this.field.operatorList.length > 1" >
+    <mat-label>Opérateur</mat-label>
+    <mat-select formControlName="operator"  >
+      <ng-container *ngFor="let item of options">
+        <mat-option  [value]="item.code" *ngIf="this.field.operatorList.indexOf(item.code) !==-1">
+          {{ item.label }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="ac-filter-field ac-filter-field-text" >
+    <mat-label><span [innerHTML]="field.label"></span></mat-label>
+    <input matInput [matDatepicker]="picker" type="text" formControlName="value" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <button matSuffix type="button" mat-button (click)="delete('value')">
+      <span><i class="fa fa-times"></i></span>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="ac-filter-field ac-filter-field-text" *ngIf="formGroup.get('operator').value === 'between'" >
+    <mat-label><span [innerHTML]="field.label2"></span></mat-label>
+    <input matInput [matDatepicker]="picker2" type="text" formControlName="value2" />
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+    <button matSuffix type="button" mat-button (click)="delete('value2')">
+      <span><i class="fa fa-times"></i></span>
+    </button>
+  </mat-form-field>
+</form>

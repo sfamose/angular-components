@@ -1,8 +1,5 @@
 import {Component, OnInit, PipeTransform, Type} from '@angular/core';
-import {AcTableColumn, AcTableOptions} from 'angular-components';
-import {Validators} from '@angular/forms';
-import {AcTableConversions} from '../../../../../angular-components/src/lib/ac-table/models/ac-table-conversions';
-import {AcCell} from '../../../../../angular-components/src/lib/ac-table/models/ac-cell';
+import {AcTableColumn, AcTableOptions, AcCell, AcTableConversions} from 'angular-components';
 import {HttpClient} from '@angular/common/http';
 import {UpperCasePipe} from '@angular/common';
 import {GenderCellComponent} from '../edition/gender-cell/gender-cell.component';
@@ -22,8 +19,7 @@ export class FilterComponent implements OnInit {
         sticky: 'start',
         filterable: true,
         filterField: {
-          type: 'chipsInput',
-          name: 'name',
+          type: 'text',
           label: 'Name',
         }
       },
@@ -38,12 +34,12 @@ export class FilterComponent implements OnInit {
   options: AcTableOptions = {
     filterOptions: {
       // filterButtonLabel: '<i class="fas fa-filter"></i>',
-      mode: 'sidenav',
-      sidenavOptions: {
-        position: 'end',
-        mode: 'side',
-        opened: true
-      }
+      mode: 'sidenav'
+    },
+    sidenavOptions: {
+      position: 'end',
+      mode: 'side',
+      opened: true
     }
   };
   conversionMap: AcTableConversions = {

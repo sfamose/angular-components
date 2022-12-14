@@ -1,0 +1,9 @@
+<form [formGroup]="formGroup">
+  <mat-form-field class="ac-filter-field ac-filter-field-text" >
+    <mat-label><span [innerHTML]="field.label"></span></mat-label>
+    <input matInput type="text" formControlName="value" />
+    <button matSuffix type="button" mat-button (click)="delete()">
+      <span><i class="fa fa-times"></i></span>
+    </button>
+  </mat-form-field>
+</form>

@@ -9,6 +9,9 @@ import {AcTableLabels} from '../models/ac-table-labels';
 import {AcTableHeaderItem} from '../models/ac-table-header-item';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatTableDataSource} from '@angular/material/table';
+import {FilterService} from './filter.service';
+import {FilterEvent} from '../models/filter-event';
+import {AcTableFilterFieldConfig} from '../models/ac-table-filter-field-config';
 
 @Injectable({
   providedIn: 'any'
@@ -23,12 +26,14 @@ export class StoreService {
   dataSource: MatTableDataSource<any>;
   labels: AcTableLabels;
   rows$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  filterValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  filterValues: any;
+  globalFilterValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  filterValues$: BehaviorSubject<{ [key: string]: any }> = new BehaviorSubject<{ [key: string]: any }>(null);
+  filterValues: { [key: string]: FilterEvent };
   displayedColumns: string[];
 
   constructor(private conversionService: ConversionService,
               @Inject(LABELS) private defaultLabels: AcTableLabels,
+              private filterService: FilterService,
               private breakpointObserver: BreakpointObserver) {
   }
 
@@ -38,7 +43,7 @@ export class StoreService {
 
   setRows$() {
     if (this.filterValues && (!this.options.filterOptions || !this.options.filterOptions.externalFilter)) {
-      this.rows$.next(this.rows.filter(row => this.isFilteredRow(row)));
+      this.rows$.next(this.rows.filter(row => this.filterService.isFilteredRow(row, this.filterValues, this.columns)));
     } else {
       this.rows$.next(this.rows);
     }
@@ -65,6 +70,9 @@ export class StoreService {
       }
       if (this.options.filter) {
         list.push({type: 'filter'});
+      }
+      if (this.options.columnManagement) {
+        list.push({type: 'column'});
       }
       if (this.options.exportCSV) {
         list.push({type: 'export'});
@@ -140,34 +148,61 @@ export class StoreService {
     }
   }
 
-  filter(filterValues: any): void {
-    this.filterValues = filterValues;
+
+  deleteFilter() {
+    this.filterValues = null;
+    this.filterValues$.next(this.filterValues);
     this.setRows$();
   }
 
-  isFilteredRow(row: any) {
-    let isOk = false;
-    const keys = Object.keys(this.filterValues);
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < keys.length; i++) {
-      const value = this.filterValues[keys[i]];
-      const rowValue = row[keys[i]] ? row[keys[i]].toString() : '';
-      isOk = false;
-      if (!value || value === '' || (Array.isArray(value) && value.length === 0)) {
-        isOk = true;
-      } else if (Array.isArray(value) && value.length > 0) {
-        value.forEach(x => {
-          if (rowValue.indexOf(x.toString()) !== -1) {
-            isOk = true;
-          }
-        });
-      } else if (rowValue.indexOf(value.toString()) !== -1) {
-        isOk = true;
-      }
-      if (!isOk) {
-        break;
-      }
+
+  addFilter(event: FilterEvent) {
+    if (!this.filterValues) {
+      this.filterValues = {};
     }
-    return isOk;
+    if (event.isFiltered) {
+      this.filterValues[event.field.key] = event;
+    } else {
+      this.removeFilter(event.field.key);
+    }
+    this.filterValues$.next(this.filterValues);
+    this.setRows$();
+  }
+
+  removeFilter(key: string) {
+    const values = JSON.parse(JSON.stringify(this.filterValues));
+    if (values && values[key]) {
+      delete values[key];
+      this.filterValues = values;
+      setTimeout(() => {
+        this.filterValues$.next(values);
+      });
+      this.setRows$();
+    }
+  }
+
+  setInitialFilterValues(initialFilterValues: { [p: string]: { value: any; } }) {
+    if (initialFilterValues) {
+      const fields: AcTableFilterFieldConfig[] = this.filterService.getFilters(this.columns, this.options, initialFilterValues);
+
+      const values: { [key: string]: FilterEvent } = {};
+      Object.keys(initialFilterValues).forEach(key => {
+        const item = fields.filter(x => x.key === key)[0];
+        if (initialFilterValues[key] && item) {
+          values[key] = {
+            field: item,
+            isFiltered: true,
+            value: initialFilterValues[key].value
+
+          };
+        }
+      });
+      this.filterValues = values;
+      setTimeout(() => {
+        this.filterValues$.next(values);
+        this.setRows$();
+      });
+    }
+
   }
 }

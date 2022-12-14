@@ -5,6 +5,9 @@ import {Moment} from 'moment';
 import {AcHint} from './hint';
 import {FormGroup} from '@angular/forms';
 import {FloatLabelType, MatFormFieldAppearance} from '@angular/material/form-field';
+import {AcFieldConfig} from './field-config';
+import {AcTextConfig} from './text-config';
+import {AcGroupConfig} from './group-config';
 
 export interface AcFieldDateConfig {
   type: 'date';
@@ -32,5 +35,5 @@ export interface AcFieldDateConfig {
   filter?: (d: Moment | null, field?: AcFieldDateConfig, group?: FormGroup) => boolean;
   touchUi?: boolean;
 
-  onValueChanges?: (value: any, field?: AcFieldDateConfig, group?: FormGroup) => void;
+  onValueChanges?: (value: any, field?: AcFieldDateConfig, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }

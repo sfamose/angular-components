@@ -1,5 +1,8 @@
 import {AcValidator} from './validator';
 import {FormGroup} from '@angular/forms';
+import {AcFieldConfig} from './field-config';
+import {AcTextConfig} from './text-config';
+import {AcGroupConfig} from './group-config';
 
 export interface AcFieldCheckboxConfig {
   type: 'checkbox';
@@ -10,5 +13,5 @@ export interface AcFieldCheckboxConfig {
   validations?: AcValidator[];
   className?: string | string[];
 
-  onValueChanges?: (value: any, field?: AcFieldCheckboxConfig, group?: FormGroup) => void;
+  onValueChanges?: (value: any, field?: AcFieldCheckboxConfig, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }

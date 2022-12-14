@@ -1,0 +1,17 @@
+<div class="ac-filter-header">
+  <span [innerHTML]="labels.columnTitleLabel"></span>
+  <span>
+    <button mat-icon-button (click)="close()"><i class="fas fa-times"></i></button>
+  </span>
+</div>
+<div class="ac-filter-content">
+  <mat-selection-list>
+    <ng-container *ngFor="let column of columns">
+      <mat-list-option *ngIf="column.label"
+                       [selected]="!column.hide"
+                       (click)="selectionChange(column)">
+        {{column.label}}
+      </mat-list-option>
+    </ng-container>
+  </mat-selection-list>
+</div>

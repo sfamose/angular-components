@@ -1,4 +1,11 @@
 <div class="jour" [ngClass]="{ 'active': active }">{{ date | date: 'dd' }}</div>
 <div class="content" #content>
-
+  <div class="ligne" *ngFor="let i of [0, 1, 2, 3]">
+    <ng-container *ngIf="eventMap[i] as e">
+      <div class="activite" *ngIf="!(i == 3 && tooManyElement)" [ngClass]="{ 'active': e.show, 'start': e.startCss, 'end': e.endCss }">
+        <div class="label" *ngIf="e.show">{{ e.event.label }}</div>
+      </div>
+      <div class="ellip" *ngIf="i == 3 && tooManyElement"><i class="fas fa-ellipsis-h"></i></div>
+    </ng-container>
+  </div>
 </div>

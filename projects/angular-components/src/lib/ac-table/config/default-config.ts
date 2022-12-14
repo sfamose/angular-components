@@ -22,5 +22,7 @@ export const DEFAULT_LABELS: AcTableLabels = {
   deleteFilterButtonLabel: 'Delete filters',
   exportButtonLabel: 'Export',
   globalFilterPlaceholder: 'Filter...',
-  globalFilterLabel: 'Filter'
+  globalFilterLabel: 'Filter',
+  columnButtonLabel: 'Show columns',
+  columnTitleLabel: 'Show columns'
 };

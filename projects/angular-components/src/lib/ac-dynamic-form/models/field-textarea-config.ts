@@ -3,6 +3,9 @@ import {AcAffix} from './affix';
 import {AcValidator} from './validator';
 import {AcHint} from './hint';
 import {FormGroup} from '@angular/forms';
+import {AcFieldConfig} from './field-config';
+import {AcTextConfig} from './text-config';
+import {AcGroupConfig} from './group-config';
 
 export interface AcFieldTextareaConfig {
   type: 'textarea';
@@ -28,5 +31,5 @@ export interface AcFieldTextareaConfig {
   minRows?: number;
   maxRows?: number;
 
-  onValueChanges?: (value: any, field?: AcFieldTextareaConfig, group?: FormGroup) => void;
+  onValueChanges?: (value: any, field?: AcFieldTextareaConfig, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }

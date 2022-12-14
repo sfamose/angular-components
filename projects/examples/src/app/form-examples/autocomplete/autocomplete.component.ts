@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AcDynamicForm} from 'angular-components';
 import {of} from 'rxjs';
+import {AcFieldAutocompleteConfig} from '../../../../../angular-components/src/lib/ac-dynamic-form/models/field-autocomplete-config';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-autocomplete',
@@ -35,6 +37,20 @@ export class AutocompleteComponent implements OnInit {
         ],
         labelKey: 'value',
         matchOption: true
+      },
+      {
+        name: 'remote',
+        type: 'autocomplete',
+        label: 'Object list',
+        options: [],
+        onValueChanges(value: any, field?: AcFieldAutocompleteConfig, group?: FormGroup) {
+          if (!value || value.length < 3) {
+            field.options = [];
+          } else {
+            field.options = ['test1'];
+          }
+          console.log(value);
+        }
       }
     ]
   };

@@ -1,5 +1,5 @@
 export interface AcTableHeaderItem {
-  type: 'addRow' | 'filter' | 'export' | 'globalFilter' | 'menu' | 'custom' ;
+  type: 'addRow' | 'filter' | 'export' | 'globalFilter' | 'menu' | 'column' | 'custom' ;
   options?: {
     label: string;
     action?: () => void;

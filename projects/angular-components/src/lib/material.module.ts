@@ -25,6 +25,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSortModule,
     MatToolbarModule,
     DragDropModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatExpansionModule
   ],
   exports: [
     MatBadgeModule,
@@ -80,7 +82,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSortModule,
     MatToolbarModule,
     DragDropModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule {

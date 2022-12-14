@@ -2,6 +2,7 @@
  * Public API Surface of angular-components
  */
 export * from './dynamic-form/dynamic-form.component';
+export * from './dynamic-form-modal/dynamic-form-modal.component';
 export * from './config/ac-dynamic-form-config';
 export * from './models/affix';
 export * from './models/custom-component';

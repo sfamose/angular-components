@@ -2,28 +2,34 @@
 
   <mat-drawer #drawer class="ac-table-sidenav"
               [mode]="filterSidenavMode"
-              [position]="options?.filterOptions?.sidenavOptions?.position"
-              [disableClose]="options?.filterOptions?.sidenavOptions?.disableClose"
-              [opened]="options?.filterOptions?.sidenavOptions?.opened"
+              [position]="options?.sidenavOptions?.position"
+              [disableClose]="options?.sidenavOptions?.disableClose"
+              [opened]="options?.sidenavOptions?.opened"
   >
-    <ac-sidenav-filter *ngIf="drawer.opened" class="ac-sidenav-filter"
+    <ac-sidenav-filter *ngIf="drawer.opened && sidenavView == 'filter'" class="ac-sidenav-filter"
                        [columns]="columns"
                        [options]="options"
                        (filterChange)="onFilterChange($event)"
                        (closeFilter)="drawer.close()"
     ></ac-sidenav-filter>
+    <ac-sidenav-column *ngIf="drawer.opened && sidenavView == 'column'" class="ac-sidenav-column"
+                       (closeColumn)="drawer.close()"
+                       (columnChange)="onColumnChange()"
+    ></ac-sidenav-column>
   </mat-drawer>
 
   <mat-drawer-content>
     <div class="ac-table-container">
       <div class="ac-table-header">
-        <ac-table-header (openFilter)="drawer.toggle()"
+        <ac-table-header (openFilter)="openFilter(drawer)"
+                         (openColumn)="openColumn(drawer)"
         ></ac-table-header>
       </div>
       <div class="ac-table-wrapper">
         <ac-table-content (sortChange)="onSortChange($event)"
                           (selectChange)="onSelectChange($event)"
                           (pageChange)="onPageChange($event)"
+                          #tableContentComponent
         ></ac-table-content>
       </div>
     </div>

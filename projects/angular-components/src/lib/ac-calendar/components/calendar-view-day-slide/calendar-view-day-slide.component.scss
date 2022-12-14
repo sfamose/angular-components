@@ -34,6 +34,7 @@
   }
 
   .allDay {
+    flex: 1;
     min-height: 60px;
     max-height: 90px;
     display: flex;
@@ -59,7 +60,7 @@
     .row-hour {
       display: flex;
       flex-direction: row;
-      height: 60px;
+      height: 40px;
 
       .col-hour {
         margin-top: -8px;

@@ -1,6 +1,6 @@
 ac-table {
   width: 80%;
-  height: 500px;
+  height: 600px;
   margin: auto;
   margin-top: 20px;
 }
@@ -19,7 +19,7 @@ ac-table {
   text-align: center;
 }
 
-::ng-deep .mat-column-editRow, ::ng-deep .mat-column-deleteRow {
+::ng-deep .mat-column-editRow, ::ng-deep .mat-column-deleteRow, ::ng-deep .mat-column-copy {
   min-width: 60px !important;
   width: 60px !important;
 }

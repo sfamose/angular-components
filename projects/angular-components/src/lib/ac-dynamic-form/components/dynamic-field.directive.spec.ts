@@ -10,9 +10,7 @@ import {AcGroupConfig} from '../models/group-config';
 import {By} from '@angular/platform-browser';
 import {FieldCheckboxComponent} from './field-checkbox/field-checkbox.component';
 import {FieldTextareaComponent} from './field-textarea/field-textarea.component';
-import {FieldTimeComponent} from './field-time/field-time.component';
 import {FieldGroupComponent} from './field-group/field-group.component';
-import {FieldDatetimeComponent} from './field-datetime/field-datetime.component';
 import {FieldSelectComponent} from './field-select/field-select.component';
 import {FieldInputComponent} from './field-input/field-input.component';
 import {FieldDateComponent} from './field-date/field-date.component';
@@ -28,7 +26,6 @@ import {
   MAT_FORM_FIELD_FLOATLABEL
 } from '../config/default-config';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {InputDatetimeComponent} from './input-datetime/input-datetime.component';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 
@@ -63,12 +60,9 @@ describe('DynamicFieldDirective', () => {
         FieldSelectComponent,
         FieldRadioButtonComponent,
         FieldDateComponent,
-        FieldTimeComponent,
         FieldGroupComponent,
         FieldTextareaComponent,
-        FieldDatetimeComponent,
-        DivTextComponent,
-        InputDatetimeComponent],
+        DivTextComponent],
       providers: [
         {provide: MAT_DATE_LOCALE, useValue: DEFAULT_LOCALE}, {
           provide: DateAdapter,
@@ -97,10 +91,8 @@ describe('DynamicFieldDirective', () => {
           FieldSelectComponent,
           FieldRadioButtonComponent,
           FieldDateComponent,
-          FieldTimeComponent,
           FieldGroupComponent,
           FieldTextareaComponent,
-          FieldDatetimeComponent,
           DivTextComponent]
       }
     }).compileComponents();
@@ -141,14 +133,6 @@ describe('DynamicFieldDirective', () => {
     expect(c).toBeTruthy();
   });
 
-  it('should add the FieldDatetimeComponent', () => {
-    fixture.componentInstance.field = {type: 'datetime', name: 'test', label: 'test'};
-    fixture.componentInstance.form = new FormGroup({test: new FormControl('')});
-    fixture.detectChanges();
-    const c = fixture.debugElement.query(By.css('ac-field-datetime'));
-    expect(c).toBeTruthy();
-  });
-
   it('should add the FieldGroupComponent', () => {
     fixture.componentInstance.field = {type: 'group', name: 'test', label: 'test'};
     fixture.componentInstance.form = new FormGroup({test: new FormControl('')});
@@ -186,14 +170,6 @@ describe('DynamicFieldDirective', () => {
     fixture.componentInstance.form = new FormGroup({test: new FormControl('')});
     fixture.detectChanges();
     const c = fixture.debugElement.query(By.css('ac-field-textarea'));
-    expect(c).toBeTruthy();
-  });
-
-  it('should add the FieldTimeComponent', () => {
-    fixture.componentInstance.field = {type: 'time', name: 'test', label: 'test'};
-    fixture.componentInstance.form = new FormGroup({test: new FormControl('')});
-    fixture.detectChanges();
-    const c = fixture.debugElement.query(By.css('ac-field-time'));
     expect(c).toBeTruthy();
   });
 

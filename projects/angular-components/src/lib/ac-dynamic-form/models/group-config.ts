@@ -9,5 +9,5 @@ export interface AcGroupConfig {
   className?: string | string[];
   fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[];
 
-  onValueChanges?: (value: any, group?: FormGroup) => void;
+  onValueChanges?: (value: any, group?: FormGroup, fields?: (AcFieldConfig | AcTextConfig | AcGroupConfig)[]) => void;
 }
